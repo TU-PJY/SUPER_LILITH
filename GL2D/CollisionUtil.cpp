@@ -7,7 +7,7 @@
 void AABB::Init() {
 	if (ShowBoundBox) {
 		Box = imageUtil.SetImage("gl2d_boundbox");
-		text.Init("arial", FW_NORMAL);
+		text.Init(L"arial", FW_NORMAL);
 		text.SetColor(1.0, 0.0, 0.0);
 	}
 }

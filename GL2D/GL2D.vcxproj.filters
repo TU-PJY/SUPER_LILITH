@@ -61,9 +61,12 @@
     <Filter Include="[3]___________[ Util ]\[ Data Util ]">
       <UniqueIdentifier>{d2e93683-5de8-4639-98b5-ff99bff6c54f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[3]___________[ Util ]\[ Font Util ]">
+      <UniqueIdentifier>{f2cdada2-a380-46fd-8cf3-b9ff333dcc11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mode1.cpp">
+    <ClCompile Include="Stage1.cpp">
       <Filter>[2]___________[ GameMode ]\[ Mode1 ]</Filter>
     </ClCompile>
     <ClCompile Include="ObjectBase.cpp">
@@ -100,9 +103,12 @@
     <ClCompile Include="FWM.cpp">
       <Filter>[0]___________[ FrameWork ]</Filter>
     </ClCompile>
+    <ClCompile Include="FontLoaderUtil.cpp">
+      <Filter>[3]___________[ Util ]\[ Font Util ]</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mode1.h">
+    <ClInclude Include="Stage1.h">
       <Filter>[2]___________[ GameMode ]\[ Mode1 ]</Filter>
     </ClInclude>
     <ClInclude Include="GLHeader.h">
@@ -143,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="FWM_CONF.h">
       <Filter>[0]___________[ FrameWork ]</Filter>
+    </ClInclude>
+    <ClInclude Include="FontLoaderUtil.h">
+      <Filter>[3]___________[ Util ]\[ Font Util ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

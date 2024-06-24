@@ -24,12 +24,13 @@ std::vector<std::string> ChannelList
 
 
 void SoundUtil::Init() {
-	f_result = FMOD::System_Create(&SoundSystem);
+	Result = FMOD::System_Create(&SoundSystem);
 
-	if (f_result != FMOD_OK)	
+	if (Result != FMOD_OK)	
 		exit(EXIT_FAILURE);
 
-	SoundSystem->init(32, FMOD_INIT_NORMAL, extdvdata);
+	SoundSystem->init(32, FMOD_INIT_NORMAL, ExtDvData);
+	SoundSystem->createDSPByType(FMOD_DSP_TYPE_LOWPASS, &LowPass);
 
 	LoadSoundFromList();
 	LoadChannelFromList();
@@ -50,26 +51,66 @@ void SoundUtil::LoadChannelFromList() {
 	}
 }
 
-void SoundUtil::PlaySound(std::string SoundName, std::string ChannelName, unsigned int Sec) {
-	SoundSystem->playSound(LoadedSoundList.find(SoundName)->second, 0, false, &LoadedChannelList.find(ChannelName)->second);
-	if(Sec > 0)
-		LoadedChannelList.find(ChannelName)->second->setPosition(Sec * 1000, FMOD_TIMEUNIT_MS);
+void SoundUtil::Update() {
+	SoundSystem->update();
+}
+
+void SoundUtil::PlaySound(std::string SoundName, std::string ChannelName, unsigned int Ms) {
+	auto ChannelIter = LoadedChannelList.find(ChannelName);
+
+	SoundSystem->playSound(LoadedSoundList.find(SoundName)->second, 0, false, &ChannelIter->second);
+
+	if (Ms > 0)
+		ChannelIter->second->setPosition(Ms, FMOD_TIMEUNIT_MS);
+}
+
+void SoundUtil::PauseSound(std::string ChannelName, bool Flag) {
+	LoadedChannelList.find(ChannelName)->second->setPaused(Flag);
 }
 
 void SoundUtil::StopSound(std::string ChannelName) {
 	LoadedChannelList.find(ChannelName)->second->stop();
 }
 
-void SoundUtil::SetBeatDetectChannel(std::string ChannelName) {
-	SoundSystem->createDSPByType(FMOD_DSP_TYPE_FFT, &FDsp);
-	LoadedChannelList.find(ChannelName)->second->addDSP(0, FDsp);
+unsigned int SoundUtil::GetLength(std::string SoundName) {
+	unsigned int Length{};
+	LoadedSoundList.find(SoundName)->second->getLength(&Length, FMOD_TIMEUNIT_MS);
+
+	return Length;
+}
+
+unsigned int SoundUtil::GetPlayTime(std::string ChannelName) {
+	unsigned int Position{};
+	LoadedChannelList.find(ChannelName)->second->getPosition(&Position, FMOD_TIMEUNIT_MS);
+
+	return Position;
+}
+
+void SoundUtil::SetPlaySpeed(std::string ChannelName, float PlaySpeed) {
+	LoadedChannelList.find(ChannelName)->second->setPitch(PlaySpeed);
+}
+
+void SoundUtil::SetFreqCutOff(std::string ChannelName, float Frequency) {
+	LowPass->setParameterFloat(FMOD_DSP_LOWPASS_CUTOFF, Frequency);
+	LoadedChannelList.find(ChannelName)->second->addDSP(0, LowPass);
+}
+
+void SoundUtil::UnSetFreqCutOff(std::string ChannelName) {
+	LoadedChannelList.find(ChannelName)->second->removeDSP(LowPass);
+}
+
+void SoundUtil::SetBeatDetect(std::string ChannelName) {
+	SoundSystem->createDSPByType(FMOD_DSP_TYPE_FFT, &BeatDetector);
+	LoadedChannelList.find(ChannelName)->second->addDSP(0, BeatDetector);
+}
+
+void SoundUtil::UnSetBeatDetect(std::string ChannelName) {
+	LoadedChannelList.find(ChannelName)->second->removeDSP(BeatDetector);
 }
 
 float SoundUtil::DetectBeat(float Threshold) {
-	SoundSystem->update();
-
 	FMOD_DSP_PARAMETER_FFT* FFT = nullptr;
-	FDsp->getParameterData(FMOD_DSP_FFT_SPECTRUMDATA, (void**)&FFT, 0, 0, 0);
+	BeatDetector->getParameterData(FMOD_DSP_FFT_SPECTRUMDATA, (void**)&FFT, 0, 0, 0);
 
 	if (FFT) {
 		int NumChannels = FFT->numchannels;

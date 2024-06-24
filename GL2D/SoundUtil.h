@@ -11,18 +11,27 @@ private:
 	std::unordered_map<std::string, FMOD::Sound*> LoadedSoundList;
 	std::unordered_map<std::string, FMOD::Channel*> LoadedChannelList;
 	FMOD::System* SoundSystem{};
-	FMOD::DSP* FDsp{};
+	FMOD::DSP* BeatDetector{};
+	FMOD::DSP* LowPass{};
 
-	FMOD_RESULT f_result{};
-	void* extdvdata{};
+	FMOD_RESULT Result{};
+	void* ExtDvData{};
 
 public:
 	void Init();
 	void LoadSoundFromList();
 	void LoadChannelFromList();
-	void PlaySound(std::string SoundName, std::string ChannelName, unsigned int Sec =0);
+	void Update();
+	unsigned int GetLength(std::string SoundName);
+	void PlaySound(std::string SoundName, std::string ChannelName, unsigned int Ms=0);
+	void PauseSound(std::string ChannelName, bool Flag);
 	void StopSound(std::string ChannelName);
-	void SetBeatDetectChannel(std::string ChannelName);
+	unsigned int GetPlayTime(std::string ChannelName);
+	void SetPlaySpeed(std::string ChannelName, float PlaySpeed);
+	void SetFreqCutOff(std::string ChannelName, float Frequency);
+	void UnSetFreqCutOff(std::string ChannelName);
+	void SetBeatDetect(std::string ChannelName);
+	void UnSetBeatDetect(std::string ChannelName);
 	float DetectBeat(float Threshold);
 };
 extern SoundUtil soundUtil;

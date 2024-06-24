@@ -50,7 +50,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -124,6 +124,7 @@
       <ConformanceMode>false</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,10 +141,11 @@
     <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="CollisionUtil.cpp" />
     <ClCompile Include="DataUtil.cpp" />
+    <ClCompile Include="FontLoaderUtil.cpp" />
     <ClCompile Include="FWM.cpp" />
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
-    <ClCompile Include="Mode1.cpp" />
+    <ClCompile Include="Stage1.cpp" />
     <ClCompile Include="MouseUtil.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="RenderModeUtil.cpp" />
@@ -155,11 +157,12 @@
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionUtil.h" />
     <ClInclude Include="DataUtil.h" />
+    <ClInclude Include="FontLoaderUtil.h" />
     <ClInclude Include="FWM.h" />
     <ClInclude Include="FWM_CONF.h" />
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
-    <ClInclude Include="Mode1.h" />
+    <ClInclude Include="Stage1.h" />
     <ClInclude Include="MouseUtil.h" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="RenderModeUtil.h" />

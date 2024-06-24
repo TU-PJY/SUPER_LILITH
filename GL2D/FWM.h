@@ -64,3 +64,4 @@ private:
 	void ClearFloatingObject();
 	void ClearAll();
 };
+extern FWM fw;

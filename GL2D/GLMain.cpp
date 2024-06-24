@@ -3,12 +3,14 @@
 #include "CameraUtil.h"
 #include "RenderModeUtil.h"
 #include "ImageUtil.h"
+#include "TextUtil.h"
 #include "MouseUtil.h"
 #include "SoundUtil.h"
 #include "DataUtil.h"
+#include "FontLoaderUtil.h"
 #include "FWM.h"
 
-#include "Mode1.h"
+#include "Stage1.h"
 
 #include <iostream>
 #include <map>
@@ -16,6 +18,7 @@
 
 int WIDTH = 1200;
 int HEIGHT = 800;
+
 GLfloat ASPECT;
 Rect rect;
 
@@ -26,9 +29,11 @@ CameraUtil cam;
 CamaraControlUtil camUtil;
 RenderModeUtil renderMode;
 ImageUtil imageUtil;
+TextUtilUnicode textUnicode;
 MouseUtil mouse;
 SoundUtil soundUtil;
 DataUtil dataUtil;
+FontLoaderUtil fontloaderUtil;
 FWM fw;
 
 clock_t StartTime, EndTime;
@@ -40,13 +45,13 @@ GLvoid DisplayReshape(int w, int h) {
 	HEIGHT = h;
 }
 
-
 GLvoid GLMain() {
 	StartTime = clock();
 
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	soundUtil.Update();
 	fw.Routine();
 
 	glutSwapBuffers();
@@ -56,14 +61,13 @@ GLvoid GLMain() {
 	fw.SetFrameTime(float(EndTime - StartTime) / 1000);
 }
 
-
 void main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GL_MULTISAMPLE);
 
 	glutInitWindowPosition(GetSystemMetrics(SM_CXSCREEN) / 2 - WIDTH / 2, GetSystemMetrics(SM_CYSCREEN) / 2 - HEIGHT / 2);
 	glutInitWindowSize(WIDTH, HEIGHT);
-	glutCreateWindow("Shape Shift");
+	glutCreateWindow("GL2D");
 
 	if (StartWithFullScreen)
 		glutFullScreen();
@@ -96,9 +100,9 @@ void main(int argc, char** argv) {
 	shader.LoadFragmentShader("GLSL//GLSL_fragment_text.glsl");
 	shader.CreateShader(TextShader);
 
-	//dataUtil.Init();
 	imageUtil.Init();
 	soundUtil.Init();
+
 	fw.Init(Mode1::GameMode1, Mode1::SetController);
 
 	glutDisplayFunc(GLMain);

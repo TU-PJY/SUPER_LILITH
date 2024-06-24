@@ -12,6 +12,7 @@ public:
 	void Init();
 	void LoadImageFromList();
 	unsigned int SetImage(std::string ImageName);
+	GLfloat Aspect(int Width, int Height);
 	void Draw(unsigned int ImageVar);
 };
 extern ImageUtil imageUtil;

@@ -7,7 +7,7 @@
 std::unordered_map<std::string, const char*> ImageList
 {
 	{"gl2d_boundbox", "GL2D res//boundbox.png"}, // do not delete this
-
+	{"image", "image.png"}
 };
 
 
@@ -64,6 +64,10 @@ void ImageUtil::LoadImageFromList() {
 
 unsigned int ImageUtil::SetImage(std::string ImageName) {
 	return LoadedImageList.find(ImageName)->second;
+}
+
+GLfloat ImageUtil::Aspect(int Width, int Height) {
+	return Width / Height;
 }
 
 void ImageUtil::Draw(unsigned int ImageVar) {

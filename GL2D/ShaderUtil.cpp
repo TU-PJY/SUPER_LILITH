@@ -16,6 +16,7 @@ char* ShaderUtil::LoadBuffer(const char* FileName) {
 		return NULL;
 
 	fseek(File, 0, SEEK_END);
+
 	Length = ftell(File);
 	Buffer = (char*)malloc(Length + 1);
 
@@ -33,10 +34,12 @@ void ShaderUtil::LoadVertexShader(const char* VertexShader) {
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, (const GLchar**)&vertex_source, 0);
 	glCompileShader(vertex_shader);
+
 	GLint Result{};
 	GLchar ErrorLog[512]{};
 
 	glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &Result);
+
 	if (!Result) {
 		glGetShaderInfoLog(vertex_shader, 512, NULL, ErrorLog);
 		std::cout << "ERROR: vertex shader err\n" << ErrorLog << std::endl;
@@ -50,8 +53,10 @@ void ShaderUtil::LoadFragmentShader(const char* FragmentShader) {
 	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment_shader, 1, (const GLchar**)&fragment_source, 0);
 	glCompileShader(fragment_shader);
+
 	GLint Result{};
 	GLchar ErrorLog[512]{};
+
 	glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &Result);
 
 	if (!Result) {
@@ -68,6 +73,7 @@ void ShaderUtil::CreateShader(GLuint& Shader) {
 	glAttachShader(Shader, fragment_shader);
 
 	glLinkProgram(Shader);
+
 	glDeleteShader(vertex_shader);
 	glDeleteShader(fragment_shader);
 

@@ -7,8 +7,8 @@ FWM_Log FLog;
 
 FWM::FWM() {
 	if (DebugMessage) {
-		std::cout << "======== FWL Message ========\n";
-		std::cout << "FWL is prepared.\n";
+		std::cout << "======== FWM Message ========\n";
+		std::cout << "FWM is prepared.\n\n";
 	}
 }
 
