@@ -34,7 +34,7 @@ void Player::Update(float FT){
 
 	Scale(0.5, 0.5);
 
-	Rotation -= FT * 150;
+	//Rotation -= FT * 150;
 	if (Rotation > 360)
 		Rotation = 0;
 
@@ -45,9 +45,9 @@ void Player::Render(){
 	RenderShapes();
 }
 
-
-
 void Player::RenderShapes() {
+	ProcessTransform();
+
 	if (ShapeState == EnumTriangle)
 		triangle.Render();
 
@@ -60,5 +60,4 @@ void Player::RenderShapes() {
 	else if (ShapeState == EnumHexagon)
 		hexagon.Render();
 
-	ProcessTransform();
 }

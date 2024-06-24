@@ -67,6 +67,12 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Player ]">
       <UniqueIdentifier>{987d76fd-821c-423d-ae0d-825d4cfd6781}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle Generator ]">
+      <UniqueIdentifier>{dc2b537d-666e-4b17-bfa2-4cfde87dc3f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle ]">
+      <UniqueIdentifier>{5d3905c6-2f36-40e2-bea4-1be7abe420e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -109,8 +115,14 @@
     <ClCompile Include="FontLoaderUtil.cpp">
       <Filter>[3]___________[ Util ]\[ Font Util ]</Filter>
     </ClCompile>
-    <ClCompile Include="Playe.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleGenerator.cpp">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle Generator ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="PlayerShape.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleGenerator.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle Generator ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -124,7 +124,7 @@
       <ConformanceMode>false</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <OpenMPSupport>true</OpenMPSupport>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,7 +145,9 @@
     <ClCompile Include="FWM.cpp" />
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
-    <ClCompile Include="Playe.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="ObstacleGenerator.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Stage1.cpp" />
     <ClCompile Include="MouseUtil.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
@@ -163,6 +165,8 @@
     <ClInclude Include="FWM_CONF.h" />
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="ObstacleGenerator.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerShape.h" />
     <ClInclude Include="Stage1.h" />

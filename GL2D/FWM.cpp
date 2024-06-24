@@ -25,27 +25,18 @@ void FWM::Routine() {
 
 	if (!ModeSwitchState && RunningState) {
 		for (int i = 0; i < Num; ++i) {
-			if (Container[i].empty())
-				continue;
-
 			for (auto It = begin(Container[i]); It != end(Container[i]);) {
 				if (CheckDeleteFlag(It, i))
 					continue;
 
 				if (FloatingModeRunningState) {
-					if (FloatingOnlyState) {
-						if ((*It)->FloatingSpecifiedDescriptor) {
-							(*It)->Update(FrameTime);
-						}
-					}
-
-					else {
-						if ((*It)->FloatingSpecifiedDescriptor)
+					if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor)
 						(*It)->Update(FrameTime);
-					}
+					else
+						(*It)->Update(FrameTime);
 				}
 
-				else 
+				else
 					(*It)->Update(FrameTime);
 
 				(*It)->Render();
@@ -62,11 +53,6 @@ void FWM::Routine() {
 			}
 		}
 	}
-
-	if (ModeSwitchReserveDescriptor) {
-		ChangeMode();
-		ModeSwitchReserveDescriptor = false;
-	}
 }
 
 void FWM::Init(Function ModeFunction, ControllerFunction Controller) {
@@ -82,6 +68,9 @@ void FWM::Init(Function ModeFunction, ControllerFunction Controller) {
 
 	FLog.CurrentMode = RunningMode;
 	FLog.Log(LogType::FWL_INIT);
+
+	for (int i = 0; i < Num; ++i)
+		AddObject(new FWM_DUMMY, "FWM_DUMMY", static_cast<Layer>(i));
 
 	RunningState = true;
 }
@@ -262,6 +251,8 @@ size_t FWM::Size(Layer TargetLayer) {
 //////// private ///////////////
 
 bool FWM::CheckDeleteFlag(std::deque<OBJ_BASE*>::iterator& It, int Layer) {
+	using namespace std;
+
 	if ((*It)->ObjectDeleteDescriptor) {
 		delete* It;
 		*It = nullptr;
@@ -343,9 +334,15 @@ void FWM::ClearAll() {
 
 	for (int i = 0; i < Num; ++i) {
 		for (auto It = begin(Container[i]); It != end(Container[i]);) {
-			delete* It;
-			*It = nullptr;
-			It = Container[i].erase(It);
+			if ((*It)->ObjectTag != "FWM_DUMMY") {
+				delete* It;
+				*It = nullptr;
+				It = Container[i].erase(It);
+
+				continue;
+			}
+
+			++It;
 		}
 	}
 }

@@ -33,7 +33,15 @@ public:
 	virtual void InputKey(unsigned char KEY, bool KeyDown) {}
 	virtual void InputSpecialKey(int KEY, bool KeyDown) {}
 	virtual void Render() {}
+	virtual ~OBJ_BASE() {}
 	void ProcessTransform();
 
 	virtual void ResetControlState() {}
+	
+	///////////////
+
+	virtual void SetGenTime(GLfloat TimeValue) {}
 };
+
+// dummy object for avoiding iterator errors
+class FWM_DUMMY : public OBJ_BASE {};
