@@ -25,8 +25,11 @@ void FWM::Routine() {
 
 	if (!ModeSwitchState && RunningState) {
 		for (int i = 0; i < Num; ++i) {
+			if (Container[i].empty())  
+				continue;
+
 			for (auto It = begin(Container[i]); It != end(Container[i]);) {
-				if (CheckDeleteFlag(It, i))
+				if (CheckDeleteFlag(It, i))  
 					continue;
 
 				if (FloatingModeRunningState) {
@@ -36,12 +39,12 @@ void FWM::Routine() {
 						(*It)->Update(FrameTime);
 				}
 
-				else
+				else  
 					(*It)->Update(FrameTime);
 
 				(*It)->Render();
 
-				if (CheckDeleteFlag(It, i))
+				if (CheckDeleteFlag(It, i))  
 					continue;
 
 				++It;
@@ -56,13 +59,12 @@ void FWM::Routine() {
 }
 
 void FWM::Init(Function ModeFunction, ControllerFunction Controller) {
-	if (RunningState)
+	if (RunningState)  
 		return;
 
 	RunningMode = ModeFunction();
 
-	if(Controller)
-		Controller();
+	if(Controller)  Controller();
 
 	ControllerBackUpBuffer = Controller;
 
@@ -76,7 +78,7 @@ void FWM::Init(Function ModeFunction, ControllerFunction Controller) {
 }
 
 void FWM::SwitchMode(Function ModeFunction, ControllerFunction Controller) {
-	if (!RunningState)
+	if (!RunningState)  
 		return;
 
 	ModeFunctionBuffer = ModeFunction;
@@ -92,7 +94,7 @@ void FWM::SwitchMode(Function ModeFunction, ControllerFunction Controller) {
 }
 
 void FWM::StartFloatingMode(Function ModeFunction, ControllerFunction Controller, bool FloatingOnlyOption) {
-	if (!RunningState || FloatingModeRunningState)
+	if (!RunningState || FloatingModeRunningState)  
 		return;
 
 	ModeFunctionBuffer = ModeFunction;
@@ -102,14 +104,13 @@ void FWM::StartFloatingMode(Function ModeFunction, ControllerFunction Controller
 	FloatingModeReserveDescriptor = true;
 	ModeSwitchReserveDescriptor = true;
 
-	if (FloatingOnlyOption)
-		FloatingOnlyState = true;
+	FloatingOnlyState = FloatingOnlyOption;
 
 	FLog.IsOnlyFloating = FloatingOnlyState;
 }
 
 void FWM::EndFloatingMode() {
-	if (!RunningState || !FloatingModeRunningState)
+	if (!RunningState || !FloatingModeRunningState)  
 		return;
 
 	FLog.PrevMode = RunningMode;
@@ -280,7 +281,7 @@ void FWM::ChangeMode() {
 		ClearFloatingObject();
 		RunningMode = PrevRunningMode;
 
-		if(ControllerBackUpBuffer)
+		if(ControllerBackUpBuffer)  
 			ControllerBackUpBuffer();
 
 		FloatingModeRunningState = false;
@@ -294,7 +295,7 @@ void FWM::ChangeMode() {
 		ClearAll();
 		RunningMode = ModeFunctionBuffer();
 
-		if(ControllerBuffer)
+		if(ControllerBuffer)  
 			ControllerBuffer();
 
 		FLog.CurrentMode = RunningMode;
