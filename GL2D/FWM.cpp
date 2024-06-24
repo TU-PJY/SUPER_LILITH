@@ -35,24 +35,19 @@ void FWM::Routine() {
 				if (FloatingModeRunningState) {
 					if (FloatingOnlyState) {
 						if ((*It)->FloatingSpecifiedDescriptor) {
-							(*It)->InputControl();
 							(*It)->Update(FrameTime);
 						}
 					}
 
 					else {
 						if ((*It)->FloatingSpecifiedDescriptor)
-							(*It)->InputControl();
 						(*It)->Update(FrameTime);
 					}
 				}
 
-				else {
-					(*It)->InputControl();
+				else 
 					(*It)->Update(FrameTime);
-				}
 
-				(*It)->ProcessTransform();
 				(*It)->Render();
 
 				if (CheckDeleteFlag(It, i))

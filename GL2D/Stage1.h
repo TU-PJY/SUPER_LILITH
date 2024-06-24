@@ -1,5 +1,6 @@
 #pragma once
 #include "MouseUtil.h"
+#include "FWM.h"
 #include <string>
 
 namespace Mode1 {
@@ -14,27 +15,6 @@ inline void ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 		case 27:
 			glutDestroyWindow(1);
 			break;
-
-		case 32:
-			break;
-		}
-
-	// Normal Key Up
-	else if(!KeyDown && !SpecialKey)
-		switch (KEY) {
-		
-		}
-
-	// Special Key Down
-	if(KeyDown && SpecialKey)
-		switch (S_KEY) {
-
-		}
-
-	// Special Key Up
-	else if(!KeyDown && SpecialKey)
-		switch (S_KEY) {
-
 		}
 }
 
@@ -85,6 +65,9 @@ inline void SpecialKeyUp(int KEY, int x, int y) {
 
 inline void SpecialKeyDown(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, false, true);
+
+	auto player = fw.Find("player", SearchRange::One, Layer::L2);
+	if (player) player->InputSpecialKey(KEY, true);
 }
 
 inline void MouseMotion(int x, int y) {

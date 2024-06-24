@@ -145,6 +145,7 @@
     <ClCompile Include="FWM.cpp" />
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
+    <ClCompile Include="Playe.cpp" />
     <ClCompile Include="Stage1.cpp" />
     <ClCompile Include="MouseUtil.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
@@ -162,6 +163,8 @@
     <ClInclude Include="FWM_CONF.h" />
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerShape.h" />
     <ClInclude Include="Stage1.h" />
     <ClInclude Include="MouseUtil.h" />
     <ClInclude Include="ObjectBase.h" />

@@ -64,6 +64,9 @@
     <Filter Include="[3]___________[ Util ]\[ Font Util ]">
       <UniqueIdentifier>{f2cdada2-a380-46fd-8cf3-b9ff333dcc11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Player ]">
+      <UniqueIdentifier>{987d76fd-821c-423d-ae0d-825d4cfd6781}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -105,6 +108,9 @@
     </ClCompile>
     <ClCompile Include="FontLoaderUtil.cpp">
       <Filter>[3]___________[ Util ]\[ Font Util ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Playe.cpp">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="FontLoaderUtil.h">
       <Filter>[3]___________[ Util ]\[ Font Util ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShape.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,10 @@
 std::unordered_map<std::string, const char*> ImageList
 {
 	{"gl2d_boundbox", "GL2D res//boundbox.png"}, // do not delete this
-	{"image", "image.png"}
+	{"center_triangle", "resources//image//shape//center_triangle.png"},
+	{"center_square", "resources//image//shape//center_square.png"},
+	{"center_pentagon", "resources//image//shape//center_pentagon.png"},
+	{"center_hexagon", "resources//image//shape//center_hexagon.png"},
 };
 
 

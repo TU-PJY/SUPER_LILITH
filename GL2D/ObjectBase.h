@@ -29,7 +29,9 @@ public:
 	void InitTransform();
 
 	virtual void Update(float FT) {}
-	virtual void InputControl() {}
+	virtual void InputMouse(bool LButtonDown, bool RButtonDown) {}
+	virtual void InputKey(unsigned char KEY, bool KeyDown) {}
+	virtual void InputSpecialKey(int KEY, bool KeyDown) {}
 	virtual void Render() {}
 	void ProcessTransform();
 
