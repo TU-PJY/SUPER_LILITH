@@ -3,11 +3,12 @@
 #include <cmath>
 
 Title::Title() {
-	Image = imageUtil.SetImage("title");
 	SetColor(1.0, 1.0, 1.0);
 
-	text.Init(L"열정그자체", FW_NORMAL);
+	text.Init(L"열정그자체", FW_NORMAL, TRUE);
+	TitleText.Init(L"열정그자체", FW_NORMAL, TRUE);
 	text.SetAlign(Align::Middle);
+	TitleText.SetAlign(Align::Middle);
 }
 
 void Title::InputSpecialKey(int KEY, bool KeyDown) {
@@ -42,26 +43,8 @@ void Title::Update(float FT) {
 }
 
 void Title::Render() {
-	ProcessTransform();
-	imageUtil.Draw(Image);
-
-	switch (LobbyPage) {
-	case 1:
-		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Charisma V.I.P");
-		break;
-
-	case 2:
-		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Celestial Donimion");
-		break;
-
-	case 3:
-		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Sky Voyager");
-		break;
-
-	case 4:
-		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Cyber Bunked");
-		break;
-	}
+	TitleText.Draw(0.0, 0.6, 0.5, "BEAT SHIFTER");
+	text.Draw(TitlePosition, 0.4, 0.1, "%s", MusicInfo[LobbyPage - 1].c_str());
 }
 
 void Title::ChangeLobbyPage(int dir) {

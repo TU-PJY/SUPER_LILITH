@@ -19,7 +19,6 @@ std::unordered_map<std::string, const char*> ImageList
 	{"obstacle_hexagon", "resources//image//obstacles//obstacle_hexagon.png"},
 
 	// lobby mode
-	{"title", "resources//image//ui//title.png"},
 	{"arrow_right", "resources//image//ui//arrow_right.png"},
 	{"arrow_left", "resources//image//ui//arrow_left.png"},
 	{"button_info", "resources//image//ui//button_info.png"},

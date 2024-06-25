@@ -25,7 +25,7 @@ private:
 
 public:
 	~TextUtilUnicode();
-	void Init(const wchar_t* FontName, int type);
+	void Init(const wchar_t* FontName, int type, int Italic);
 	void SetAlpha(GLfloat Value);
 	void SetColor(GLfloat R, GLfloat G, GLfloat B);
 	void SetAlign(Align AlignOpt);
@@ -56,7 +56,7 @@ private:
 
 public:
 	~TextUtil();
-	void Init(const wchar_t* FontName, int type);
+	void Init(const wchar_t* FontName, int type, int Italic);
 	void SetAlpha(GLfloat Value);
 	void SetColor(GLfloat R, GLfloat G, GLfloat B);
 	void SetAlign(Align AlignOpt);
