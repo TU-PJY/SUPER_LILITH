@@ -23,6 +23,14 @@ GLfloat Player::GetRotation(){
 	return Rotation;
 }
 
+int Player::GetShapeState() {
+	return ShapeState;
+}
+
+void Player::SetRotateSpeed(GLfloat Speed) {
+	RotateSpeed = Speed;
+}
+
 Player::Player(){
 	SetColor(1.0, 1.0, 1.0);
 	Scale(0.5, 0.5);
@@ -38,7 +46,7 @@ void Player::Update(float FT){
 
 	Scale(0.5, 0.5);
 
-	Rotation += FT * 35;
+	Rotation += FT * RotateSpeed;
 	if (Rotation > 360)
 		Rotation = 0;
 

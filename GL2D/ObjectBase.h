@@ -42,6 +42,9 @@ public:
 
 	virtual void SetGenTime(GLfloat TimeValue) {}
 	virtual GLfloat GetRotation() { return{}; }
+	virtual void SetRotateSpeed(GLfloat Speed) {}
+	virtual int GetShapeState() { return {}; }
+	virtual void SetMoveSpeed(GLfloat Speed) {}
 };
 
 // dummy object for avoiding iterator errors

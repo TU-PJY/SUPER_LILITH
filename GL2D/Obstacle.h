@@ -7,14 +7,17 @@ enum class ObstacleType
 class Obstacle : public OBJ_BASE {
 private:
 	unsigned int Image{};
-	ObstacleType type{};
+	int ShapeType{};
 	GLfloat Size = 15;
 	GLfloat Rotation{};
 	GLfloat MoveSpeed = 1.5;
+	bool Checked{};
 
 public:
 	Obstacle(ObstacleType type);
+	void SetMoveSpeed(GLfloat Speed);
 	void Update(float FT);
+	bool CheckShapeType();
 	void Render();
 };
 

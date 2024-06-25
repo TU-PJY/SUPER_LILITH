@@ -22,7 +22,14 @@ Obstacle::Obstacle(ObstacleType type){
 		break;
 	}
 
+
+	ShapeType = static_cast<int>(type);
+
 	SetColor(1.0, 1.0, 1.0);
+}
+
+void Obstacle::SetMoveSpeed(GLfloat Speed) {
+	MoveSpeed = Speed;
 }
 
 void Obstacle::Update(float FT) {
@@ -32,9 +39,28 @@ void Obstacle::Update(float FT) {
 	if (player) Rotation = player->GetRotation();
 
 	if (Size <= 0.65) {
-		Size -= FT * MoveSpeed * 4 * Size;
-		if (Size <= 0)
-			fw.DeleteSelf(this);
+		// 플레이어의 도형과 같을 경우 통과하고 완전히 작아지면 삭제
+		if (CheckShapeType()) 
+			Checked = true;
+
+		if (Checked) {
+			Size -= FT * MoveSpeed * 4 * Size;
+			if (Size <= 0)
+				fw.DeleteSelf(this);
+		}
+		
+		// 플레이어의 도형이 다가오는 도형과 다를 경우 도형 생성기를 삭제하고 모든 도형의 업데이트가 멈춘다
+		// 플레이어의 회전도 멈춘다
+		else {
+			fw.DeleteObject("obstacle_generator", DeleteRange::One, SearchRange::One, Layer::L1);
+
+			for (int i = 0; i < fw.Size(Layer::L1); ++i) {
+				auto shape = fw.Find("obstacle", Layer::L1, i);
+				if (shape) shape->SetMoveSpeed(0.0);
+			}
+
+			if (player) player->SetRotateSpeed(0.0);
+		}
 	}
 
 	else {
@@ -43,6 +69,14 @@ void Obstacle::Update(float FT) {
 
 	Scale(Size, Size);
 	Rotate(Rotation + 30);
+}
+
+bool Obstacle::CheckShapeType() {
+	auto player = fw.Find("player", SearchRange::One, Layer::L2);
+	if (player && player->GetShapeState() != ShapeType)
+		return false;
+
+	return true;
 }
 
 void Obstacle::Render() {

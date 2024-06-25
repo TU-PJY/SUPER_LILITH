@@ -16,6 +16,8 @@ private:
 	Pentagon pentagon;
 	Hexagon hexagon;
 
+	GLfloat RotateSpeed = 35;
+
 public:
 	Player();
 	void Update(float FT);
@@ -23,5 +25,7 @@ public:
 	void RenderShapes();
 	void InputSpecialKey(int KEY, bool KeyDown);
 	GLfloat GetRotation();
+	int GetShapeState();
+	void SetRotateSpeed(GLfloat Speed);
 };
 
