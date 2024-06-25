@@ -19,6 +19,10 @@ void Player::InputSpecialKey(int KEY, bool KeyDown) {
 	}
 }
 
+GLfloat Player::GetRotation(){
+	return Rotation;
+}
+
 Player::Player(){
 	SetColor(1.0, 1.0, 1.0);
 	Scale(0.5, 0.5);
@@ -34,7 +38,7 @@ void Player::Update(float FT){
 
 	Scale(0.5, 0.5);
 
-	//Rotation -= FT * 150;
+	Rotation += FT * 35;
 	if (Rotation > 360)
 		Rotation = 0;
 

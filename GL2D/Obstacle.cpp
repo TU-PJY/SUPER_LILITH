@@ -1,6 +1,7 @@
 #include "Obstacle.h"
 #include "ImageUtil.h"
 #include "FWM.h"
+#include <cmath>
 
 Obstacle::Obstacle(ObstacleType type){
 	switch (type) {
@@ -27,13 +28,21 @@ Obstacle::Obstacle(ObstacleType type){
 void Obstacle::Update(float FT) {
 	InitTransform();
 
-	Size -= FT * MoveSpeed;
+	auto player = fw.Find("player", SearchRange::One, Layer::L2);
+	if (player) Rotation = player->GetRotation();
+
+	if (Size <= 0.65) {
+		Size -= FT * MoveSpeed * 4 * Size;
+		if (Size <= 0)
+			fw.DeleteSelf(this);
+	}
+
+	else {
+		Size -= FT * MoveSpeed * Size;
+	}
 
 	Scale(Size, Size);
 	Rotate(Rotation + 30);
-
-	if (Size <= 0.4)
-		fw.DeleteSelf(this);
 }
 
 void Obstacle::Render() {

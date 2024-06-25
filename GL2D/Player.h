@@ -22,5 +22,6 @@ public:
 	void Render();
 	void RenderShapes();
 	void InputSpecialKey(int KEY, bool KeyDown);
+	GLfloat GetRotation();
 };
 

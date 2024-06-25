@@ -4,7 +4,8 @@
 class ObstacleGenerator : public OBJ_BASE {
 private:
 	GLfloat GenTimer{};
-	GLfloat GenTimeValue = 15;
+	GLfloat GenTimeValue = 10;
+	int PrevType{-1}, RandomType{};
 
 public:
 	void SetGenTime(GLfloat TimeValue);

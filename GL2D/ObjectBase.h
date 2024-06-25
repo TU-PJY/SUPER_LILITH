@@ -41,6 +41,7 @@ public:
 	///////////////
 
 	virtual void SetGenTime(GLfloat TimeValue) {}
+	virtual GLfloat GetRotation() { return{}; }
 };
 
 // dummy object for avoiding iterator errors
