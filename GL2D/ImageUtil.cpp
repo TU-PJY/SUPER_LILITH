@@ -24,6 +24,9 @@ std::unordered_map<std::string, const char*> ImageList
 	{"button_info", "resources//image//ui//button_info.png"},
 	{"button_sound_enable", "resources//image//ui//button_sound_enable.png"},
 	{"button_sound_disable", "resources//image//ui//button_sound_disable.png"},
+
+	// cursor
+	{"cursor", "resources//image//ui//cursor.png"},
 };
 
 

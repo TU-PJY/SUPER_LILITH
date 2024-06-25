@@ -52,7 +52,7 @@ GLvoid GLMain() {
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//soundUtil.Update();
+	soundUtil.Update();
 	fw.Routine();
 
 	glutSwapBuffers();
@@ -72,6 +72,8 @@ void main(int argc, char** argv) {
 
 	if (StartWithFullScreen)
 		glutFullScreen();
+
+	glutSetCursor(GLUT_CURSOR_NONE);
 
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {

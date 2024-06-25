@@ -43,7 +43,7 @@ void Title::Update(float FT) {
 }
 
 void Title::Render() {
-	TitleText.Draw(0.0, 0.6, 0.5, "BEAT SHIFTER");
+	TitleText.Draw(0.0, 0.6, 0.45, "BEAT SHIFTER");
 	text.Draw(TitlePosition, 0.4, 0.1, "%s", MusicInfo[LobbyPage - 1].c_str());
 }
 

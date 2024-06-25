@@ -2,6 +2,7 @@
 #include "FWM.h"
 #include "Title.h"
 #include "Button.h"
+#include "Cursor.h"
 #include <string>
 
 void Lobby::SetController() {
@@ -18,6 +19,7 @@ void Lobby::SetController() {
 std::string Lobby::LobbyMode() {
 	fw.AddObject(new Title, "title", Layer::L2);
 	fw.AddObject(new Button, "button", Layer::L2);
+	fw.AddObject(new Cursor, "cursor", Layer::L2);
 
 	return __func__;
 }
