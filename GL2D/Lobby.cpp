@@ -30,24 +30,6 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 			glutDestroyWindow(1);
 			break;
 		}
-
-	// Normal Key Up
-	else if (!KeyDown && SpecialKey)
-		switch (KEY) {
-
-		}
-
-	// Special Key Down
-	if (KeyDown && SpecialKey)
-		switch (S_KEY) {
-
-		}
-
-	// Special Key Up
-	else if (!KeyDown && SpecialKey)
-		switch (S_KEY) {
-
-		}
 }
 
 void Lobby::MouseButton(int button, int state, int x, int y) {
@@ -80,6 +62,9 @@ void Lobby::SpecialKeyUp(int KEY, int x, int y) {
 
 void Lobby::SpecialKeyDown(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, false, true);
+
+	auto title = fw.Find("title", SearchRange::One, Layer::L2);
+	if (title) title->InputSpecialKey(KEY, true);
 }
 
 void Lobby::MouseMotion(int x, int y) {

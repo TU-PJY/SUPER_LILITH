@@ -1,5 +1,6 @@
 #include "Title.h"
 #include "ImageUtil.h"
+#include <cmath>
 
 Title::Title() {
 	Image = imageUtil.SetImage("title");
@@ -9,6 +10,26 @@ Title::Title() {
 	text.SetAlign(Align::Middle);
 }
 
+void Title::InputSpecialKey(int KEY, bool KeyDown) {
+	if (KeyDown) {
+		switch (KEY) {
+		case GLUT_KEY_LEFT:
+			if (LobbyPage > 1) {
+				LobbyPage -= 1;
+				TitlePosition = 0.3;
+			}
+			break;
+
+		case GLUT_KEY_RIGHT:
+			if (LobbyPage < 4) {
+				LobbyPage += 1;
+				TitlePosition = -0.3;
+			}
+			break;
+		}
+	}
+}
+
 void Title::Update(float FT) {
 	InitTransform();
 
@@ -16,6 +37,8 @@ void Title::Update(float FT) {
 	Scale(imageUtil.Aspect(1500, 500), 1.0);
 
 	Translate(0.0, 0.7);
+
+	TitlePosition = std::lerp(TitlePosition, 0.0, FT * 10);
 }
 
 void Title::Render() {
@@ -24,33 +47,37 @@ void Title::Render() {
 
 	switch (LobbyPage) {
 	case 1:
-		text.Draw(0.0, 0.4, 0.1, "DJ Striden - Charisma V.I.P");
+		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Charisma V.I.P");
 		break;
 
 	case 2:
-		text.Draw(0.0, 0.4, 0.1, "DJ Striden - Celestial Donimion");
+		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Celestial Donimion");
 		break;
 
 	case 3:
-		text.Draw(0.0, 0.4, 0.1, "DJ Striden - Sky Voyager");
+		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Sky Voyager");
 		break;
 
 	case 4:
-		text.Draw(0.0, 0.4, 0.1, "DJ Striden - Cyber Bunked");
+		text.Draw(TitlePosition, 0.4, 0.1, "DJ Striden - Cyber Bunked");
 		break;
 	}
 }
 
 void Title::ChangeLobbyPage(int dir) {
 	switch (dir) {
-	case 0:
-		if (LobbyPage > 1)
+	case 0:  // left
+		if (LobbyPage > 1) {
 			LobbyPage -= 1;
+			TitlePosition = 0.3;
+		}
 		break;
 
-	case 1:
-		if (LobbyPage < 4)
+	case 1:  // right
+		if (LobbyPage < 4) {
 			LobbyPage += 1;
+			TitlePosition = -0.3;
+		}
 		break;
 	}
 }
