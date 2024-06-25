@@ -1,7 +1,12 @@
 #include "Button.h"
 #include "ImageUtil.h"
 #include "MouseUtil.h"
+#include "Title.h"
+#include "FWM.h"
 #include <cmath>
+
+enum Dir
+{PageLeft, PageRight};
 
 Button::Button() {
 	ArrowRight = imageUtil.SetImage("arrow_right");
@@ -74,5 +79,15 @@ void Button::Render() {
 }
 
 void Button::ClickButton() {
+	// right arrow
+	if (aabb[0].CheckCollisionDot(ASP(mouse.x), mouse.y)) {
+		auto title = fw.Find("title", SearchRange::One, Layer::L2);
+		if (title) title->ChangeLobbyPage(PageRight);
+	}
 
+	// left arrow
+	if (aabb[1].CheckCollisionDot(ASP(mouse.x), mouse.y)) {
+		auto title = fw.Find("title", SearchRange::One, Layer::L2);
+		if (title) title->ChangeLobbyPage(PageLeft);
+	}
 }

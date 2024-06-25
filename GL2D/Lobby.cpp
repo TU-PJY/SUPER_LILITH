@@ -51,26 +51,9 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 }
 
 void Lobby::MouseButton(int button, int state, int x, int y) {
-	switch (button) {
-	case GLUT_LEFT_BUTTON:
-		switch (state) {
-		case GLUT_DOWN:
-			break;
-
-		case GLUT_UP:
-			break;
-		}
-		break;
-
-	case GLUT_RIGHT_BUTTON:
-		switch (state) {
-		case GLUT_DOWN:
-			break;
-
-		case GLUT_UP:
-			break;
-		}
-		break;
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		auto button = fw.Find("button", SearchRange::One, Layer::L2);
+		if (button) button->ClickButton();
 	}
 }
 
