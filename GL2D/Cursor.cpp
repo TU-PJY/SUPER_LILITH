@@ -1,6 +1,7 @@
 #include "Cursor.h"
 #include "MouseUtil.h"
 #include "ImageUtil.h"
+#include "CameraUtil.h"
 
 Cursor::Cursor() {
 	Image = imageUtil.SetImage("cursor");
@@ -9,8 +10,8 @@ Cursor::Cursor() {
 
 void Cursor::Render() {
 	InitTransform();
-	Translate(ASP(mouse.x) + 0.075, mouse.y - 0.075);
-	ScaleSpot(0.15, 0.15);
+	Translate(DivideZoom(ASP(mouse.x) + 0.075, cam.Zoom), DivideZoom(mouse.y - 0.075, cam.Zoom));
+	ScaleSpot(DivideZoom(0.15, cam.Zoom), DivideZoom(0.15, cam.Zoom));
 	ProcessTransform();
 	imageUtil.Draw(Image);
 }
