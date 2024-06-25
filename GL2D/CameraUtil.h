@@ -22,10 +22,11 @@ public:
 extern CameraUtil cam;
 
 
-class CamaraControlUtil {
+class CameraControlUtil {
 public:
 	void Translate(GLfloat MoveX, GLfloat MoveY);
 	void Rotate(GLfloat Radians);
 	void SetZoom(ZOOM ZoomOpt, GLfloat Value);
+	void UpdateZoom(float FT);
 };
-extern CamaraControlUtil camUtil;
+extern CameraControlUtil camUtil;

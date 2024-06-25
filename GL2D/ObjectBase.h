@@ -48,6 +48,7 @@ public:
 	virtual void SetMoveSpeed(GLfloat Speed) {}
 	virtual void ClickButton() {}
 	virtual void ChangeLobbyPage(int dir) {}
+	virtual void PlayMusic(int dir) {}
 };
 
 // dummy object for avoiding iterator errors

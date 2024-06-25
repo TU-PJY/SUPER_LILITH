@@ -18,7 +18,6 @@ void OBJ_BASE::ScaleSpot(GLfloat X, GLfloat Y) {
 	TranslateMatrix = scale(TranslateMatrix, glm::vec3(X, Y, 0.0));
 }
 
-
 void OBJ_BASE::RotateSpot(GLfloat Radians) {
 	TranslateMatrix = rotate(TranslateMatrix, glm::radians(Radians), glm::vec3(0.0, 0.0, 1.0));
 }

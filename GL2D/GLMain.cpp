@@ -27,7 +27,7 @@ std::string VENDOR;
 
 ShaderUtil shader;
 CameraUtil cam;
-CamaraControlUtil camUtil;
+CameraControlUtil camUtil;
 RenderModeUtil renderMode;
 ImageUtil imageUtil;
 TextUtilUnicode textUnicode;
@@ -38,6 +38,7 @@ FontLoaderUtil fontloaderUtil;
 FWM fw;
 
 clock_t StartTime, EndTime;
+float FrameTime;
 
 
 GLvoid DisplayReshape(int w, int h) {
@@ -54,12 +55,14 @@ GLvoid GLMain() {
 
 	soundUtil.Update();
 	fw.Routine();
+	camUtil.UpdateZoom(FrameTime);
 
 	glutSwapBuffers();
 	glutPostRedisplay();
 
 	EndTime = clock();
-	fw.SetFrameTime(float(EndTime - StartTime) / 1000);
+	FrameTime = float(EndTime - StartTime) / 1000;
+	fw.SetFrameTime(FrameTime);
 }
 
 void main(int argc, char** argv) {

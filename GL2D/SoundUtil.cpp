@@ -13,13 +13,18 @@ FileNameAndOption FNO;
 // list sounds to load
 std::unordered_map<std::string, FileNameAndOption> SoundList
 {
+	{"stage1", {"resources//sound//bgm//DJ Striden - Charisma VIP.mp3", FMOD_LOOP_NORMAL}},
+	{"stage2", {"resources//sound//bgm//DJ Striden - Celestial Dominion.mp3", FMOD_LOOP_NORMAL}},
+	{"stage3", {"resources//sound//bgm//DJ Striden - Sky Voyager.mp3", FMOD_LOOP_NORMAL}},
+	{"stage4", {"resources//sound//bgm//DJ Striden - Cyber Bunked.mp3", FMOD_LOOP_NORMAL}},
 
+	{"click", {"resources//sound//ui//lobby_click.wav", FMOD_DEFAULT}}
 };
 
 // list channels to load
 std::vector<std::string> ChannelList
 {
-
+	"ch_bgm", "ch_ui"
 };
 
 
@@ -129,4 +134,8 @@ float SoundUtil::DetectBeat(float Threshold) {
 	}
 
 	return 0;
+}
+
+int SoundUtil::GetSoundNum() {
+	return LoadedSoundList.size();
 }

@@ -91,6 +91,9 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Cursor ]">
       <UniqueIdentifier>{7de1d4d9-7a69-497d-a659-67a850d3d467}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Lobby Music Player ]">
+      <UniqueIdentifier>{abb28645-0c87-4622-8ac5-0b678551fbb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -153,6 +156,9 @@
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Cursor ]</Filter>
+    </ClCompile>
+    <ClCompile Include="LobbyMusicPlayer.cpp">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Lobby Music Player ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Cursor ]</Filter>
+    </ClInclude>
+    <ClInclude Include="LobbyMusicPlayer.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Lobby Music Player ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

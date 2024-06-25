@@ -58,15 +58,15 @@ void CameraUtil::UpdateCamera() {
 
 
 
-void CamaraControlUtil::Translate(GLfloat X, GLfloat Y) {
+void CameraControlUtil::Translate(GLfloat X, GLfloat Y) {
 	cam.ViewMatrix = translate(cam.ViewMatrix, glm::vec3(X, Y, 0.0));
 }
 
-void CamaraControlUtil::Rotate(GLfloat Radians) {
+void CameraControlUtil::Rotate(GLfloat Radians) {
 	cam.ViewMatrix = rotate(cam.ViewMatrix, glm::radians(Radians), glm::vec3(0.0, 0.0, 1.0));
 }
 
-void CamaraControlUtil::SetZoom(ZOOM ZoomOpt, GLfloat Value) {
+void CameraControlUtil::SetZoom(ZOOM ZoomOpt, GLfloat Value) {
 	GLfloat UpdatedZoomValue{};
 
 	switch (ZoomOpt) {
@@ -82,4 +82,8 @@ void CamaraControlUtil::SetZoom(ZOOM ZoomOpt, GLfloat Value) {
 	}
 
 	cam.Zoom = UpdatedZoomValue;
+}
+
+void CameraControlUtil::UpdateZoom(float FT) {
+	cam.Zoom = std::lerp(cam.Zoom, 1.0, FT * 15);
 }

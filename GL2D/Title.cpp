@@ -1,5 +1,7 @@
 #include "Title.h"
 #include "ImageUtil.h"
+#include "SoundUtil.h"
+#include "FWM.h"
 #include <cmath>
 
 Title::Title() {
@@ -15,17 +17,11 @@ void Title::InputSpecialKey(int KEY, bool KeyDown) {
 	if (KeyDown) {
 		switch (KEY) {
 		case GLUT_KEY_LEFT:
-			if (LobbyPage > 1) {
-				LobbyPage -= 1;
-				TitlePosition = 0.3;
-			}
+			ChangeLobbyPage(0);
 			break;
 
 		case GLUT_KEY_RIGHT:
-			if (LobbyPage < 4) {
-				LobbyPage += 1;
-				TitlePosition = -0.3;
-			}
+			ChangeLobbyPage(1);
 			break;
 		}
 	}
@@ -53,13 +49,25 @@ void Title::ChangeLobbyPage(int dir) {
 		if (LobbyPage > 1) {
 			LobbyPage -= 1;
 			TitlePosition = 0.3;
+
+			auto music_player = fw.Find("lobby_music_player", SearchRange::One, Layer::L2);
+			if (music_player) {
+				soundUtil.PlaySound("click", "ch_ui");
+				music_player->PlayMusic(LobbyPage);
+			}
 		}
 		break;
 
 	case 1:  // right
-		if (LobbyPage < 4) {
+		if (LobbyPage < soundUtil.GetSoundNum() - 1) {
 			LobbyPage += 1;
 			TitlePosition = -0.3;
+
+			auto music_player = fw.Find("lobby_music_player", SearchRange::One, Layer::L2);
+			if (music_player) {
+				soundUtil.PlaySound("click", "ch_ui");
+				music_player->PlayMusic(LobbyPage);
+			}
 		}
 		break;
 	}
