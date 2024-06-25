@@ -1,6 +1,9 @@
 #pragma once
 #include "ObjectBase.h"
 #include "ImageUtil.h"
+#include "FWM.h"
+#include "MusicPlayer.h"
+#include "Lobby.h"
 
 enum class ObstacleType 
 {Triangle, Square, Pentagon, Hexagon};
@@ -13,8 +16,9 @@ private:
 	GLfloat Rotation{};
 	GLfloat MoveSpeed = 1.5;
 
-	bool Checked{};
+	bool IsSame{};
 	bool B_ObstacleAdded{};
+	bool FeedbackAdded{};
 
 public:
 	Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B);
@@ -30,6 +34,8 @@ private:
 	int ShapeType{};
 	unsigned int Image{};
 	float Frame{};
+
+	GLfloat EndTimer{};
 
 	glm::vec3 ColorSet{};
 
@@ -75,8 +81,14 @@ public:
 				SetColor(ColorSet.r, ColorSet.g, ColorSet.b);
 		}
 
-		else
+		else {
 			SetColor(1.0, 0.0, 0.0);
+			EndTimer += FT * 10;
+			if (EndTimer >= 15) {
+				mp.SetToLobbyMode();
+				fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
+			}
+		}
 	}
 
 	void Render() {
@@ -84,4 +96,38 @@ public:
 		imageUtil.Draw(Image);
 	}
 };
+
+
+class FeedBack : public OBJ_BASE {
+private:
+	unsigned int Image{};
+	GLfloat Size{};
+
+public:
+	FeedBack() {
+		Image = imageUtil.SetImage("feedback");
+		Size = 0.8;
+		Scale(Size, Size);
+		SetColor(0.0, 1.0, 0.0);
+	}
+
+	void Update(float FT) {
+		InitTransform();
+
+		Size = std::lerp(Size, 0.0, FT * 2);
+		AlphaValue = std::lerp(AlphaValue, 0.0, FT * 2);
+
+		Scale(Size, Size);
+
+		if (Size <= 0.2)
+			fw.DeleteSelf(this);
+	}
+
+	void Render() {
+		ProcessTransform();
+		imageUtil.Draw(Image);
+	}
+};
+
+
 

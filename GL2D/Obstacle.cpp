@@ -38,37 +38,38 @@ void Obstacle::Update(float FT) {
 	auto player = fw.Find("player", SearchRange::One, Layer::L2);
 	if (player) Rotation = player->GetRotation();
 
-	if (Size <= 0.65) {
-		// 플레이어의 도형과 같을 경우 통과하고 완전히 작아지면 삭제
-		if (CheckShapeType()) 
-			Checked = true;
+	
+	if (Size <= 0.75)
+		Size -= FT * MoveSpeed * 2 * Size;
+	else
+		Size -= FT * MoveSpeed * Size;
 
-		if (Checked) {
-			Size -= FT * MoveSpeed * 4 * Size;
-			if (Size <= 0)
-				fw.DeleteSelf(this);
+
+	if (Size <= 0.65) {
+		// 플레이어의 도형과 같을 경우 삭제
+		if (CheckShapeType()) {
+			fw.AddObject(new FeedBack, "feedback", Layer::L1);
+			fw.DeleteSelf(this);
 		}
-		
+
 		// 플레이어의 도형이 다가오는 도형과 다를 경우 도형 생성기를 삭제하고 모든 도형의 업데이트가 멈춘다
 		// 플레이어의 회전도 멈춘다
-		else {
-			fw.DeleteObject("obstacle_generator", DeleteRange::One, SearchRange::One, Layer::L1);
-
+		else{
 			for (int i = 0; i < fw.Size(Layer::L1); ++i) {
 				auto shape = fw.Find("obstacle", Layer::L1, i);
 				if (shape) shape->SetMoveSpeed(0.0);
 			}
-			if (player) player->SetRotateSpeed(0.0);
+			if (player) {
+				player->SetRotateSpeed(0.0);
+				player->SetGameOver();
+			}
 
 			if (!B_ObstacleAdded) {
+				fw.DeleteObject("obstacle_generator", DeleteRange::One, SearchRange::One, Layer::L1);
 				fw.AddObject(new BlinkingObstacle(ShapeType, ObjectColor.r, ObjectColor.g, ObjectColor.b, Rotation, Size), "b_obstacle", Layer::L2);
 				B_ObstacleAdded = true;
 			}
 		}
-	}
-
-	else {
-		Size -= FT * MoveSpeed * Size;
 	}
 
 	Scale(Size, Size );

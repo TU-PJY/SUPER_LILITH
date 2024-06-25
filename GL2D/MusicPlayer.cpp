@@ -1,13 +1,22 @@
 #include "MusicPlayer.h"
 #include "SoundUtil.h"
 #include "CameraUtil.h"
+#include "FWM.h"
 
-void MusicPlayer::SetToLobbyMode(std::string MusicName){
+void MusicPlayer::SetToLobbyMode(){
+	soundUtil.SetFreqCutOff("ch_bgm", 200);
+}
+
+void MusicPlayer::Init(std::string MusicName) {
 	PlayTime.reserve(10);
 
 	soundUtil.PlaySound(MusicName, "ch_bgm");
 	soundUtil.SetBeatDetect("ch_bgm");
 	soundUtil.SetFreqCutOff("ch_bgm", 200);
+}
+
+void MusicPlayer::SetToPlayMode() {
+	soundUtil.UnSetFreqCutOff("ch_bgm");
 }
 
 void MusicPlayer::PlayMusic(int Page){
@@ -38,7 +47,12 @@ void MusicPlayer::PlayMusic(int Page){
 
 void MusicPlayer::Update() {
 	float BassValue = soundUtil.DetectBeat(0.0);
-	camUtil.SetZoom(ZOOM::In, BassValue * 0.002);
+	if(fw.Mode() == "LobbyMode")
+		camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
+	else {
+		auto player = fw.Find("player", SearchRange::One, Layer::L2);
+		if (player) player->SetSize(BassValue * 0.01);
+	}
 
 	PlayTime[MusicPage - 1] = soundUtil.GetPlayTime("ch_bgm");
 }

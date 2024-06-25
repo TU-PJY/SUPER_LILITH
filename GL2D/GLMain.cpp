@@ -116,6 +116,7 @@ void main(int argc, char** argv) {
 	soundUtil.Init();
 
 	fw.Init(Lobby::LobbyMode, Lobby::SetController);
+	mp.Init("stage1");
 
 	glutDisplayFunc(GLMain);
 	glutReshapeFunc(DisplayReshape);

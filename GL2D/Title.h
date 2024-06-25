@@ -21,10 +21,11 @@ private:
 	};
 	
 public:
-	Title();
+	Title(int Page);
 	void InputSpecialKey(int KEY, bool KeyDown);
 	void Update(float FT);
 	void Render();
 	void ChangeLobbyPage(int dir);
+	int GetLobbyPage();
 };
 

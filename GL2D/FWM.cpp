@@ -25,27 +25,21 @@ void FWM::Routine() {
 
 	if (!ModeSwitchState && RunningState) {
 		for (int i = 0; i < Num; ++i) {
-			if (Container[i].empty())  
-				continue;
-
 			for (auto It = begin(Container[i]); It != end(Container[i]);) {
-				if (CheckDeleteFlag(It, i))  
-					continue;
-
 				if (FloatingModeRunningState) {
-					if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor)
+					if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor && !(*It)->ObjectDeleteDescriptor)
 						(*It)->Update(FrameTime);
 					else
-						(*It)->Update(FrameTime);
+						if (!(*It)->ObjectDeleteDescriptor)
+							(*It)->Update(FrameTime);
 				}
 
 				else  
-					(*It)->Update(FrameTime);
+					if(!(*It)->ObjectDeleteDescriptor)
+						(*It)->Update(FrameTime);
 
-				(*It)->Render();
-
-				if (CheckDeleteFlag(It, i))  
-					continue;
+				if (!(*It)->ObjectDeleteDescriptor)
+					(*It)->Render();
 
 				++It;
 			}
@@ -54,7 +48,21 @@ void FWM::Routine() {
 				ModeSwitchState = true;
 				break;
 			}
+
+			for (auto It = begin(Container[i]); It != end(Container[i]);) {
+				if ((*It)->ObjectTag != "FWM_DUMMY" && (*It)->ObjectDeleteDescriptor) {
+					delete* It;
+					*It = nullptr;
+					It = Container[i].erase(It);
+					continue;
+				}
+				++It;
+			}
 		}
+	}
+	else {
+		ChangeMode();
+		ModeSwitchReserveDescriptor = false;
 	}
 }
 

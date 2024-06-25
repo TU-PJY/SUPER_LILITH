@@ -1,20 +1,20 @@
 #include "Player.h"
 #include "ImageUtil.h"
-#include "FWM.h"
-#include <cmath>
 
 void Player::InputSpecialKey(int KEY, bool KeyDown) {
-	if (KeyDown) {
-		switch (KEY) {
-		case GLUT_KEY_RIGHT:
-			if (ShapeState < 3)
-				ShapeState += 1;
-			break;
+	if (!GameOver) {
+		if (KeyDown) {
+			switch (KEY) {
+			case GLUT_KEY_RIGHT:
+				if (ShapeState < 3)
+					ShapeState += 1;
+				break;
 
-		case GLUT_KEY_LEFT:
-			if (ShapeState > 0) 
-				ShapeState -= 1;
-			break;
+			case GLUT_KEY_LEFT:
+				if (ShapeState > 0)
+					ShapeState -= 1;
+				break;
+			}
 		}
 	}
 }
@@ -31,9 +31,17 @@ void Player::SetRotateSpeed(GLfloat Speed) {
 	RotateSpeed = Speed;
 }
 
+void Player::SetSize(GLfloat SizeValue) {
+	Size += SizeValue;
+}
+
+void Player::SetGameOver() {
+	GameOver = true;
+}
+
 Player::Player(){
 	SetColor(1.0, 1.0, 1.0);
-	Scale(0.5, 0.5);
+	Scale(Size, Size);
 
 	triangle.Init();
 	square.Init();
@@ -44,13 +52,16 @@ Player::Player(){
 void Player::Update(float FT){
 	InitTransform();
 
-	Scale(0.5, 0.5);
+	Size = std::lerp(Size, 0.5, FT * 25);
 
 	Rotation += FT * RotateSpeed;
 	if (Rotation > 360)
 		Rotation = 0;
 
+	Scale(Size, Size);
+
 	Rotate(Rotation + 30);
+
 }
 
 void Player::Render(){

@@ -2,6 +2,7 @@
 #include "FWM.h"
 #include "Player.h"
 #include "ObstacleGenerator.h"
+#include "MusicPlayer.h"
 
 void Stage_1::SetController() {
 	glutMotionFunc(MouseMotion);
@@ -16,7 +17,9 @@ void Stage_1::SetController() {
 
 std::string Stage_1::Stage1() {
 	fw.AddObject(new Player, "player", Layer::L2);
-	fw.AddObject(new ObstacleGenerator, "obstacle_generator", Layer::L1);
+	fw.AddObject(new ObstacleGenerator, "obstacle_generator", Layer::L2);
+	mp.SetToPlayMode();
+
 	return __func__;
 }
 

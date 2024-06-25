@@ -44,9 +44,12 @@ public:
 	virtual void SetGenTime(GLfloat TimeValue) {}
 	virtual GLfloat GetRotation() { return{}; }
 	virtual void SetRotateSpeed(GLfloat Speed) {}
+	virtual void SetSize(GLfloat SizeValue) {}
 	virtual int GetShapeState() { return {}; }
 	virtual void SetMoveSpeed(GLfloat Speed) {}
+	virtual void SetGameOver() {}
 	virtual void ClickButton() {}
+	virtual int GetLobbyPage() { return {}; }
 	virtual void ChangeLobbyPage(int dir) {}
 	virtual void PlayMusic(int dir) {}
 };

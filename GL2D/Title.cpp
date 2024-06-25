@@ -5,13 +5,15 @@
 #include "MusicPlayer.h"
 #include <cmath>
 
-Title::Title() {
+Title::Title(int Page) {
 	SetColor(1.0, 1.0, 1.0);
 
 	Text.Init(L"열정그자체", FW_NORMAL, TRUE);
 	Text.SetAlign(Align::Middle);
 
 	BgmNum = soundUtil.GetSoundNumif("stage");
+
+	LobbyPage = Page;
 }
 
 void Title::InputSpecialKey(int KEY, bool KeyDown) {
@@ -66,4 +68,8 @@ void Title::ChangeLobbyPage(int dir) {
 		}
 		break;
 	}
+}
+
+int Title::GetLobbyPage() {
+	return LobbyPage;
 }

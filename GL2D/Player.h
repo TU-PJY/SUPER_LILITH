@@ -10,6 +10,7 @@ class Player : public OBJ_BASE {
 private:
 	int ShapeState{ EnumTriangle };
 	GLfloat Rotation{};
+	GLfloat Size = 0.5;
 
 	Triangle triangle;
 	Square square;
@@ -17,6 +18,8 @@ private:
 	Hexagon hexagon;
 
 	GLfloat RotateSpeed = 35;
+
+	bool GameOver{};
 
 public:
 	Player();
@@ -27,5 +30,6 @@ public:
 	GLfloat GetRotation();
 	int GetShapeState();
 	void SetRotateSpeed(GLfloat Speed);
+	void SetSize(GLfloat Size);
+	void SetGameOver();
 };
-

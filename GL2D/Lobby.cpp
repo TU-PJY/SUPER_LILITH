@@ -4,6 +4,7 @@
 #include "Button.h"
 #include "Cursor.h"
 #include "MusicPlayer.h"
+#include "Stage1.h"
 #include <string>
 
 void Lobby::SetController() {
@@ -18,10 +19,9 @@ void Lobby::SetController() {
 }
 
 std::string Lobby::LobbyMode() {
-	fw.AddObject(new Title, "title", Layer::L2);
+	fw.AddObject(new Title{mp.MusicPage}, "title", Layer::L2);
 	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Cursor, "cursor", Layer::L2);
-	mp.SetToLobbyMode("stage1");
 
 	return __func__;
 }
@@ -32,6 +32,10 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 		switch (KEY) {
 		case 27:
 			glutDestroyWindow(1);
+			break;
+
+		case 32:
+			fw.SwitchMode(Stage_1::Stage1, Stage_1::SetController);
 			break;
 		}
 }

@@ -85,5 +85,5 @@ void CameraControlUtil::SetZoom(ZOOM ZoomOpt, GLfloat Value) {
 }
 
 void CameraControlUtil::UpdateZoom(float FT) {
-	cam.Zoom = std::lerp(cam.Zoom, 1.0, FT * 15);
+	cam.Zoom = std::lerp(cam.Zoom, 1.0, FT * 25);
 }
