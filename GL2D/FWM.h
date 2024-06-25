@@ -52,6 +52,7 @@ public:
 	void EndFloatingMode();
 	void ResetControlState(OBJ_BASE* Object);
 	void AddObject(OBJ_BASE* Object, std::string Tag, Layer AddLayer, bool SetFloatingObject=false);
+	void SwapLayer(OBJ_BASE* Object, Layer From, Layer To);
 	void DeleteSelf(OBJ_BASE* Object);
 	void DeleteObject(std::string Tag, DeleteRange deleteRange, SearchRange searchRange, Layer LayerToSearch);
 	OBJ_BASE* Find(std::string Tag, SearchRange searchRange, Layer LayerToSearch = Layer::L1);

@@ -22,6 +22,7 @@ public:
 	void Translate(GLfloat MoveX, GLfloat MoveY);
 	void Rotate(GLfloat Radians);
 	void Scale(GLfloat ScaleX, GLfloat ScaleY);
+	void ScaleSpot(GLfloat X, GLfloat Y);
 	void RotateSpot(GLfloat Radians);
 	void RotateAxis(GLfloat Radians, GLfloat AxisX, GLfloat AxisY);
 	void SetColor(GLfloat R, GLfloat G, GLfloat B);
@@ -45,6 +46,7 @@ public:
 	virtual void SetRotateSpeed(GLfloat Speed) {}
 	virtual int GetShapeState() { return {}; }
 	virtual void SetMoveSpeed(GLfloat Speed) {}
+	virtual void ClickButton() {}
 };
 
 // dummy object for avoiding iterator errors

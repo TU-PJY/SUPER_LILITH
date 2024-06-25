@@ -52,9 +52,6 @@
     <Filter Include="[2]___________[ GameMode ]">
       <UniqueIdentifier>{824d0f24-8e5b-4c58-99e5-e019f51ea99a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[2]___________[ GameMode ]\[ Mode1 ]">
-      <UniqueIdentifier>{7b8ece9e-369e-41aa-9eb1-0f0dc2f9398d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="[3]___________[ Util ]\[ Sound Util ]">
       <UniqueIdentifier>{22512964-c0e1-42b6-8ae0-9c32d227bc22}</UniqueIdentifier>
     </Filter>
@@ -64,19 +61,37 @@
     <Filter Include="[3]___________[ Util ]\[ Font Util ]">
       <UniqueIdentifier>{f2cdada2-a380-46fd-8cf3-b9ff333dcc11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Player ]">
-      <UniqueIdentifier>{987d76fd-821c-423d-ae0d-825d4cfd6781}</UniqueIdentifier>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]">
+      <UniqueIdentifier>{58785ac2-68c2-4626-9628-3d7856dfcc1b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle Generator ]">
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Obstacle ]">
+      <UniqueIdentifier>{5d3905c6-2f36-40e2-bea4-1be7abe420e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Obstacle Generator ]">
       <UniqueIdentifier>{dc2b537d-666e-4b17-bfa2-4cfde87dc3f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle ]">
-      <UniqueIdentifier>{5d3905c6-2f36-40e2-bea4-1be7abe420e7}</UniqueIdentifier>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Player ]">
+      <UniqueIdentifier>{987d76fd-821c-423d-ae0d-825d4cfd6781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]">
+      <UniqueIdentifier>{3e8bc110-f787-4c06-aa98-b55d6a570be5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Stage1 ]">
+      <UniqueIdentifier>{7b8ece9e-369e-41aa-9eb1-0f0dc2f9398d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Lobby ]">
+      <UniqueIdentifier>{1c3a1f0a-dd2d-40fc-a517-97dbb2e1a8e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Button ]">
+      <UniqueIdentifier>{b64ba527-c3ce-4631-99a5-dfc974581b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Title ]">
+      <UniqueIdentifier>{b443e89a-25e7-4fcc-aaf8-278a4ea0d434}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
-      <Filter>[2]___________[ GameMode ]\[ Mode1 ]</Filter>
+      <Filter>[2]___________[ GameMode ]\[ Stage1 ]</Filter>
     </ClCompile>
     <ClCompile Include="ObjectBase.cpp">
       <Filter>[1]___________[ Object ]\[3][ Object Base ]</Filter>
@@ -116,18 +131,27 @@
       <Filter>[3]___________[ Util ]\[ Font Util ]</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Player ]</Filter>
     </ClCompile>
     <ClCompile Include="ObstacleGenerator.cpp">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle Generator ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Obstacle Generator ]</Filter>
     </ClCompile>
     <ClCompile Include="Obstacle.cpp">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Obstacle ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Lobby.cpp">
+      <Filter>[2]___________[ GameMode ]\[ Lobby ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Button ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Title ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stage1.h">
-      <Filter>[2]___________[ GameMode ]\[ Mode1 ]</Filter>
+      <Filter>[2]___________[ GameMode ]\[ Stage1 ]</Filter>
     </ClInclude>
     <ClInclude Include="GLHeader.h">
       <Filter>[4]___________[ OpenGL ]</Filter>
@@ -172,16 +196,25 @@
       <Filter>[3]___________[ Util ]\[ Font Util ]</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Player ]</Filter>
     </ClInclude>
     <ClInclude Include="PlayerShape.h">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Player ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Player ]</Filter>
     </ClInclude>
     <ClInclude Include="ObstacleGenerator.h">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle Generator ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Obstacle Generator ]</Filter>
     </ClInclude>
     <ClInclude Include="Obstacle.h">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Obstacle ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Obstacle ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Lobby.h">
+      <Filter>[2]___________[ GameMode ]\[ Lobby ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Button ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Title ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

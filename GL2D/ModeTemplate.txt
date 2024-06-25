@@ -1,104 +1,30 @@
 // header
+#pragma once
 #include "MouseUtil.h"
-#include "FWL.h"
 #include <string>
 
-std::string Mode1();
+namespace Mode_1 {
+	void SetController();
+	std::string Mode1();
 
-inline void ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey=false) {
-	// Normal Key Down
-	if (KeyDown && !SpecialKey) 
-		switch (KEY) {
-		case 27:
-			glutDestroyWindow(1);
-			break;
-		}
-
-	// Normal Key Up
-	else if(!KeyDown && SpecialKey)
-		switch (KEY) {
-		
-		}
-
-	// Special Key Down
-	if(KeyDown && SpecialKey)
-		switch (S_KEY) {
-
-		}
-
-	// Special Key Up
-	else if(!KeyDown && SpecialKey)
-		switch (S_KEY) {
-
-		}
-}
-
-inline void MouseButton(int button, int state, int x, int y) {
-	switch (button) {
-	case GLUT_LEFT_BUTTON:
-		switch (state) {
-		case GLUT_DOWN:
-			mouse.LButtonDown = true;
-			break;
-
-		case GLUT_UP:
-			mouse.LButtonDown = false;
-			break;
-		}
-		break;
-
-	case GLUT_RIGHT_BUTTON:
-		switch (state) {
-		case GLUT_DOWN:
-			mouse.RButtonDown = true;
-			break;
-
-		case GLUT_UP:
-			mouse.RButtonDown = false;
-			break;
-		}
-		break;
-	}
-}
-
-inline void MouseWheel(int button, int dir, int x, int y) {
-	if (dir > 0) {
-	}
-
-	else if (dir < 0) {
-	}
+	void ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey = false);
+	void MouseButton(int button, int state, int x, int y);
+	void MouseWheel(int button, int Wheel, int x, int y);
+	void KeyDown(unsigned char KEY, int x, int y);
+	void KeyUp(unsigned char KEY, int x, int y);
+	void SpecialKeyUp(int KEY, int x, int y);
+	void SpecialKeyDown(int KEY, int x, int y);
+	void MouseMotion(int x, int y);
+	void MousePassiveMotion(int x, int y);
 }
 
 
-inline void KeyDown(unsigned char KEY, int x, int y) {
-	ProcessKeyboard(KEY, NULL, true);
-}
-
-inline void KeyUp(unsigned char KEY, int x, int y) {
-	ProcessKeyboard(KEY, NULL, false);
-}
-
-inline void SpecialKeyUp(int KEY, int x, int y) {
-	ProcessKeyboard(NULL, KEY, true, true);
-}
-
-inline void SpecialKeyDown(int KEY, int x, int y) {
-	ProcessKeyboard(NULL, KEY, false, true);
-}
-
-inline void MouseMotion(int x, int y) {
-	mouse.ConvertPosition(x, y);
-}
-
-inline void MousePassiveMotion(int x, int y) {
-	mouse.ConvertPosition(x, y);
-}
 
 
-// cpp
-#include <string>
+////// cpp
 
-void SetController() {
+
+void Mode_1::SetController() {
 	glutMotionFunc(MouseMotion);
 	glutPassiveMotionFunc(MousePassiveMotion);
 	glutKeyboardFunc(KeyDown);
@@ -109,7 +35,73 @@ void SetController() {
 	glutSpecialUpFunc(SpecialKeyUp);
 }
 
-std::string Mode1() {
-	SetController();
+std::string Mode_1::Mode1() {
 	return __func__;
+}
+
+void  Mode_1::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
+	// Normal Key Down
+	if (KeyDown && !SpecialKey)
+		switch (KEY) {
+		case 27:
+			glutDestroyWindow(1);
+			break;
+		}
+}
+
+void  Mode_1::MouseButton(int button, int state, int x, int y) {
+	switch (button) {
+	case GLUT_LEFT_BUTTON:
+		switch (state) {
+		case GLUT_DOWN:
+			break;
+
+		case GLUT_UP:
+			break;
+		}
+		break;
+
+	case GLUT_RIGHT_BUTTON:
+		switch (state) {
+		case GLUT_DOWN:
+			break;
+
+		case GLUT_UP:
+			break;
+		}
+		break;
+	}
+}
+
+void  Mode_1::MouseWheel(int button, int Wheel, int x, int y) {
+	if (Wheel > 0) {
+	}
+
+	else if (Wheel < 0) {
+	}
+}
+
+
+void  Mode_1::KeyDown(unsigned char KEY, int x, int y) {
+	ProcessKeyboard(KEY, NULL, true);
+}
+
+void  Mode_1::KeyUp(unsigned char KEY, int x, int y) {
+	ProcessKeyboard(KEY, NULL, false);
+}
+
+void  Mode_1::SpecialKeyUp(int KEY, int x, int y) {
+	ProcessKeyboard(NULL, KEY, true, true);
+}
+
+void  Mode_1::SpecialKeyDown(int KEY, int x, int y) {
+	ProcessKeyboard(NULL, KEY, false, true);
+}
+
+void  Mode_1::MouseMotion(int x, int y) {
+	mouse.ConvertPosition(x, y);
+}
+
+void  Mode_1::MousePassiveMotion(int x, int y) {
+	mouse.ConvertPosition(x, y);
 }

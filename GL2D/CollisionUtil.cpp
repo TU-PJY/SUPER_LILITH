@@ -7,8 +7,8 @@
 void AABB::Init() {
 	if (ShowBoundBox) {
 		Box = imageUtil.SetImage("gl2d_boundbox");
-		text.Init(L"arial", FW_NORMAL);
-		text.SetColor(1.0, 0.0, 0.0);
+		//text.Init(L"arial", FW_NORMAL);
+		//text.SetColor(1.0, 0.0, 0.0);
 	}
 }
 
@@ -27,7 +27,7 @@ void AABB::Update(GLfloat X, GLfloat Y, GLfloat xScale, GLfloat yScale, bool Use
 		ProcessTransform();
 		imageUtil.Draw(Box);
 
-		if (UseViewportPosition) {
+		/*if (UseViewportPosition) {
 			text.SetAlign(Align::Left);
 			text.Draw(LeftX - DivideZoom(0.02, cam.Zoom), LeftY, DivideZoom(0.07, cam.Zoom), "[%.2f, %.2f]", DivideASP(X) - xScale / 2, LeftY);
 			text.SetAlign(Align::Default);
@@ -43,7 +43,7 @@ void AABB::Update(GLfloat X, GLfloat Y, GLfloat xScale, GLfloat yScale, bool Use
 			text.Draw(RightX + DivideZoom(0.02, cam.Zoom), RightY, DivideZoom(0.07, cam.Zoom), "[%.2f, %.2f]", X + xScale / 2, RightY);
 			text.SetAlign(Align::Middle);
 			text.Draw(X, Y, DivideZoom(0.07, cam.Zoom), "[%.2f, %.2f]", X, Y);
-		}
+		}*/
 	}
 }
 

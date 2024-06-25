@@ -11,6 +11,7 @@
 #include "FWM.h"
 
 #include "Stage1.h"
+#include "Lobby.h"
 
 #include <iostream>
 #include <map>
@@ -103,7 +104,7 @@ void main(int argc, char** argv) {
 	imageUtil.Init();
 	soundUtil.Init();
 
-	fw.Init(Mode1::GameMode1, Mode1::SetController);
+	fw.Init(Lobby::LobbyMode, Lobby::SetController);
 
 	glutDisplayFunc(GLMain);
 	glutReshapeFunc(DisplayReshape);

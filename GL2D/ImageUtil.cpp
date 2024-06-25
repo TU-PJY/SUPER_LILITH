@@ -8,15 +8,23 @@ std::unordered_map<std::string, const char*> ImageList
 {
 	{"gl2d_boundbox", "GL2D res//boundbox.png"}, // do not delete this
 
+	// play mode
 	{"center_triangle", "resources//image//shape//center_triangle.png"},
 	{"center_square", "resources//image//shape//center_square.png"},
 	{"center_pentagon", "resources//image//shape//center_pentagon.png"},
 	{"center_hexagon", "resources//image//shape//center_hexagon.png"},
-
 	{"obstacle_triangle", "resources//image//obstacles//obstacle_triangle.png"},
 	{"obstacle_square", "resources//image//obstacles//obstacle_square.png"},
 	{"obstacle_pentagon", "resources//image//obstacles//obstacle_pentagon.png"},
 	{"obstacle_hexagon", "resources//image//obstacles//obstacle_hexagon.png"},
+
+	// lobby mode
+	{"title", "resources//image//ui//title.png"},
+	{"arrow_right", "resources//image//ui//arrow_right.png"},
+	{"arrow_left", "resources//image//ui//arrow_left.png"},
+	{"button_info", "resources//image//ui//button_info.png"},
+	{"button_sound_enable", "resources//image//ui//button_sound_enable.png"},
+	{"button_sound_disable", "resources//image//ui//button_sound_disable.png"},
 };
 
 

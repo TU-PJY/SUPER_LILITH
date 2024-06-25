@@ -10,7 +10,7 @@ private:
 	GLfloat RightX{}, RightY{};
 
 	unsigned int Box{};
-	TextUtil text;
+	//TextUtil text;
 
 public:
 	void Init();

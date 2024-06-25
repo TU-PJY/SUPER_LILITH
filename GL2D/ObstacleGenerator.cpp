@@ -23,15 +23,19 @@ void ObstacleGenerator::Update(float FT) {
 
 			while (true) {
 				RandomType = uid(rd);
-				if (RandomType != PrevType && abs(RandomType - PrevType) <= 1)
+				if (abs(RandomType - PrevType) <= 1 && RandomType != PrevType)
 					break;
 			}
 		}
 
 		PrevType = RandomType;
 
-		fw.AddObject(new Obstacle(static_cast<ObstacleType>(RandomType)), "obstacle", Layer::L1);
+		fw.AddObject(new Obstacle(static_cast<ObstacleType>(RandomType), 1.0, 1.0, 1.0), "obstacle", Layer::L1);
+
+
+		GLfloat DiffTime = GenTimeValue - GenTimer;
 
 		GenTimer = 0;
+		GenTimer += DiffTime;
 	}
 }

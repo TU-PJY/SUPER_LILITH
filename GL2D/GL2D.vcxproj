@@ -138,6 +138,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="CollisionUtil.cpp" />
     <ClCompile Include="DataUtil.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="FWM.cpp" />
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
+    <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleGenerator.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -155,8 +157,10 @@
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="SoundUtil.cpp" />
     <ClCompile Include="TextUtil.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionUtil.h" />
     <ClInclude Include="DataUtil.h" />
@@ -165,6 +169,7 @@
     <ClInclude Include="FWM_CONF.h" />
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
+    <ClInclude Include="Lobby.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleGenerator.h" />
     <ClInclude Include="Player.h" />
@@ -176,6 +181,7 @@
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="SoundUtil.h" />
     <ClInclude Include="TextUtil.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModeTemplate.txt" />

@@ -3,7 +3,7 @@
 #include "FWM.h"
 #include <cmath>
 
-Obstacle::Obstacle(ObstacleType type){
+Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 	switch (type) {
 	case ObstacleType::Triangle:
 		Image = imageUtil.SetImage("obstacle_triangle");
@@ -25,7 +25,7 @@ Obstacle::Obstacle(ObstacleType type){
 
 	ShapeType = static_cast<int>(type);
 
-	SetColor(1.0, 1.0, 1.0);
+	SetColor(R, G, B);
 }
 
 void Obstacle::SetMoveSpeed(GLfloat Speed) {
@@ -58,8 +58,12 @@ void Obstacle::Update(float FT) {
 				auto shape = fw.Find("obstacle", Layer::L1, i);
 				if (shape) shape->SetMoveSpeed(0.0);
 			}
-
 			if (player) player->SetRotateSpeed(0.0);
+
+			if (!B_ObstacleAdded) {
+				fw.AddObject(new BlinkingObstacle(ShapeType, ObjectColor.r, ObjectColor.g, ObjectColor.b, Rotation, Size), "b_obstacle", Layer::L2);
+				B_ObstacleAdded = true;
+			}
 		}
 	}
 
@@ -67,7 +71,7 @@ void Obstacle::Update(float FT) {
 		Size -= FT * MoveSpeed * Size;
 	}
 
-	Scale(Size, Size);
+	Scale(Size, Size );
 	Rotate(Rotation + 30);
 }
 
