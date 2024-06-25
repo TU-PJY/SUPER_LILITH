@@ -1,5 +1,7 @@
 #include "SoundUtil.h"
 #include <iostream>
+#include <ranges>
+#include <algorithm>
 
 std::vector<float>FFTdata(FFT_SIZE);
 
@@ -138,4 +140,15 @@ float SoundUtil::DetectBeat(float Threshold) {
 
 int SoundUtil::GetSoundNum() {
 	return LoadedSoundList.size();
+}
+
+int SoundUtil::GetSoundNumif(std::string ContainSrtring) {
+	using namespace std;
+	int Count{};
+
+	for (auto& [Name, Sound] : LoadedSoundList)
+		if (Name.contains("stage"))
+			++Count;
+
+	return Count;
 }

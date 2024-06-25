@@ -1,15 +1,16 @@
-#include "LobbyMusicPlayer.h"
+#include "MusicPlayer.h"
 #include "SoundUtil.h"
 #include "CameraUtil.h"
 
-LobbyMusicPlayer::LobbyMusicPlayer(std::string MusicName){
+void MusicPlayer::SetToLobbyMode(std::string MusicName){
 	PlayTime.reserve(10);
+
 	soundUtil.PlaySound(MusicName, "ch_bgm");
 	soundUtil.SetBeatDetect("ch_bgm");
 	soundUtil.SetFreqCutOff("ch_bgm", 200);
 }
 
-void LobbyMusicPlayer::PlayMusic(int Page){
+void MusicPlayer::PlayMusic(int Page){
 	soundUtil.StopSound("ch_bgm");
 	soundUtil.UnSetBeatDetect("ch_bgm");
 	soundUtil.UnSetFreqCutOff("ch_bgm");
@@ -35,7 +36,7 @@ void LobbyMusicPlayer::PlayMusic(int Page){
 	MusicPage = Page;
 }
 
-void LobbyMusicPlayer::Update(float FT) {
+void MusicPlayer::Update() {
 	float BassValue = soundUtil.DetectBeat(0.0);
 	camUtil.SetZoom(ZOOM::In, BassValue * 0.002);
 

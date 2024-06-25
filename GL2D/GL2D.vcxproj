@@ -148,7 +148,7 @@
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
     <ClCompile Include="Lobby.cpp" />
-    <ClCompile Include="LobbyMusicPlayer.cpp" />
+    <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleGenerator.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -173,7 +173,7 @@
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
     <ClInclude Include="Lobby.h" />
-    <ClInclude Include="LobbyMusicPlayer.h" />
+    <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleGenerator.h" />
     <ClInclude Include="Player.h" />

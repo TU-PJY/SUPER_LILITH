@@ -2,15 +2,16 @@
 #include "ImageUtil.h"
 #include "SoundUtil.h"
 #include "FWM.h"
+#include "MusicPlayer.h"
 #include <cmath>
 
 Title::Title() {
 	SetColor(1.0, 1.0, 1.0);
 
-	text.Init(L"열정그자체", FW_NORMAL, TRUE);
-	TitleText.Init(L"열정그자체", FW_NORMAL, TRUE);
-	text.SetAlign(Align::Middle);
-	TitleText.SetAlign(Align::Middle);
+	Text.Init(L"열정그자체", FW_NORMAL, TRUE);
+	Text.SetAlign(Align::Middle);
+
+	BgmNum = soundUtil.GetSoundNumif("stage");
 }
 
 void Title::InputSpecialKey(int KEY, bool KeyDown) {
@@ -39,8 +40,8 @@ void Title::Update(float FT) {
 }
 
 void Title::Render() {
-	TitleText.Draw(0.0, 0.6, 0.45, "BEAT SHIFTER");
-	text.Draw(TitlePosition, 0.4, 0.1, "%s", MusicInfo[LobbyPage - 1].c_str());
+	Text.Draw(0.0, 0.6, 0.45, "BEAT SHIFTER");
+	Text.Draw(TitlePosition, 0.4, 0.1, "%s", MusicInfo[LobbyPage - 1].c_str());
 }
 
 void Title::ChangeLobbyPage(int dir) {
@@ -50,24 +51,18 @@ void Title::ChangeLobbyPage(int dir) {
 			LobbyPage -= 1;
 			TitlePosition = 0.3;
 
-			auto music_player = fw.Find("lobby_music_player", SearchRange::One, Layer::L2);
-			if (music_player) {
-				soundUtil.PlaySound("click", "ch_ui");
-				music_player->PlayMusic(LobbyPage);
-			}
+			soundUtil.PlaySound("click", "ch_ui");
+			mp.PlayMusic(LobbyPage);
 		}
 		break;
 
 	case 1:  // right
-		if (LobbyPage < soundUtil.GetSoundNum() - 1) {
+		if (LobbyPage < BgmNum) {
 			LobbyPage += 1;
 			TitlePosition = -0.3;
 
-			auto music_player = fw.Find("lobby_music_player", SearchRange::One, Layer::L2);
-			if (music_player) {
-				soundUtil.PlaySound("click", "ch_ui");
-				music_player->PlayMusic(LobbyPage);
-			}
+			soundUtil.PlaySound("click", "ch_ui");
+			mp.PlayMusic(LobbyPage);
 		}
 		break;
 	}

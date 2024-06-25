@@ -34,5 +34,6 @@ public:
 	void UnSetBeatDetect(std::string ChannelName);
 	float DetectBeat(float Threshold);
 	int GetSoundNum();
+	int GetSoundNumif(std::string ContainSrtring);
 };
 extern SoundUtil soundUtil;

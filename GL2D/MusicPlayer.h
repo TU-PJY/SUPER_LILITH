@@ -1,9 +1,8 @@
 #pragma once
-#include "ObjectBase.h"
 #include <string>
 #include <vector>
 
-class LobbyMusicPlayer : public OBJ_BASE {
+class MusicPlayer {
 private:
 	int MusicPage = 1;
 	float Threshold{};
@@ -11,8 +10,9 @@ private:
 	std::vector<int> PlayTime;
 
 public:
-	LobbyMusicPlayer(std::string MusicName);
+	void SetToLobbyMode(std::string MusicName);
 	void PlayMusic(int dir);
-	void Update(float FT);
+	void Update();
 };
+extern MusicPlayer mp;
 

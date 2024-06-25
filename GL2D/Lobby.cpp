@@ -3,7 +3,7 @@
 #include "Title.h"
 #include "Button.h"
 #include "Cursor.h"
-#include "LobbyMusicPlayer.h"
+#include "MusicPlayer.h"
 #include <string>
 
 void Lobby::SetController() {
@@ -21,7 +21,7 @@ std::string Lobby::LobbyMode() {
 	fw.AddObject(new Title, "title", Layer::L2);
 	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Cursor, "cursor", Layer::L2);
-	fw.AddObject(new LobbyMusicPlayer("stage1"), "lobby_music_player", Layer::L2);
+	mp.SetToLobbyMode("stage1");
 
 	return __func__;
 }

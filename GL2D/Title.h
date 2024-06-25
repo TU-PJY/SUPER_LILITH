@@ -6,8 +6,10 @@
 
 class Title : public OBJ_BASE {
 private:
-	TextUtil text, TitleText;
 	int LobbyPage = 1;
+	int BgmNum{};
+
+	TextUtil Text;
 	GLfloat TitlePosition{};
 
 	std::vector<std::string> MusicInfo

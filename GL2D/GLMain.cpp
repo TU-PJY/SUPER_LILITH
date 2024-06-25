@@ -13,6 +13,8 @@
 #include "Stage1.h"
 #include "Lobby.h"
 
+#include "MusicPlayer.h"
+
 #include <iostream>
 #include <map>
 #include <ctime>
@@ -37,6 +39,8 @@ DataUtil dataUtil;
 FontLoaderUtil fontloaderUtil;
 FWM fw;
 
+MusicPlayer mp;
+
 clock_t StartTime, EndTime;
 float FrameTime;
 
@@ -54,8 +58,10 @@ GLvoid GLMain() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	soundUtil.Update();
-	fw.Routine();
+	mp.Update();
 	camUtil.UpdateZoom(FrameTime);
+
+	fw.Routine();
 
 	glutSwapBuffers();
 	glutPostRedisplay();
