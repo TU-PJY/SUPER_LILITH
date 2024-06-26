@@ -27,6 +27,8 @@ private:
 public:
 	Title(int Page);
 	void InputSpecialKey(int KEY, bool KeyDown);
+	void InputKey(unsigned char KEY, bool KeyDown);
+	bool GetAnimationtate();
 	void EnableStartAnimation();
 	void Update(float FT);
 	void Render();

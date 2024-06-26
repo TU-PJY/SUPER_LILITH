@@ -35,17 +35,6 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 		case 27:
 			glutDestroyWindow(1);
 			break;
-
-		case 32:
-		{
-			auto title = fw.Find("title", SearchRange::One, Layer::L2);
-			if (title) title->EnableStartAnimation();
-			auto button = fw.Find("button", SearchRange::One, Layer::L2);
-			if (button) button->EnableStartAnimation();
-			fw.AddObject(new AnimationShape(1.0, 1.0, 1.0), "ani_shape", Layer::L2);
-		}
-			//fw.SwitchMode(Stage_1::Stage1, Stage_1::SetController);
-			break;
 		}
 }
 
@@ -67,6 +56,9 @@ void Lobby::MouseWheel(int button, int Wheel, int x, int y) {
 
 void Lobby::KeyDown(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, true, false);
+
+	auto title = fw.Find("title", SearchRange::One, Layer::L2);
+	if (title) title->InputKey(KEY, true);
 }
 
 void Lobby::KeyUp(unsigned char KEY, int x, int y) {

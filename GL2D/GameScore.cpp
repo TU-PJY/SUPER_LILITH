@@ -15,8 +15,6 @@ void GameScore::Update(float FT) {
 	InitTransform();
 
 	MiliSecond += FT;
-	if (MiliSecond >= 1000)
-		Second += 1;
 	
 	Translate(rect.rx - 0.35 - cam.ShakeValueX, rect.ly + 0.14 - cam.ShakeValueY);
 	ScaleSpot(0.3 * imageUtil.Aspect(400, 128), 0.3);

@@ -42,6 +42,11 @@ void Player::SetGameOver() {
 	GameOver = true;
 }
 
+bool Player::GetGameOverState() {
+	return GameOver;
+}
+
+
 Player::Player(){
 	SetColor(1.0, 1.0, 1.0);
 	Scale(Size, Size);
@@ -58,17 +63,20 @@ void Player::Update(float FT){
 	if (PlaySpeed < 1.0 && !GameOver) {
 		PlaySpeed = std::lerp(PlaySpeed, 1.0, FT * 3);
 		soundUtil.SetPlaySpeed("ch_bgm", PlaySpeed);
-		RotateSpeed = std::lerp(RotateSpeed, 45, FT * 3);
+		//RotateSpeed = std::lerp(RotateSpeed, 45, FT * 3);
 	}
 
 	if (!GameOver) {
 		auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
 		if (score) {
-			if (score->GetTime() >= 20) {
-				RotateSpeed += FT * 100;
-				if (RotateSpeed >= 120)
-					RotateSpeed = 120;
-			}
+			if (score->GetTime() >= 20)
+				RotateSpeed = 20;
+
+			if (score->GetTime() >= 40)
+				RotateSpeed = 35;
+
+			if (score->GetTime() >= 60)
+				RotateSpeed = 50;
 		}
 	}
 
@@ -87,10 +95,10 @@ void Player::Update(float FT){
 		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
 		break;
 	case EnumSquare:
-		ShapeRotation = std::lerp(ShapeRotation, -90, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, -120, FT * 15);
 		break;
 	case EnumPentagon:
-		ShapeRotation = std::lerp(ShapeRotation, -180, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
 		break;
 	case EnumHexagon:
 		ShapeRotation = std::lerp(ShapeRotation, -240, FT * 15);

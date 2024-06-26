@@ -4,6 +4,7 @@
 #include "FWM.h"
 #include "MusicPlayer.h"
 #include "stage1.h"
+#include "AnimationShape.h"
 #include <cmath>
 
 Title::Title(int Page) {
@@ -31,6 +32,23 @@ void Title::InputSpecialKey(int KEY, bool KeyDown) {
 			}
 		}
 	}
+}
+
+void Title::InputKey(unsigned char KEY, bool KeyDown) {
+	if (!StartAnimation) {
+		if (KeyDown) {
+			if (KEY == 32) {
+				fw.AddObject(new AnimationShape(1.0, 1.0, 1.0), "ani_shape", Layer::L2);
+				auto button = fw.Find("button", SearchRange::One, Layer::L2);
+				if (button) button->EnableStartAnimation();
+				StartAnimation = true;
+			}
+		}
+	}
+}
+
+bool Title::GetAnimationtate() {
+	return StartAnimation;
 }
 
 void Title::EnableStartAnimation() {

@@ -53,7 +53,7 @@ public:
 
 		ShapeSize = 0.8;
 		Scale(ShapeSize, ShapeSize);
-		AlphaValue = 0.7;
+		AlphaValue = 0.5;
 	}
 
 	void Update(float FT) {

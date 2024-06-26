@@ -4,8 +4,8 @@
 
 class GameScore : public OBJ_BASE {
 private:
-	int Second{};
 	float MiliSecond{};
+	int Second{};
 	unsigned int ScorePlate{};
 
 	TextUtil Text;

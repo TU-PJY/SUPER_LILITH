@@ -60,7 +60,7 @@ GLvoid GLMain() {
 	soundUtil.Update();
 	mp.Update();
 	camUtil.UpdateZoom(FrameTime);
-
+	
 	fw.Routine();
 
 	glutSwapBuffers();

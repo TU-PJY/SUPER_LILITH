@@ -41,9 +41,36 @@ void Obstacle::Update(float FT) {
 	auto player = fw.Find("player", SearchRange::One, Layer::L2);
 	if (player) Rotation = player->GetRotation();
 
+	auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
+	if (score) {
+		if (score->GetTime() >= 20) {
+			MoveSpeed += FT * 0.1;
+			if (MoveSpeed >= 11)
+				MoveSpeed = 11;
+		}
+
+		if (score->GetTime() >= 40) {
+			MoveSpeed += FT * 0.1;
+			if (MoveSpeed >= 12)
+				MoveSpeed = 12;
+		}
+
+		if (score->GetTime() >= 60) {
+			MoveSpeed += FT * 0.1;
+			if (MoveSpeed >= 13)
+				MoveSpeed = 13;
+		}
+
+		if (score->GetTime() >= 80) {
+			MoveSpeed += FT * 0.1;
+			if (MoveSpeed >= 14)
+				MoveSpeed = 14;
+		}
+	}
 	
 	if (Size <= 0.75)
 		Size -= FT * MoveSpeed * 2 * Size;
+
 	else
 		Size -= FT * MoveSpeed * Size;
 
@@ -66,10 +93,10 @@ void Obstacle::Update(float FT) {
 		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
 		break;
 	case 1:
-		ShapeRotation = std::lerp(ShapeRotation, -90, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, -120, FT * 15);
 		break;
 	case 2:
-		ShapeRotation = std::lerp(ShapeRotation, -180, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
 		break;
 	case 3:
 		ShapeRotation = std::lerp(ShapeRotation, -240, FT * 15);

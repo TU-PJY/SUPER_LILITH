@@ -37,4 +37,16 @@ void ObstacleGenerator::Update(float FT) {
 		GenTimer = 0;
 		GenTimer += DiffTime;
 	}
+
+	auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
+	if (score) {
+		if (score->GetTime() >= 20)
+			GenTimeValue = 8;
+
+		if (score->GetTime() >= 40)
+			GenTimeValue = 6;
+
+		if (score->GetTime() >= 60)
+			GenTimeValue = 5;
+	}
 }

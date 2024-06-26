@@ -48,10 +48,12 @@ public:
 	virtual int GetShapeState() { return {}; }
 	virtual void SetMoveSpeed(GLfloat Speed) {}
 	virtual void SetGameOver() {}
+	virtual bool GetGameOverState() {return {};}
 	virtual void ClickButton() {}
 	virtual int GetLobbyPage() { return {}; }
 	virtual void EnableStartAnimation() {}
 	virtual void ChangeLobbyPage(int dir) {}
+	virtual bool GetAnimationtate() { return {}; }
 	virtual void PlayMusic(int dir) {}
 	virtual float GetTime() { return{}; }
 };

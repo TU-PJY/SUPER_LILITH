@@ -34,4 +34,5 @@ public:
 	void SetRotateSpeed(GLfloat Speed);
 	void SetSize(GLfloat Size);
 	void SetGameOver();
+	bool GetGameOverState();
 };

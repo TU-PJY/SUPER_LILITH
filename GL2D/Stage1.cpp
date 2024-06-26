@@ -4,6 +4,7 @@
 #include "ObstacleGenerator.h"
 #include "MusicPlayer.h"
 #include "GameScore.h"
+#include "CameraUtil.h"
 
 void Stage_1::SetController() {
 	glutMotionFunc(MouseMotion);
