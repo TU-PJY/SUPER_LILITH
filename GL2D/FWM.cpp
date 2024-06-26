@@ -24,18 +24,18 @@ void FWM::Routine() {
 	if (!ModeSwitchState && RunningState) {
 		for (int i = 0; i < Num; ++i) {
 			for (auto It = begin(Container[i]); It != end(Container[i]);) {
-				if (FloatingModeRunningState) {
-					if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor && !(*It)->ObjectDeleteDescriptor)
-						if(*It) (*It)->Update(FrameTime);
-					else
-					  if(*It) (*It)->Update(FrameTime);
-
-					if(*It) (*It)->Render();
+				if (!FloatingModeRunningState) {
+					(*It)->Update(FrameTime);
+					(*It)->Render();
 				}
 
 				else {
-					if (*It) (*It)->Update(FrameTime);
-					if (*It) (*It)->Render();
+					if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor)
+						(*It)->Update(FrameTime);
+					else
+						(*It)->Update(FrameTime);
+
+					(*It)->Render();
 				}
 
 				++It;
@@ -47,14 +47,11 @@ void FWM::Routine() {
 				ModeSwitchState = true;
 				break;
 			}
-
-
 		}
 	}
-	else {
+
+	else 
 		ChangeMode();
-		ModeSwitchReserveDescriptor = false;
-	}
 }
 
 void FWM::Init(Function ModeFunction, ControllerFunction Controller) {
@@ -251,6 +248,7 @@ void FWM::ChangeMode() {
 
 	FloatingModeReserveDescriptor = false;
 	FloatingModeEndReserveDescriptor = false;
+	ModeSwitchReserveDescriptor = false;
 	ModeSwitchState = false;
 }
 
