@@ -12,8 +12,15 @@ private:
 
 	AABB aabb[4];
 
+	bool StartAnimation{};
+
+	GLfloat ArrowMovePosition = 0.5;
+	GLfloat ButtonMovePosition = 0.5;
+	
+
 public:
 	Button();
+	void EnableStartAnimation();
 	void Update(float FT);
 	void ClickButton();
 	void Render();

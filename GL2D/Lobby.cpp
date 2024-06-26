@@ -36,7 +36,13 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 			break;
 
 		case 32:
-			fw.SwitchMode(Stage_1::Stage1, Stage_1::SetController);
+		{
+			auto title = fw.Find("title", SearchRange::One, Layer::L2);
+			if (title) title->EnableStartAnimation();
+			auto button = fw.Find("button", SearchRange::One, Layer::L2);
+			if (button) button->EnableStartAnimation();
+		}
+			//fw.SwitchMode(Stage_1::Stage1, Stage_1::SetController);
 			break;
 		}
 }

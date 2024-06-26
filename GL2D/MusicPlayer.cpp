@@ -4,7 +4,6 @@
 #include "FWM.h"
 
 void MusicPlayer::SetToLobbyMode(){
-	soundUtil.SetFreqCutOff("ch_bgm", 200);
 	soundUtil.SetPlaySpeed("ch_bgm", 1.0);
 }
 
@@ -12,8 +11,9 @@ void MusicPlayer::Init(std::string MusicName) {
 	PlayTime.reserve(10);
 
 	soundUtil.PlaySound(MusicName, "ch_bgm");
+	soundUtil.SetPlaySpeed("ch_bgm", 0.0);
 	soundUtil.SetBeatDetect("ch_bgm");
-	soundUtil.SetFreqCutOff("ch_bgm", 200);
+	Threshold = 1.0;
 }
 
 void MusicPlayer::SetToPlayMode() {
@@ -45,16 +45,18 @@ void MusicPlayer::PlayMusic(int Page){
 	}
 
 	soundUtil.SetBeatDetect("ch_bgm");
-	soundUtil.SetFreqCutOff("ch_bgm", 200);
 
 	MusicPage = Page;
 }
 
 void MusicPlayer::Update() {
-	float BassValue = soundUtil.DetectBeat(Threshold);
-	if(fw.Mode() == "LobbyMode")
+	if (fw.Mode() == "LobbyMode") {
+		float BassValue = soundUtil.DetectBeat(0.0);
 		camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
+	}
+
 	else {
+		float BassValue = soundUtil.DetectBeat(Threshold);
 		auto player = fw.Find("player", SearchRange::One, Layer::L2);
 		if (player) player->SetSize(BassValue * 0.01);
 	}

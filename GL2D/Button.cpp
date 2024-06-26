@@ -19,7 +19,21 @@ Button::Button() {
 		aabb[i].Init();
 }
 
+void Button::EnableStartAnimation() {
+	StartAnimation = true;
+}
+
 void Button::Update(float FT) {
+	if (StartAnimation) {
+		ArrowMovePosition = std::lerp(ArrowMovePosition, 0.5, FT * 5);
+		ButtonMovePosition = std::lerp(ButtonMovePosition, 0.5, FT * 5);
+	}
+
+	else {
+		ArrowMovePosition = std::lerp(ArrowMovePosition, 0.0, FT * 5);
+		ButtonMovePosition = std::lerp(ButtonMovePosition, 0.0, FT * 5);
+	}
+
 	// right arrow
 	if (aabb[0].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom)))
 		RightArrowSize = std::lerp(RightArrowSize, 0.35, FT * 15);
@@ -48,24 +62,28 @@ void Button::Update(float FT) {
 void Button::Render() {
 	InitTransform();
 	Translate(DivideZoom(rect.rx - 0.18, cam.Zoom), 0.0);
+	Translate(DivideZoom(ArrowMovePosition, cam.Zoom), 0.0);
 	ScaleSpot(DivideZoom(RightArrowSize, cam.Zoom), DivideZoom(RightArrowSize, cam.Zoom));
 	ProcessTransform();
 	imageUtil.Draw(ArrowRight);
 
 	InitTransform();
 	Translate(DivideZoom(rect.lx + 0.18, cam.Zoom), 0.0);
+	Translate(DivideZoom(-ArrowMovePosition, cam.Zoom), 0.0);
 	ScaleSpot(DivideZoom(LeftArrowSize, cam.Zoom), DivideZoom(LeftArrowSize, cam.Zoom));
 	ProcessTransform();
 	imageUtil.Draw(ArrowLeft);
 
 	InitTransform();
 	Translate(DivideZoom(rect.rx - 0.15, cam.Zoom), DivideZoom(rect.ly + 0.15, cam.Zoom));
+	Translate(0.0, DivideZoom(-ButtonMovePosition, cam.Zoom));
 	ScaleSpot(DivideZoom(ButtonInfoSize, cam.Zoom), DivideZoom(ButtonInfoSize, cam.Zoom));
 	ProcessTransform();
 	imageUtil.Draw(ButtonInfo);
 
 	InitTransform();
 	Translate(DivideZoom(rect.rx - 0.4, cam.Zoom), DivideZoom(rect.ly + 0.15, cam.Zoom));
+	Translate(0.0, DivideZoom(-ButtonMovePosition, cam.Zoom));
 	ScaleSpot(DivideZoom(ButtonSoundSize, cam.Zoom), DivideZoom(ButtonSoundSize, cam.Zoom));
 	ProcessTransform();
 	imageUtil.Draw(ButtonSoundEnable);
@@ -77,15 +95,17 @@ void Button::Render() {
 }
 
 void Button::ClickButton() {
-	// right arrow
-	if (aabb[0].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
-		auto title = fw.Find("title", SearchRange::One, Layer::L2);
-		if (title) title->ChangeLobbyPage(1);
-	}
+	if (!StartAnimation) {
+		// right arrow
+		if (aabb[0].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
+			auto title = fw.Find("title", SearchRange::One, Layer::L2);
+			if (title) title->ChangeLobbyPage(1);
+		}
 
-	// left arrow
-	if (aabb[1].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
-		auto title = fw.Find("title", SearchRange::One, Layer::L2);
-		if (title) title->ChangeLobbyPage(0);
+		// left arrow
+		if (aabb[1].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
+			auto title = fw.Find("title", SearchRange::One, Layer::L2);
+			if (title) title->ChangeLobbyPage(0);
+		}
 	}
 }

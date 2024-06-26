@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ImageUtil.h"
+#include "SoundUtil.h"
 #include <cmath>
 
 void Player::InputSpecialKey(int KEY, bool KeyDown) {
@@ -53,6 +54,12 @@ Player::Player(){
 void Player::Update(float FT){
 	InitTransform();
 
+	if (PlaySpeed < 1.0 && !GameOver) {
+		PlaySpeed = std::lerp(PlaySpeed, 1.0, FT * 3);
+		soundUtil.SetPlaySpeed("ch_bgm", PlaySpeed);
+		RotateSpeed = std::lerp(RotateSpeed, 45, FT * 3);
+	}
+
 	Size = std::lerp(Size, 0.5, FT * 25);
 
 	if (GameOver)
@@ -64,9 +71,7 @@ void Player::Update(float FT){
 		Rotation = 0;
 
 	Scale(Size, Size);
-
 	Rotate(Rotation + 30);
-
 }
 
 void Player::Render(){

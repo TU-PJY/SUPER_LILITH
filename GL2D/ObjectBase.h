@@ -50,6 +50,7 @@ public:
 	virtual void SetGameOver() {}
 	virtual void ClickButton() {}
 	virtual int GetLobbyPage() { return {}; }
+	virtual void EnableStartAnimation() {}
 	virtual void ChangeLobbyPage(int dir) {}
 	virtual void PlayMusic(int dir) {}
 };

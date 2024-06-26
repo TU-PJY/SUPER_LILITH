@@ -4,13 +4,11 @@
 
 class MusicPlayer {
 private:
-	float Threshold{};
-
 	std::vector<int> PlayTime;
 
 public:
 	int MusicPage = 1;
-	float Threashol = 1.0;
+	float Threshold = 1.0;
 
 	void SetToLobbyMode();
 	void Init(std::string MusicName);
