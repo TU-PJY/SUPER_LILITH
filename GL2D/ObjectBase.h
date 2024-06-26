@@ -53,6 +53,7 @@ public:
 	virtual void EnableStartAnimation() {}
 	virtual void ChangeLobbyPage(int dir) {}
 	virtual void PlayMusic(int dir) {}
+	virtual float GetTime() { return{}; }
 };
 
 // dummy object for avoiding iterator errors

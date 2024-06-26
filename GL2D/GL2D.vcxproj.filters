@@ -97,7 +97,7 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Animation Shape ]">
       <UniqueIdentifier>{b8317e7b-9483-4988-9666-7cfba0f79b0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Game Score ]">
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Game Score ]">
       <UniqueIdentifier>{9d65c8a4-bd75-41b5-881d-8078a49064e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -167,7 +167,7 @@
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Music Player ]</Filter>
     </ClCompile>
     <ClCompile Include="GameScore.cpp">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Game Score ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Game Score ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +247,7 @@
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Animation Shape ]</Filter>
     </ClInclude>
     <ClInclude Include="GameScore.h">
-      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Game Score ]</Filter>
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ GamePlay ]\[ Game Score ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

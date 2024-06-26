@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "ImageUtil.h"
 #include "SoundUtil.h"
+#include "FWM.h"
 #include <cmath>
 
 void Player::InputSpecialKey(int KEY, bool KeyDown) {
@@ -60,12 +61,23 @@ void Player::Update(float FT){
 		RotateSpeed = std::lerp(RotateSpeed, 45, FT * 3);
 	}
 
-	Size = std::lerp(Size, 0.5, FT * 25);
+	if (!GameOver) {
+		auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
+		if (score) {
+			if (score->GetTime() >= 20) {
+				RotateSpeed += FT * 100;
+				if (RotateSpeed >= 120)
+					RotateSpeed = 120;
+			}
+		}
+	}
+
 
 	if (GameOver)
 		RotateSpeed = std::lerp(RotateSpeed, 0.0, FT * 2.5);
 
 	Rotation += FT * RotateSpeed;
+	Size = std::lerp(Size, 0.5, FT * 25);
 
 	if (Rotation > 360)
 		Rotation = 0;

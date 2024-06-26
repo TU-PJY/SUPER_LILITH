@@ -15,4 +15,5 @@ public:
 	void Update(float FT);
 	void Render();
 	void SaveHighScoreToFile();
+	float GetTime();
 };
