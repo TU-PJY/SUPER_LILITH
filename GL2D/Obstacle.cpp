@@ -38,34 +38,52 @@ void Obstacle::Update(float FT) {
 	auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
 	if (score) {
 		if (score->GetTime() >= 20 && score->GetTime() < 40) {
-			MoveSpeed += FT * 0.1;
-			if (MoveSpeed >= 11)
-				MoveSpeed = 11;
+			if (MoveSpeed < 11) {
+				MoveSpeed += FT * 0.1;
+				if (MoveSpeed >= 11)
+					MoveSpeed = 11;
+			}
 		}
-
 		else if (score->GetTime() >= 40 && score->GetTime() < 60) {
-			MoveSpeed += FT * 0.1;
-			if (MoveSpeed >= 12)
-				MoveSpeed = 12;
+			if (MoveSpeed < 12) {
+				MoveSpeed += FT * 0.1;
+				if (MoveSpeed >= 12)
+					MoveSpeed = 12;
+			}
 		}
-
 		else if (score->GetTime() >= 60 && score->GetTime() < 80) {
-			MoveSpeed += FT * 0.1;
-			if (MoveSpeed >= 13)
-				MoveSpeed = 13;
+			if (MoveSpeed < 13) {
+				MoveSpeed += FT * 0.1;
+				if (MoveSpeed >= 13)
+					MoveSpeed = 13;
+			}
 		}
-
 		else if (score->GetTime() >= 80 && score->GetTime() < 100) {
-			MoveSpeed += FT * 0.1;
-			if (MoveSpeed >= 14)
-				MoveSpeed = 14;
+			if (MoveSpeed < 14) {
+				MoveSpeed += FT * 0.1;
+				if (MoveSpeed >= 14)
+					MoveSpeed = 14;
+			}
 		}
-
 		else if (score->GetTime() >= 100) {
-			MoveSpeed += FT * 0.1;
-			if (MoveSpeed >= 15)
-				MoveSpeed = 15;
+			if (MoveSpeed < 15) {
+				MoveSpeed += FT * 0.1;
+				if (MoveSpeed >= 15)
+					MoveSpeed = 15;
+			}
 		}
+	}
+
+	switch (ShapeType) {
+	case 0:
+		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
+		break;
+	case 1:
+		ShapeRotation = std::lerp(ShapeRotation, -120, FT * 15);
+		break;
+	case 2:
+		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
+		break;
 	}
 	
 	if (Size <= 0.85 && Size > 0.75)
@@ -86,19 +104,6 @@ void Obstacle::Update(float FT) {
 
 	else
 		Size -= FT * MoveSpeed * Size;
-
-
-	switch (ShapeType) {
-	case 0:
-		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
-		break;
-	case 1:
-		ShapeRotation = std::lerp(ShapeRotation, -120, FT * 15);
-		break;
-	case 2:
-		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
-		break;
-	}
 
 	Scale(Size, Size );
 	Rotate(Rotation + ShapeRotation + 30);
