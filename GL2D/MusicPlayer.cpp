@@ -36,7 +36,7 @@ void MusicPlayer::PlayMusic(int Page){
 		break;
 	case 3:
 		soundUtil.PlaySound("stage3", "ch_bgm", PlayTime[Page - 1]);
-		Threshold = 1.0;
+		Threshold = 1.2;
 		break;
 	case 4:
 		soundUtil.PlaySound("stage4", "ch_bgm", PlayTime[Page - 1]);

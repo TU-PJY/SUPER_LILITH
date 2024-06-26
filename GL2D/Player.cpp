@@ -70,8 +70,24 @@ void Player::Update(float FT){
 	if (Rotation > 360)
 		Rotation = 0;
 
+	switch (ShapeState) {
+	case EnumTriangle:
+		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
+		break;
+	case EnumSquare:
+		ShapeRotation = std::lerp(ShapeRotation, -90, FT * 15);
+		break;
+	case EnumPentagon:
+		ShapeRotation = std::lerp(ShapeRotation, -180, FT * 15);
+		break;
+	case EnumHexagon:
+		ShapeRotation = std::lerp(ShapeRotation, -240, FT * 15);
+		break;
+	}
+
 	Scale(Size, Size);
-	Rotate(Rotation + 30);
+	Rotate(Rotation + ShapeRotation + 30);
+
 }
 
 void Player::Render(){

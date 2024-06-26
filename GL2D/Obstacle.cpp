@@ -61,8 +61,23 @@ void Obstacle::Update(float FT) {
 			ProcessGameOver(FT);
 	}
 
+	switch (ShapeType) {
+	case 0:
+		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
+		break;
+	case 1:
+		ShapeRotation = std::lerp(ShapeRotation, -90, FT * 15);
+		break;
+	case 2:
+		ShapeRotation = std::lerp(ShapeRotation, -180, FT * 15);
+		break;
+	case 3:
+		ShapeRotation = std::lerp(ShapeRotation, -240, FT * 15);
+		break;
+	}
+
 	Scale(Size, Size );
-	Rotate(Rotation + 30);
+	Rotate(Rotation + ShapeRotation + 30);
 }
 
 bool Obstacle::CheckShapeType() {
@@ -110,7 +125,7 @@ void Obstacle::ProcessGameOver(float FT) {
 
 	if (!B_ObstacleAdded) {
 		fw.DeleteObject("obstacle_generator", DeleteRange::One, SearchRange::One, Layer::L1);
-		fw.AddObject(new BlinkingObstacle(ShapeType, ObjectColor.r, ObjectColor.g, ObjectColor.b, Rotation, Size), "b_obstacle", Layer::L2);
+		fw.AddObject(new BlinkingObstacle, "b_obstacle", Layer::L1);
 		B_ObstacleAdded = true;
 	}
 

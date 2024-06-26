@@ -14,6 +14,7 @@ private:
 	int ShapeType{};
 	GLfloat Size = 16;
 	GLfloat Rotation{};
+	GLfloat ShapeRotation{};
 	GLfloat MoveSpeed = 1.5;
 
 	bool IsSame{};
@@ -33,7 +34,7 @@ public:
 	void ProcessGameOver(float FT);
 };
 
-#include <iostream>
+
 class BlinkingObstacle : public OBJ_BASE {
 private:
 	int ShapeType{};
@@ -45,37 +46,14 @@ private:
 	GLfloat EndTimer{};
 
 public:
-	BlinkingObstacle(int Type, GLfloat R, GLfloat G, GLfloat B, GLfloat Rotation, GLfloat Size) {
-		switch (Type) {
-		case 0:
-			Image = imageUtil.SetImage("obstacle_triangle");
-			break;
+	BlinkingObstacle() {
+		Image = imageUtil.SetImage("feedback");
 
-		case 1:
-			Image = imageUtil.SetImage("obstacle_square");
-			break;
+		SetColor(1.0, 0.0, 0.0);
 
-		case 2:
-			Image = imageUtil.SetImage("obstacle_pentagon");
-			break;
-
-		case 3:
-			Image = imageUtil.SetImage("obstacle_hexagon");
-			break;
-
-		}
-
-		SetColor(R, G, B);
-
-		ColorSet.r = R;
-		ColorSet.g = G;
-		ColorSet.b = B;
-
-		auto player = fw.Find("player", SearchRange::One, Layer::L2);
-		if (player) Rotate(player->GetRotation() + 30);
-
-		ShapeSize = Size;
+		ShapeSize = 0.8;
 		Scale(ShapeSize, ShapeSize);
+		AlphaValue = 0.7;
 	}
 
 	void Update(float FT) {
@@ -83,31 +61,23 @@ public:
 
 		Frame += FT * 10;
 
-		if (Frame < 8) {
-			if (int(Frame) % 2 == 0)
-				SetColor(1.0, 0.0, 0.0);
-			else
-				SetColor(ColorSet.r, ColorSet.g, ColorSet.b);
-		}
-
-		else {
-			SetColor(1.0, 0.0, 0.0);
-			EndTimer += FT * 10;
-			if (EndTimer >= 15) {
-				mp.SetToLobbyMode();
-				fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
-			}
-		}
-
 		Scale(ShapeSize, ShapeSize);
 
-		auto player = fw.Find("player", SearchRange::One, Layer::L2);
-		if (player) Rotate(player->GetRotation() + 30);
+		if (Frame >= 30) {
+			mp.SetToLobbyMode();
+			fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
+		}
 	}
 
 	void Render() {
 		ProcessTransform();
-		imageUtil.Draw(Image);
+
+		if (Frame < 8) {
+			if (int(Frame) % 2 == 0)
+				imageUtil.Draw(Image);
+		}
+		else
+			imageUtil.Draw(Image);
 	}
 };
 
