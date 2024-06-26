@@ -10,6 +10,7 @@ private:
 
 public:
 	int MusicPage = 1;
+	float Threashol = 1.0;
 
 	void SetToLobbyMode();
 	void Init(std::string MusicName);

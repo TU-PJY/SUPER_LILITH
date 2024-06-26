@@ -17,7 +17,7 @@ private:
 	Pentagon pentagon;
 	Hexagon hexagon;
 
-	GLfloat RotateSpeed = 35;
+	GLfloat RotateSpeed = 45;
 
 	bool GameOver{};
 

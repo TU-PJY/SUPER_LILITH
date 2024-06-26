@@ -4,9 +4,6 @@
 #include <random>
 #include <cmath>
 
-std::random_device rd;
-std::uniform_int_distribution uid{ 0, 3 };
-
 void ObstacleGenerator::SetGenTime(GLfloat TimeValue) {
 	GenTimeValue = TimeValue;
 }
@@ -19,11 +16,13 @@ void ObstacleGenerator::Update(float FT) {
 			RandomType = 0;
 
 		else {
+			std::random_device rd;
+			std::uniform_int_distribution uid{ 0, 3 };
 			RandomType = uid(rd);
 
 			while (true) {
 				RandomType = uid(rd);
-				if (abs(RandomType - PrevType) <= 1 && RandomType != PrevType)
+				if (abs(RandomType - PrevType) <= 1)
 					break;
 			}
 		}

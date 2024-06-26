@@ -5,6 +5,7 @@
 
 void MusicPlayer::SetToLobbyMode(){
 	soundUtil.SetFreqCutOff("ch_bgm", 200);
+	soundUtil.SetPlaySpeed("ch_bgm", 1.0);
 }
 
 void MusicPlayer::Init(std::string MusicName) {
@@ -27,15 +28,19 @@ void MusicPlayer::PlayMusic(int Page){
 	switch (Page) {
 	case 1:
 		soundUtil.PlaySound("stage1", "ch_bgm", PlayTime[Page - 1]);
+		Threshold = 1.0;
 		break;
 	case 2:
 		soundUtil.PlaySound("stage2", "ch_bgm", PlayTime[Page - 1]);
+		Threshold = 1.0;
 		break;
 	case 3:
 		soundUtil.PlaySound("stage3", "ch_bgm", PlayTime[Page - 1]);
+		Threshold = 1.0;
 		break;
 	case 4:
 		soundUtil.PlaySound("stage4", "ch_bgm", PlayTime[Page - 1]);
+		Threshold = 0.6;
 		break;
 	}
 
@@ -46,7 +51,7 @@ void MusicPlayer::PlayMusic(int Page){
 }
 
 void MusicPlayer::Update() {
-	float BassValue = soundUtil.DetectBeat(0.0);
+	float BassValue = soundUtil.DetectBeat(Threshold);
 	if(fw.Mode() == "LobbyMode")
 		camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
 	else {

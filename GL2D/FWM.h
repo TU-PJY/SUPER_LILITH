@@ -60,7 +60,7 @@ public:
 	size_t Size(Layer TargetLayer);
 
 private:
-	bool CheckDeleteFlag(std::deque<OBJ_BASE*>::iterator& It, int Layer);
+	void CheckDeleteFlag(int i);
 	void ChangeMode();
 	void ClearFloatingObject();
 	void ClearAll();

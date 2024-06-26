@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ImageUtil.h"
+#include <cmath>
 
 void Player::InputSpecialKey(int KEY, bool KeyDown) {
 	if (!GameOver) {
@@ -54,7 +55,11 @@ void Player::Update(float FT){
 
 	Size = std::lerp(Size, 0.5, FT * 25);
 
+	if (GameOver)
+		RotateSpeed = std::lerp(RotateSpeed, 0.0, FT * 2.5);
+
 	Rotation += FT * RotateSpeed;
+
 	if (Rotation > 360)
 		Rotation = 0;
 

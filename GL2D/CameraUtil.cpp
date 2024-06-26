@@ -1,4 +1,5 @@
 #include "CameraUtil.h"
+#include <random>
 
 void CameraUtil::CalculateASPECT() {
 	ASPECT = 1.0 * WIDTH / HEIGHT;
@@ -21,9 +22,9 @@ void CameraUtil::SetCamera() {
 	CamDirection = vec3(0.0f, 0.0f, 0.0f);
 	CamUp = vec3(0.0f, 1.0f, 0.0f);
 
-	UpdateCamera();
 
 	ViewMatrix = lookAt(CamPos, CamDirection, CamUp);
+	cam.ViewMatrix = translate(ViewMatrix, glm::vec3(ShakeValueX, ShakeValueY, 0.0));
 
 	Projection = ortho((ASPECT * -1.0f) / Zoom, (ASPECT * 1.0f) / Zoom, -1.0f / Zoom, 1.0f / Zoom, -100.0f, 100.0f);
 }
@@ -53,7 +54,6 @@ void CameraUtil::ProcessTransform(bool UseTextShader) {
 }
 
 void CameraUtil::UpdateCamera() {
-
 }
 
 

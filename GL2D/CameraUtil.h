@@ -13,6 +13,8 @@ public:
 	GLfloat Rotation{};
 	GLfloat x{}, y{};
 	GLfloat Zoom{ 1.0f };
+	GLfloat ShakeValueX = 0.0;
+	GLfloat ShakeValueY = 0.0;
 
 	void CalculateASPECT();
 	void UpdateCamera();

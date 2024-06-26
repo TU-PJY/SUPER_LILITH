@@ -22,6 +22,7 @@ std::string Lobby::LobbyMode() {
 	fw.AddObject(new Title{mp.MusicPage}, "title", Layer::L2);
 	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Cursor, "cursor", Layer::L2);
+	mp.SetToLobbyMode();
 
 	return __func__;
 }

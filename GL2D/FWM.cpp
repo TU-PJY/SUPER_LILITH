@@ -44,20 +44,14 @@ void FWM::Routine() {
 				++It;
 			}
 
+			CheckDeleteFlag(i);
+
 			if (ModeSwitchReserveDescriptor) {
 				ModeSwitchState = true;
 				break;
 			}
 
-			for (auto It = begin(Container[i]); It != end(Container[i]);) {
-				if ((*It)->ObjectTag != "FWM_DUMMY" && (*It)->ObjectDeleteDescriptor) {
-					delete* It;
-					*It = nullptr;
-					It = Container[i].erase(It);
-					continue;
-				}
-				++It;
-			}
+
 		}
 	}
 	else {
@@ -259,16 +253,18 @@ size_t FWM::Size(Layer TargetLayer) {
 
 //////// private ///////////////
 
-bool FWM::CheckDeleteFlag(std::deque<OBJ_BASE*>::iterator& It, int Layer) {
+void FWM::CheckDeleteFlag(int i) {
 	using namespace std;
 
-	if ((*It)->ObjectDeleteDescriptor) {
-		delete* It;
-		*It = nullptr;
-		It = Container[Layer].erase(It);
-		return true;
+	for (auto It = begin(Container[i]); It != end(Container[i]);) {
+		if ((*It)->ObjectDeleteDescriptor) {
+			delete* It;
+			*It = nullptr;
+			It = Container[i].erase(It);
+			continue;
+		}
+		++It;
 	}
-	return false;
 }
 
 void FWM::ChangeMode() {

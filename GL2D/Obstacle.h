@@ -19,6 +19,8 @@ private:
 	bool IsSame{};
 	bool B_ObstacleAdded{};
 	bool FeedbackAdded{};
+	GLfloat PlaySpeed = 1.0;
+	GLfloat ShakeValue = 0.1;
 
 public:
 	Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B);
@@ -26,6 +28,9 @@ public:
 	void Update(float FT);
 	bool CheckShapeType();
 	void Render();
+	void SlowMusic(float FT);
+	void ShakeCamera(float FT);
+	void ProcessGameOver(float FT);
 };
 
 #include <iostream>
@@ -34,10 +39,10 @@ private:
 	int ShapeType{};
 	unsigned int Image{};
 	float Frame{};
+	glm::vec3 ColorSet{};
+	GLfloat ShapeSize{};
 
 	GLfloat EndTimer{};
-
-	glm::vec3 ColorSet{};
 
 public:
 	BlinkingObstacle(int Type, GLfloat R, GLfloat G, GLfloat B, GLfloat Rotation, GLfloat Size) {
@@ -66,12 +71,16 @@ public:
 		ColorSet.g = G;
 		ColorSet.b = B;
 
-		Rotate(Rotation + 30);
-		Scale(Size, Size);
+		auto player = fw.Find("player", SearchRange::One, Layer::L2);
+		if (player) Rotate(player->GetRotation() + 30);
 
+		ShapeSize = Size;
+		Scale(ShapeSize, ShapeSize);
 	}
 
 	void Update(float FT) {
+		InitTransform();
+
 		Frame += FT * 10;
 
 		if (Frame < 8) {
@@ -89,6 +98,11 @@ public:
 				fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
 			}
 		}
+
+		Scale(ShapeSize, ShapeSize);
+
+		auto player = fw.Find("player", SearchRange::One, Layer::L2);
+		if (player) Rotate(player->GetRotation() + 30);
 	}
 
 	void Render() {
