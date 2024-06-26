@@ -9,7 +9,7 @@ void Player::InputSpecialKey(int KEY, bool KeyDown) {
 		if (KeyDown) {
 			switch (KEY) {
 			case GLUT_KEY_RIGHT:
-				if (ShapeState < 3)
+				if (ShapeState < 2)
 					ShapeState += 1;
 				break;
 
@@ -54,7 +54,6 @@ Player::Player(){
 	triangle.Init();
 	square.Init();
 	pentagon.Init();
-	hexagon.Init();
 }
 
 void Player::Update(float FT){
@@ -68,29 +67,31 @@ void Player::Update(float FT){
 	if (!GameOver) {
 		auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
 		if (score) {
-			if (score->GetTime() >= 20)
+			if (score->GetTime() >= 20 && score->GetTime() < 40)
 				RotateSpeed = 20;
 
-			if (score->GetTime() >= 40)
+			else if (score->GetTime() >= 40 && score->GetTime() < 60)
 				RotateSpeed = 35;
 
-			if (score->GetTime() >= 60)
+			else if (score->GetTime() >= 60 && score->GetTime() > 80)
 				RotateSpeed = 50;
 
-			if (score->GetTime() >= 80)
+			else if (score->GetTime() >= 80 && score->GetTime() < 100)
 				RotateSpeed = 65;
+
+			else if(score->GetTime() >= 100)
+				RotateSpeed = 100;
 		}
 	}
 
-
-	if (GameOver)
+	else
 		RotateSpeed = std::lerp(RotateSpeed, 0.0, FT * 2.5);
 
 	Rotation += FT * RotateSpeed;
-	Size = std::lerp(Size, 0.5, FT * 25);
-
 	if (Rotation > 360)
 		Rotation = 0;
+
+	Size = std::lerp(Size, 0.5, FT * 25);
 
 	switch (ShapeState) {
 	case EnumTriangle:
@@ -102,14 +103,10 @@ void Player::Update(float FT){
 	case EnumPentagon:
 		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
 		break;
-	case EnumHexagon:
-		ShapeRotation = std::lerp(ShapeRotation, -240, FT * 15);
-		break;
 	}
 
 	Scale(Size, Size);
 	Rotate(Rotation + ShapeRotation + 30);
-
 }
 
 void Player::Render(){
@@ -119,16 +116,17 @@ void Player::Render(){
 void Player::RenderShapes() {
 	ProcessTransform();
 
-	if (ShapeState == EnumTriangle)
+	switch (ShapeState) {
+	case EnumTriangle:
 		triangle.Render();
+		break;
 
-	else if (ShapeState == EnumSquare)
+	case EnumSquare:
 		square.Render();
+		break;
 
-	else if (ShapeState == EnumPentagon)
+	case EnumPentagon:
 		pentagon.Render();
-
-	else if (ShapeState == EnumHexagon)
-		hexagon.Render();
-
+		break;
+	}
 }

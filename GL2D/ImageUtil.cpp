@@ -13,10 +13,11 @@ std::unordered_map<std::string, const char*> ImageList
 	{"center_square", "resources//image//shape//center_square.png"},
 	{"center_pentagon", "resources//image//shape//center_pentagon.png"},
 	{"center_hexagon", "resources//image//shape//center_hexagon.png"},
-	{"obstacle_triangle", "resources//image//obstacles//obstacle_triangle.png"},
-	{"obstacle_square", "resources//image//obstacles//obstacle_square.png"},
-	{"obstacle_pentagon", "resources//image//obstacles//obstacle_pentagon.png"},
-	{"obstacle_hexagon", "resources//image//obstacles//obstacle_hexagon.png"},
+
+	{"obstacle_triangle_1", "resources//image//obstacles//obstacle_triangle_1.png"},
+	{"obstacle_square_1", "resources//image//obstacles//obstacle_square_1.png"},
+	{"obstacle_pentagon_1", "resources//image//obstacles//obstacle_pentagon_1.png"},
+	//{"obstacle_hexagon", "resources//image//obstacles//obstacle_hexagon.png"},
 	{"feedback", "resources//image//shape//feedback.png"},
 
 	{"score_plate", "resources//image//ui//score_plate.png"},

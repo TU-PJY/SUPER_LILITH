@@ -32,14 +32,17 @@ void FWM::Routine() {
 					else
 						if (!(*It)->ObjectDeleteDescriptor)
 							(*It)->Update(FrameTime);
+
+					if (!(*It)->ObjectDeleteDescriptor)
+						(*It)->Render();
 				}
 
-				else  
-					if(!(*It)->ObjectDeleteDescriptor)
+				else {
+					if (!(*It)->ObjectDeleteDescriptor) {
 						(*It)->Update(FrameTime);
-
-				if (!(*It)->ObjectDeleteDescriptor)
-					(*It)->Render();
+						(*It)->Render();
+					}
+				}
 
 				++It;
 			}

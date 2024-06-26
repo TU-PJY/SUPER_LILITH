@@ -4,6 +4,7 @@
 #include "FWM.h"
 #include "MusicPlayer.h"
 #include "Lobby.h"
+#include <random>
 
 enum class ObstacleType 
 {Triangle, Square, Pentagon, Hexagon};
@@ -23,6 +24,8 @@ private:
 	GLfloat PlaySpeed = 1.0;
 	GLfloat ShakeValue = 0.1;
 
+	std::random_device rd;
+
 public:
 	Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B);
 	void SetMoveSpeed(GLfloat Speed);
@@ -37,12 +40,8 @@ public:
 
 class BlinkingObstacle : public OBJ_BASE {
 private:
-	int ShapeType{};
 	unsigned int Image{};
 	float Frame{};
-	glm::vec3 ColorSet{};
-	GLfloat ShapeSize{};
-
 	GLfloat EndTimer{};
 
 public:
@@ -51,22 +50,20 @@ public:
 
 		SetColor(1.0, 0.0, 0.0);
 
-		ShapeSize = 0.8;
-		Scale(ShapeSize, ShapeSize);
 		AlphaValue = 0.5;
+		Scale(0.8, 0.8);
 	}
 
 	void Update(float FT) {
 		InitTransform();
-
 		Frame += FT * 10;
-
-		Scale(ShapeSize, ShapeSize);
 
 		if (Frame >= 30) {
 			mp.SetToLobbyMode();
 			fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
 		}
+
+		Scale(0.8, 0.8);
 	}
 
 	void Render() {

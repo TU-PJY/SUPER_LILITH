@@ -4,27 +4,21 @@
 #include "SoundUtil.h"
 #include "CameraUtil.h"
 #include <cmath>
-#include <random>
 
 Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 	switch (type) {
 	case ObstacleType::Triangle:
-		Image = imageUtil.SetImage("obstacle_triangle");
+		Image = imageUtil.SetImage("obstacle_triangle_1");
 		break;
 
 	case ObstacleType::Square:
-		Image = imageUtil.SetImage("obstacle_square");
+		Image = imageUtil.SetImage("obstacle_square_1");
 		break;
 
 	case ObstacleType::Pentagon:
-		Image = imageUtil.SetImage("obstacle_pentagon");
-		break;
-
-	case ObstacleType::Hexagon:
-		Image = imageUtil.SetImage("obstacle_hexagon");
+		Image = imageUtil.SetImage("obstacle_pentagon_1");
 		break;
 	}
-
 
 	ShapeType = static_cast<int>(type);
 
@@ -43,39 +37,41 @@ void Obstacle::Update(float FT) {
 
 	auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
 	if (score) {
-		if (score->GetTime() >= 20) {
+		if (score->GetTime() >= 20 && score->GetTime() < 40) {
 			MoveSpeed += FT * 0.1;
 			if (MoveSpeed >= 11)
 				MoveSpeed = 11;
 		}
 
-		if (score->GetTime() >= 40) {
+		else if (score->GetTime() >= 40 && score->GetTime() < 60) {
 			MoveSpeed += FT * 0.1;
 			if (MoveSpeed >= 12)
 				MoveSpeed = 12;
 		}
 
-		if (score->GetTime() >= 60) {
+		else if (score->GetTime() >= 60 && score->GetTime() < 80) {
 			MoveSpeed += FT * 0.1;
 			if (MoveSpeed >= 13)
 				MoveSpeed = 13;
 		}
 
-		if (score->GetTime() >= 80) {
+		else if (score->GetTime() >= 80 && score->GetTime() < 100) {
 			MoveSpeed += FT * 0.1;
 			if (MoveSpeed >= 14)
 				MoveSpeed = 14;
 		}
+
+		else if (score->GetTime() >= 100) {
+			MoveSpeed += FT * 0.1;
+			if (MoveSpeed >= 15)
+				MoveSpeed = 15;
+		}
 	}
 	
-	if (Size <= 0.85)
+	if (Size <= 0.85 && Size > 0.75)
 		Size -= FT * MoveSpeed * 2 * Size;
 
-	else
-		Size -= FT * MoveSpeed * Size;
-
-
-	if (Size <= 0.75) {
+	else if (Size <= 0.75) {
 		// 플레이어의 도형과 같을 경우 삭제
 		if (CheckShapeType()) {
 			fw.AddObject(new FeedBack, "feedback", Layer::L1);
@@ -88,6 +84,10 @@ void Obstacle::Update(float FT) {
 			ProcessGameOver(FT);
 	}
 
+	else
+		Size -= FT * MoveSpeed * Size;
+
+
 	switch (ShapeType) {
 	case 0:
 		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
@@ -97,9 +97,6 @@ void Obstacle::Update(float FT) {
 		break;
 	case 2:
 		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
-		break;
-	case 3:
-		ShapeRotation = std::lerp(ShapeRotation, -240, FT * 15);
 		break;
 	}
 
@@ -129,12 +126,10 @@ void Obstacle::SlowMusic(float FT) {
 }
 
 void Obstacle::ShakeCamera(float FT) {
-
 	ShakeValue -= FT * 0.1;
 	if (ShakeValue <= 0)
 		ShakeValue = 0;
 
-	std::random_device rd;
 	std::uniform_real_distribution urdX{ -ShakeValue, ShakeValue };
 	std::uniform_real_distribution urdY{ -ShakeValue, ShakeValue };
 
@@ -147,12 +142,14 @@ void Obstacle::ProcessGameOver(float FT) {
 		auto shape = fw.Find("obstacle", Layer::L1, i);
 		if (shape) shape->SetMoveSpeed(0.0);
 	}
+
 	auto player = fw.Find("player", SearchRange::One, Layer::L2);
 	if (player) player->SetGameOver();
 
 	if (!B_ObstacleAdded) {
 		fw.DeleteObject("obstacle_generator", DeleteRange::One, SearchRange::One, Layer::L1);
 		fw.AddObject(new BlinkingObstacle, "b_obstacle", Layer::L1);
+
 		B_ObstacleAdded = true;
 	}
 
