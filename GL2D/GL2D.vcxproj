@@ -186,6 +186,7 @@
     <ClInclude Include="SoundUtil.h" />
     <ClInclude Include="TextUtil.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="AnimationShape.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModeTemplate.txt" />

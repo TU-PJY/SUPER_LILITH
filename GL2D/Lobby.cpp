@@ -5,6 +5,7 @@
 #include "Cursor.h"
 #include "MusicPlayer.h"
 #include "Stage1.h"
+#include "AnimationShape.h"
 #include <string>
 
 void Lobby::SetController() {
@@ -41,6 +42,7 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 			if (title) title->EnableStartAnimation();
 			auto button = fw.Find("button", SearchRange::One, Layer::L2);
 			if (button) button->EnableStartAnimation();
+			fw.AddObject(new AnimationShape(1.0, 1.0, 1.0), "ani_shape", Layer::L2);
 		}
 			//fw.SwitchMode(Stage_1::Stage1, Stage_1::SetController);
 			break;

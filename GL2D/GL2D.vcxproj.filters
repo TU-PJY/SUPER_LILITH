@@ -94,6 +94,9 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Music Player ]">
       <UniqueIdentifier>{abb28645-0c87-4622-8ac5-0b678551fbb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Animation Shape ]">
+      <UniqueIdentifier>{b8317e7b-9483-4988-9666-7cfba0f79b0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="MusicPlayer.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Music Player ]</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationShape.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Animation Shape ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
