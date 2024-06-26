@@ -11,7 +11,7 @@ private:
 	int ShapeState{ EnumTriangle };
 	GLfloat Rotation{};
 	GLfloat ShapeRotation{};
-	GLfloat Size = 0.5;
+	GLfloat Size = 0.6;
 
 	Triangle triangle;
 	Square square;

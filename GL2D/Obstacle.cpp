@@ -68,14 +68,14 @@ void Obstacle::Update(float FT) {
 		}
 	}
 	
-	if (Size <= 0.75)
+	if (Size <= 0.85)
 		Size -= FT * MoveSpeed * 2 * Size;
 
 	else
 		Size -= FT * MoveSpeed * Size;
 
 
-	if (Size <= 0.65) {
+	if (Size <= 0.75) {
 		// 플레이어의 도형과 같을 경우 삭제
 		if (CheckShapeType()) {
 			fw.AddObject(new FeedBack, "feedback", Layer::L1);

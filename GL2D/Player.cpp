@@ -63,7 +63,6 @@ void Player::Update(float FT){
 	if (PlaySpeed < 1.0 && !GameOver) {
 		PlaySpeed = std::lerp(PlaySpeed, 1.0, FT * 3);
 		soundUtil.SetPlaySpeed("ch_bgm", PlaySpeed);
-		//RotateSpeed = std::lerp(RotateSpeed, 45, FT * 3);
 	}
 
 	if (!GameOver) {
@@ -77,6 +76,9 @@ void Player::Update(float FT){
 
 			if (score->GetTime() >= 60)
 				RotateSpeed = 50;
+
+			if (score->GetTime() >= 80)
+				RotateSpeed = 65;
 		}
 	}
 
