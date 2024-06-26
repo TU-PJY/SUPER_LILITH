@@ -84,7 +84,7 @@ void Stage_1::SpecialKeyUp(int KEY, int x, int y) {
 void Stage_1::SpecialKeyDown(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, false, true);
 
-	auto player = fw.Find("player", SearchRange::One, Layer::L2);
+	auto player = fw.Find("player");
 	if (player) player->InputSpecialKey(KEY, true);
 }
 

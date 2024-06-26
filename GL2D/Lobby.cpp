@@ -40,7 +40,7 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 
 void Lobby::MouseButton(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		auto button = fw.Find("button", SearchRange::One, Layer::L2);
+		auto button = fw.Find("button");
 		if (button) button->ClickButton();
 	}
 }
@@ -57,7 +57,7 @@ void Lobby::MouseWheel(int button, int Wheel, int x, int y) {
 void Lobby::KeyDown(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, true, false);
 
-	auto title = fw.Find("title", SearchRange::One, Layer::L2);
+	auto title = fw.Find("title");
 	if (title) title->InputKey(KEY, true);
 }
 
@@ -72,7 +72,7 @@ void Lobby::SpecialKeyUp(int KEY, int x, int y) {
 void Lobby::SpecialKeyDown(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, false, true);
 
-	auto title = fw.Find("title", SearchRange::One, Layer::L2);
+	auto title = fw.Find("title");
 	if (title) title->InputSpecialKey(KEY, true);
 }
 

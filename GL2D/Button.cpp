@@ -98,13 +98,13 @@ void Button::ClickButton() {
 	if (!StartAnimation) {
 		// right arrow
 		if (aabb[0].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
-			auto title = fw.Find("title", SearchRange::One, Layer::L2);
+			auto title = fw.Find("title");
 			if (title) title->ChangeLobbyPage(1);
 		}
 
 		// left arrow
 		if (aabb[1].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
-			auto title = fw.Find("title", SearchRange::One, Layer::L2);
+			auto title = fw.Find("title");
 			if (title) title->ChangeLobbyPage(0);
 		}
 	}

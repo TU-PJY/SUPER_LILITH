@@ -65,7 +65,7 @@ void Player::Update(float FT){
 	}
 
 	if (!GameOver) {
-		auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
+		auto score = fw.Find("game_score");
 		if (score) {
 			if (score->GetTime() >= 20 && score->GetTime() < 40)
 				RotateSpeed = 20;

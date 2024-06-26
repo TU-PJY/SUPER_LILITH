@@ -32,10 +32,10 @@ void Obstacle::SetMoveSpeed(GLfloat Speed) {
 void Obstacle::Update(float FT) {
 	InitTransform();
 
-	auto player = fw.Find("player", SearchRange::One, Layer::L2);
+	auto player = fw.Find("player");
 	if (player) Rotation = player->GetRotation();
 
-	auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
+	auto score = fw.Find("game_score");
 	if (score) {
 		if (score->GetTime() >= 20 && score->GetTime() < 40) {
 			if (MoveSpeed < 11) {
@@ -110,7 +110,7 @@ void Obstacle::Update(float FT) {
 }
 
 bool Obstacle::CheckShapeType() {
-	auto player = fw.Find("player", SearchRange::One, Layer::L2);
+	auto player = fw.Find("player");
 	if (player && player->GetShapeState() != ShapeType)
 		return false;
 
@@ -148,11 +148,11 @@ void Obstacle::ProcessGameOver(float FT) {
 		if (shape) shape->SetMoveSpeed(0.0);
 	}
 
-	auto player = fw.Find("player", SearchRange::One, Layer::L2);
+	auto player = fw.Find("player");
 	if (player) player->SetGameOver();
 
 	if (!B_ObstacleAdded) {
-		fw.DeleteObject("obstacle_generator", DeleteRange::One, SearchRange::One, Layer::L1);
+		fw.DeleteObject("obstacle_generator", DeleteRange::One);
 		fw.AddObject(new BlinkingObstacle, "b_obstacle", Layer::L1);
 
 		B_ObstacleAdded = true;

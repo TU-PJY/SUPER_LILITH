@@ -29,7 +29,7 @@ void ObstacleGenerator::Update(float FT) {
 		GenTimer += DiffTime;
 	}
 
-	auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
+	auto score = fw.Find("game_score");
 	if (score) {
 		if (score->GetTime() >= 20 && score->GetTime() < 40)
 			GenTimeValue = 8;
@@ -43,7 +43,7 @@ void ObstacleGenerator::Update(float FT) {
 }
 
 void ObstacleGenerator::GenerateShape() {
-	auto score = fw.Find("game_score", SearchRange::One, Layer::L3);
+	auto score = fw.Find("game_score");
 	if (score) {
 		std::uniform_int_distribution uid{ 0, 2 };
 		RandomType = uid(rd);

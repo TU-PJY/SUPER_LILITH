@@ -21,27 +21,21 @@ std::string FWM::Mode() {
 }
 
 void FWM::Routine() {
-	using namespace std;
-
 	if (!ModeSwitchState && RunningState) {
 		for (int i = 0; i < Num; ++i) {
 			for (auto It = begin(Container[i]); It != end(Container[i]);) {
 				if (FloatingModeRunningState) {
 					if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor && !(*It)->ObjectDeleteDescriptor)
-						(*It)->Update(FrameTime);
+						if(*It) (*It)->Update(FrameTime);
 					else
-						if (!(*It)->ObjectDeleteDescriptor)
-							(*It)->Update(FrameTime);
+					  if(*It) (*It)->Update(FrameTime);
 
-					if (!(*It)->ObjectDeleteDescriptor)
-						(*It)->Render();
+					if(*It) (*It)->Render();
 				}
 
 				else {
-					if (!(*It)->ObjectDeleteDescriptor) {
-						(*It)->Update(FrameTime);
-						(*It)->Render();
-					}
+					if (*It) (*It)->Update(FrameTime);
+					if (*It) (*It)->Render();
 				}
 
 				++It;
@@ -132,6 +126,8 @@ void FWM::AddObject(OBJ_BASE* Object, std::string Tag, Layer AddLayer, bool SetF
 	Container[static_cast<int>(AddLayer)].push_back(Object);
 	Object->ObjectTag = Tag;
 
+	ObjectList.insert(std::make_pair(Tag, Object));
+
 	FLog.ObjectTag = Tag;
 	FLog.Log(LogType::ADD_OBJECT);
 
@@ -148,92 +144,28 @@ void FWM::DeleteSelf(OBJ_BASE* Object) {
 	FLog.Log(LogType::DELETE_OBJECT);
 }
 
-void FWM::DeleteObject(std::string Tag, DeleteRange deleteRange, SearchRange searchRange, Layer LayerToSearch) {
-	switch (searchRange) {
-	case SearchRange::One:
-		int layer;
-		layer = static_cast<int>(LayerToSearch);
+void FWM::DeleteObject(std::string Tag, DeleteRange deleteRange) {
+	if (deleteRange == DeleteRange::One) {
+		auto It = ObjectList.lower_bound(Tag);
+		if (It != end(ObjectList))
+			It->second->ObjectDeleteDescriptor = true;
+	}
 
-		switch (deleteRange) {
-		case DeleteRange::One:
-			for (auto& It : Container[layer]) {
-				if (It->ObjectTag == Tag) {
-					It->ObjectDeleteDescriptor = true;
-
-					FLog.ObjectTag = It->ObjectTag;
-					FLog.Log(LogType::DELETE_OBJECT);
-					return;
-				}
+	else if (deleteRange == DeleteRange::All) {
+		for (auto It = begin(ObjectList); It != end(ObjectList);) {
+			if (It->first == Tag) {
+				It->second->ObjectDeleteDescriptor = true;
+				continue;
 			}
-			break;
-
-		case DeleteRange::All:
-			for (auto& It : Container[layer]) {
-				if (It->ObjectTag == Tag) {
-					It->ObjectDeleteDescriptor = true;
-
-					FLog.ObjectTag = It->ObjectTag;
-					FLog.Log(LogType::DELETE_OBJECT);
-				}
-			}
-			break;
+			++It;
 		}
-		break;
-
-	case SearchRange::All:
-		switch (deleteRange) {
-		case DeleteRange::One:
-			for (auto& A : Container) {
-				for (auto& It : A) {
-					if (It->ObjectTag == Tag) {
-						It->ObjectDeleteDescriptor = true;
-
-						FLog.ObjectTag = It->ObjectTag;
-						FLog.Log(LogType::DELETE_OBJECT);
-						return;
-					}
-				}
-			}
-			break;
-
-		case DeleteRange::All:
-			for (auto& A : Container) {
-				for (auto& It : A) {
-					if (It->ObjectTag == Tag) {
-						It->ObjectDeleteDescriptor = true;
-
-						FLog.ObjectTag = It->ObjectTag;
-						FLog.Log(LogType::DELETE_OBJECT);
-					}
-				}
-			}
-			break;
-		}
-		break;
 	}
 }
 
-OBJ_BASE* FWM::Find(std::string Tag, SearchRange searchRange, Layer LayerToSearch) {
-	switch (searchRange) {
-	case SearchRange::One:
-		int layer;
-		layer = static_cast<int>(LayerToSearch);
-
-		for (auto& It : Container[layer]) {
-			if (It->ObjectTag == Tag)
-				return It;
-		}
-		break;
-
-	case SearchRange::All:
-		for (auto& A : Container) {
-			for (auto& It : A) {
-				if (It->ObjectTag == Tag)
-					return It;
-			}
-		}
-		break;
-	}
+OBJ_BASE* FWM::Find(std::string Tag) {
+	auto It = ObjectList.lower_bound(Tag);
+	if (It != end(ObjectList))
+		return It->second;
 
 	return nullptr;
 }
@@ -257,8 +189,6 @@ size_t FWM::Size(Layer TargetLayer) {
 //////// private ///////////////
 
 void FWM::CheckDeleteFlag(int i) {
-	using namespace std;
-
 	for (auto It = begin(Container[i]); It != end(Container[i]);) {
 		if ((*It)->ObjectDeleteDescriptor) {
 			delete* It;
@@ -268,6 +198,8 @@ void FWM::CheckDeleteFlag(int i) {
 		}
 		++It;
 	}
+
+	UpdateObjectList();
 }
 
 void FWM::ChangeMode() {
@@ -335,11 +267,11 @@ void FWM::ClearFloatingObject() {
 			++It;
 		}
 	}
+
+	UpdateObjectList();
 }
 
 void FWM::ClearAll() {
-	using namespace std;
-
 	for (int i = 0; i < Num; ++i) {
 		for (auto It = begin(Container[i]); It != end(Container[i]);) {
 			if ((*It)->ObjectTag != "FWM_DUMMY") {
@@ -352,5 +284,18 @@ void FWM::ClearAll() {
 
 			++It;
 		}
+	}
+
+	ObjectList.clear();
+}
+
+void FWM::UpdateObjectList() {
+	for (auto It = begin(ObjectList); It != end(ObjectList);) {
+		if (!It->second) {
+			It = ObjectList.erase(It);
+			continue;
+		}
+
+		++It;
 	}
 }
