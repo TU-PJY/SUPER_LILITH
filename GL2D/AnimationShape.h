@@ -23,7 +23,7 @@ public:
 	void Update(float FT) {
 		InitTransform();
 		Rotation = std::lerp(Rotation, 0.0, FT * 3.5);
-		Size = std::lerp(Size, 0.5, FT * 3.5);
+		Size = std::lerp(Size, 0.6, FT * 3.5);
 		Position = std::lerp(Position, 0.0, FT * 3.5);
 
 		Translate(0.0, Position);

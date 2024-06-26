@@ -38,15 +38,18 @@ void FWM::Routine() {
 					(*It)->Render();
 				}
 
+				if (ModeSwitchReserveDescriptor)
+					break;
+
 				++It;
 			}
-
-			CheckDeleteFlag(i);
 
 			if (ModeSwitchReserveDescriptor) {
 				ModeSwitchState = true;
 				break;
 			}
+
+			CheckDeleteFlag(i);
 		}
 	}
 
