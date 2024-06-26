@@ -145,6 +145,7 @@
     <ClCompile Include="DataUtil.cpp" />
     <ClCompile Include="FontLoaderUtil.cpp" />
     <ClCompile Include="FWM.cpp" />
+    <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
     <ClCompile Include="Lobby.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="FontLoaderUtil.h" />
     <ClInclude Include="FWM.h" />
     <ClInclude Include="FWM_CONF.h" />
+    <ClInclude Include="GameScore.h" />
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
     <ClInclude Include="Lobby.h" />
