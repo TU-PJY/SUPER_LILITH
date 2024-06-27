@@ -59,17 +59,17 @@ void Obstacle::Update(float FT) {
 			}
 		}
 		else if (score->GetTime() >= 80 && score->GetTime() < 100) {
-			if (MoveSpeed < 14) {
+			if (MoveSpeed < 15) {
 				MoveSpeed += FT * 0.1;
 				if (MoveSpeed >= 14)
 					MoveSpeed = 14;
 			}
 		}
 		else if (score->GetTime() >= 100) {
-			if (MoveSpeed < 15) {
+			if (MoveSpeed < 18) {
 				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 15)
-					MoveSpeed = 15;
+				if (MoveSpeed >= 18)
+					MoveSpeed = 18;
 			}
 		}
 	}

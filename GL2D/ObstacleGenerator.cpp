@@ -37,8 +37,11 @@ void ObstacleGenerator::Update(float FT) {
 		else if (score->GetTime() >= 40 && score->GetTime() < 60)
 			GenTimeValue = 6;
 
-		else if (score->GetTime() >= 60)
+		else if (score->GetTime() >= 60 && score->GetTime() < 80)
 			GenTimeValue = 5;
+
+		else if (score->GetTime() >= 80)
+			GenTimeValue = 4;
 	}
 }
 

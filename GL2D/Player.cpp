@@ -77,10 +77,10 @@ void Player::Update(float FT){
 				RotateSpeed = 50;
 
 			else if (score->GetTime() >= 80 && score->GetTime() < 100)
-				RotateSpeed = 65;
+				RotateSpeed = 85;
 
 			else if(score->GetTime() >= 100)
-				RotateSpeed = 100;
+				RotateSpeed = 120;
 		}
 	}
 
