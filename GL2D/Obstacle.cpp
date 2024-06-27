@@ -4,22 +4,58 @@
 #include "SoundUtil.h"
 #include "CameraUtil.h"
 #include <cmath>
+#include <string>
 
 Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
+	std::string TypeName;
+	auto score = fw.Find("game_score");
+
+	// 40초 이후부터는 다양한 패턴을 생성한다
 	switch (type) {
 	case ObstacleType::Triangle:
-		Image = imageUtil.SetImage("obstacle_triangle_1");
+		{
+		if (score) {
+			if (score->GetTime() < 40)
+				TypeName = "obstacle_triangle_1";
+			else {
+				std::uniform_int_distribution uid{ 1, 4 };
+				TypeName = "obstacle_triangle_";
+				TypeName += std::to_string(uid(rd));
+			}
+		}
+		}
 		break;
 
 	case ObstacleType::Square:
-		Image = imageUtil.SetImage("obstacle_square_1");
+		{
+		if (score) {
+			if (score->GetTime() < 40)
+				TypeName = "obstacle_square_1";
+			else {
+				std::uniform_int_distribution uid{ 1, 5 };
+				TypeName = "obstacle_square_";
+				TypeName += std::to_string(uid(rd));
+			}
+		}
+		}
 		break;
 
 	case ObstacleType::Pentagon:
-		Image = imageUtil.SetImage("obstacle_pentagon_1");
+		{
+		if (score) {
+			if (score->GetTime() < 40)
+				TypeName = "obstacle_pentagon_1";
+			else {
+				std::uniform_int_distribution uid{ 1, 5 };
+				TypeName = "obstacle_pentagon_";
+				TypeName += std::to_string(uid(rd));
+			}
+		}
+		}
 		break;
 	}
 
+	Image = imageUtil.SetImage(TypeName);
 	ShapeType = static_cast<int>(type);
 
 	SetColor(R, G, B);

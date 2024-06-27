@@ -15,9 +15,22 @@ std::unordered_map<std::string, const char*> ImageList
 	{"center_hexagon", "resources//image//shape//center_hexagon.png"},
 
 	{"obstacle_triangle_1", "resources//image//obstacles//obstacle_triangle_1.png"},
+	{"obstacle_triangle_2", "resources//image//obstacles//obstacle_triangle_2.png"},
+	{"obstacle_triangle_3", "resources//image//obstacles//obstacle_triangle_3.png"},
+	{"obstacle_triangle_4", "resources//image//obstacles//obstacle_triangle_4.png"},
+
 	{"obstacle_square_1", "resources//image//obstacles//obstacle_square_1.png"},
+	{"obstacle_square_2", "resources//image//obstacles//obstacle_square_2.png"},
+	{"obstacle_square_3", "resources//image//obstacles//obstacle_square_3.png"},
+	{"obstacle_square_4", "resources//image//obstacles//obstacle_square_4.png"},
+	{"obstacle_square_5", "resources//image//obstacles//obstacle_square_5.png"},
+
 	{"obstacle_pentagon_1", "resources//image//obstacles//obstacle_pentagon_1.png"},
-	//{"obstacle_hexagon", "resources//image//obstacles//obstacle_hexagon.png"},
+	{"obstacle_pentagon_2", "resources//image//obstacles//obstacle_pentagon_2.png"},
+	{"obstacle_pentagon_3", "resources//image//obstacles//obstacle_pentagon_3.png"},
+	{"obstacle_pentagon_4", "resources//image//obstacles//obstacle_pentagon_4.png"},
+	{"obstacle_pentagon_5", "resources//image//obstacles//obstacle_pentagon_4.png"},
+
 	{"feedback", "resources//image//shape//feedback.png"},
 
 	{"score_plate", "resources//image//ui//score_plate.png"},
@@ -86,7 +99,7 @@ void ImageUtil::LoadImageFromList() {
 }
 
 unsigned int ImageUtil::SetImage(std::string ImageName) {
-	return LoadedImageList.find(ImageName)->second;
+	return LoadedImageList.lower_bound(ImageName)->second;
 }
 
 GLfloat ImageUtil::Aspect(int Width, int Height) {
