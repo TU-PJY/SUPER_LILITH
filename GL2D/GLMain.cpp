@@ -25,6 +25,8 @@ int HEIGHT = 800;
 GLfloat ASPECT;
 Rect rect;
 
+int Face;
+
 std::string VENDOR;
 
 ShaderUtil shader;
@@ -115,6 +117,7 @@ void main(int argc, char** argv) {
 	imageUtil.Init();
 	soundUtil.Init();
 
+	Face = lilith;
 	fw.Init(Lobby::LobbyMode, Lobby::SetController);
 	mp.Init("stage1");
 

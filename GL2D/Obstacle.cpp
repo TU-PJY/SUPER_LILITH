@@ -25,7 +25,9 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 				TypeName += std::to_string(num);
 				if (num == 5)
 					DirectionChanger = true;
+
 			}
+			ShapeRotation = 0.0;
 		}
 		}
 		break;
@@ -43,6 +45,7 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 				if (num == 6)
 					DirectionChanger = true;
 			}
+			ShapeRotation = -90.0;
 		}
 		}
 		break;
@@ -60,6 +63,7 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 				if (num == 6)
 					DirectionChanger = true;
 			}
+			ShapeRotation = -192.0;
 		}
 		}
 		break;
@@ -69,6 +73,7 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 	ShapeType = static_cast<int>(type);
 
 	SetColor(R, G, B);
+	Rotate(ShapeRotation);
 }
 
 void Obstacle::SetMoveSpeed(GLfloat Speed) {
@@ -112,18 +117,6 @@ void Obstacle::Update(float FT) {
 			}
 		}
 	}
-
-	switch (ShapeType) {
-	case 0:
-		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
-		break;
-	case 1:
-		ShapeRotation = std::lerp(ShapeRotation, -120, FT * 15);
-		break;
-	case 2:
-		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
-		break;
-	}
 	
 	if (Size <= 0.85 && Size > 0.75)
 		Size -= FT * MoveSpeed * 2 * Size;
@@ -150,7 +143,7 @@ void Obstacle::Update(float FT) {
 		Size -= FT * MoveSpeed * Size;
 
 	Scale(Size, Size );
-	Rotate(Rotation + ShapeRotation + 30);
+	Rotate(Rotation + ShapeRotation);
 }
 
 bool Obstacle::CheckShapeType() {

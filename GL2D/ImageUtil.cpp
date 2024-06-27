@@ -47,6 +47,12 @@ std::unordered_map<std::string, const char*> ImageList
 
 	// cursor
 	{"cursor", "resources//image//ui//cursor.png"},
+
+	// player face
+	{"lilith_1", "resources//image//player//lilith_sprite_1.png"},
+	{"lilith_2", "resources//image//player//lilith_sprite_2.png"},
+	{"lilith_3", "resources//image//player//lilith_sprite_3.png"},
+	{"lilith_4", "resources//image//player//lilith_sprite_4.png"},
 };
 
 

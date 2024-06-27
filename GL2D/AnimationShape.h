@@ -13,7 +13,7 @@ private:
 public:
 	AnimationShape(GLfloat R, GLfloat G, GLfloat B) {
 		Image = imageUtil.SetImage("center_triangle");
-		Rotation = -90;
+		Rotation = -180;
 		Translate(0.0, Position);
 		ScaleSpot(Size, Size);
 		RotateSpot(Rotation);
@@ -28,7 +28,7 @@ public:
 
 		Translate(0.0, Position);
 		ScaleSpot(Size, Size);
-		RotateSpot(Rotation + 30);
+		RotateSpot(Rotation);
 	}
 
 	void Render() {

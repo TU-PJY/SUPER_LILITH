@@ -52,6 +52,15 @@ void Player::ChangeRotationDirection() {
 
 
 Player::Player(){
+	switch (Face) {
+	case lilith:
+		PlayerImageNormal1 = imageUtil.SetImage("lilith_1");
+		PlayerImageNormal2 = imageUtil.SetImage("lilith_2");
+		PlayerImageNormal3 = imageUtil.SetImage("lilith_3");
+		PlayerImageGameOver = imageUtil.SetImage("lilith_4");
+		break;
+	}
+
 	SetColor(1.0, 1.0, 1.0);
 	Scale(Size, Size);
 
@@ -102,7 +111,7 @@ void Player::Update(float FT){
 		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
 		break;
 	case EnumSquare:
-		ShapeRotation = std::lerp(ShapeRotation, -120, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, -90, FT * 15);
 		break;
 	case EnumPentagon:
 		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
@@ -110,7 +119,7 @@ void Player::Update(float FT){
 	}
 
 	Scale(Size, Size);
-	Rotate(Rotation + ShapeRotation + 30);
+	Rotate(Rotation + ShapeRotation);
 }
 
 void Player::Render(){
@@ -118,6 +127,7 @@ void Player::Render(){
 }
 
 void Player::RenderShapes() {
+	SetColor(1.0, 1.0, 1.0);
 	ProcessTransform();
 
 	switch (ShapeState) {
@@ -133,4 +143,11 @@ void Player::RenderShapes() {
 		pentagon.Render();
 		break;
 	}
+
+	SetColor(0.0, 0.0, 0.0);
+	ProcessTransform();
+	if(!GameOver)
+		imageUtil.Draw(PlayerImageNormal1);
+	else
+		imageUtil.Draw(PlayerImageGameOver);
 }

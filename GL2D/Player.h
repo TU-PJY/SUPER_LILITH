@@ -24,6 +24,11 @@ private:
 
 	bool GameOver{};
 
+	unsigned int PlayerImageNormal1{};
+	unsigned int PlayerImageNormal2{};
+	unsigned int PlayerImageNormal3{};
+	unsigned int PlayerImageGameOver{};
+
 public:
 	Player();
 	void Update(float FT);

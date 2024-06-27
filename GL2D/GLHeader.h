@@ -32,6 +32,12 @@ constexpr bool ShowBoundBox = true;
 extern GLuint ImageShader;
 extern GLuint TextShader;
 
+extern int Face;
+
+enum Face {
+	lilith,
+};
+
 
 // multiply Xposition with Aspect
 inline GLfloat ASP(GLfloat ValueX) {
