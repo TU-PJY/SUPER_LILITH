@@ -49,7 +49,16 @@ void FWM::Routine() {
 				break;
 			}
 
-			CheckDeleteFlag(i);
+			std::erase_if(Container[i], [](OBJ_BASE*& Object) {
+				bool IsDeleteTarget = Object->ObjectDeleteDescriptor;
+				if (IsDeleteTarget) {
+					delete Object;
+					Object = nullptr;
+				}
+				return IsDeleteTarget;
+				});
+
+			std::erase_if(ObjectList, [](const std::pair<std::string, OBJ_BASE*>& Object) {return !Object.second; });
 		}
 	}
 
@@ -188,20 +197,6 @@ size_t FWM::Size(Layer TargetLayer) {
 
 //////// private ///////////////
 
-void FWM::CheckDeleteFlag(int i) {
-	for (auto It = begin(Container[i]); It != end(Container[i]);) {
-		if ((*It)->ObjectDeleteDescriptor) {
-			delete* It;
-			*It = nullptr;
-			It = Container[i].erase(It);
-			continue;
-		}
-		++It;
-	}
-
-	UpdateObjectList();
-}
-
 void FWM::ChangeMode() {
 	if (FloatingModeReserveDescriptor) {
 		PrevRunningMode = RunningMode;
@@ -268,8 +263,6 @@ void FWM::ClearFloatingObject() {
 			++It;
 		}
 	}
-
-	UpdateObjectList();
 }
 
 void FWM::ClearAll() {
@@ -288,15 +281,4 @@ void FWM::ClearAll() {
 	}
 
 	ObjectList.clear();
-}
-
-void FWM::UpdateObjectList() {
-	for (auto It = begin(ObjectList); It != end(ObjectList);) {
-		if (!It->second) {
-			It = ObjectList.erase(It);
-			continue;
-		}
-
-		++It;
-	}
 }

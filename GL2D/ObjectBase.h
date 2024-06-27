@@ -56,6 +56,7 @@ public:
 	virtual bool GetAnimationtate() { return {}; }
 	virtual void PlayMusic(int dir) {}
 	virtual float GetTime() { return{}; }
+	virtual void Stop() {}
 };
 
 // dummy object for avoiding iterator errors

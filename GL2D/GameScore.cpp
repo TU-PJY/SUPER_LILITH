@@ -11,10 +11,15 @@ GameScore::GameScore() {
 	ScaleSpot(0.3 * imageUtil.Aspect(350, 128), 0.3);
 }
 
+void GameScore::Stop() {
+	StopState = true;
+}
+
 void GameScore::Update(float FT) {
 	InitTransform();
 
-	MiliSecond += FT;
+	if(!StopState)
+		MiliSecond += FT;
 	
 	Translate(rect.rx - 0.35 - cam.ShakeValueX, rect.ly + 0.14 - cam.ShakeValueY);
 	ScaleSpot(0.3 * imageUtil.Aspect(400, 128), 0.3);

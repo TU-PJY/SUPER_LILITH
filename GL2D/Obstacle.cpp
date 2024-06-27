@@ -80,18 +80,18 @@ void Obstacle::Update(float FT) {
 					MoveSpeed = 11;
 			}
 		}
-		else if (score->GetTime() >= 40 && score->GetTime() < 60) {
+		/*else if (score->GetTime() >= 40 && score->GetTime() < 60) {
 			if (MoveSpeed < 12) {
 				MoveSpeed += FT * 0.1;
 				if (MoveSpeed >= 12)
 					MoveSpeed = 12;
 			}
-		}
+		}*/
 		else if (score->GetTime() >= 60 && score->GetTime() < 80) {
 			if (MoveSpeed < 13) {
 				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 13)
-					MoveSpeed = 13;
+				if (MoveSpeed >= 12)
+					MoveSpeed = 12;
 			}
 		}
 		else if (score->GetTime() >= 80 && score->GetTime() < 100) {
@@ -186,6 +186,9 @@ void Obstacle::ProcessGameOver(float FT) {
 
 	auto player = fw.Find("player");
 	if (player) player->SetGameOver();
+
+	auto score = fw.Find("game_score");
+	if (score) score->Stop();
 
 	if (!B_ObstacleAdded) {
 		fw.DeleteObject("obstacle_generator", DeleteRange::One);

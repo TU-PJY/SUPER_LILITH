@@ -72,47 +72,47 @@ void SoundUtil::PlaySound(std::string SoundName, std::string ChannelName, unsign
 }
 
 void SoundUtil::PauseSound(std::string ChannelName, bool Flag) {
-	LoadedChannelList.find(ChannelName)->second->setPaused(Flag);
+	LoadedChannelList.lower_bound(ChannelName)->second->setPaused(Flag);
 }
 
 void SoundUtil::StopSound(std::string ChannelName) {
-	LoadedChannelList.find(ChannelName)->second->stop();
+	LoadedChannelList.lower_bound(ChannelName)->second->stop();
 }
 
 unsigned int SoundUtil::GetLength(std::string SoundName) {
 	unsigned int Length{};
-	LoadedSoundList.find(SoundName)->second->getLength(&Length, FMOD_TIMEUNIT_MS);
+	LoadedSoundList.lower_bound(SoundName)->second->getLength(&Length, FMOD_TIMEUNIT_MS);
 
 	return Length;
 }
 
 unsigned int SoundUtil::GetPlayTime(std::string ChannelName) {
 	unsigned int Position{};
-	LoadedChannelList.find(ChannelName)->second->getPosition(&Position, FMOD_TIMEUNIT_MS);
+	LoadedChannelList.lower_bound(ChannelName)->second->getPosition(&Position, FMOD_TIMEUNIT_MS);
 
 	return Position;
 }
 
 void SoundUtil::SetPlaySpeed(std::string ChannelName, float PlaySpeed) {
-	LoadedChannelList.find(ChannelName)->second->setPitch(PlaySpeed);
+	LoadedChannelList.lower_bound(ChannelName)->second->setPitch(PlaySpeed);
 }
 
 void SoundUtil::SetFreqCutOff(std::string ChannelName, float Frequency) {
 	LowPass->setParameterFloat(FMOD_DSP_LOWPASS_CUTOFF, Frequency);
-	LoadedChannelList.find(ChannelName)->second->addDSP(0, LowPass);
+	LoadedChannelList.lower_bound(ChannelName)->second->addDSP(0, LowPass);
 }
 
 void SoundUtil::UnSetFreqCutOff(std::string ChannelName) {
-	LoadedChannelList.find(ChannelName)->second->removeDSP(LowPass);
+	LoadedChannelList.lower_bound(ChannelName)->second->removeDSP(LowPass);
 }
 
 void SoundUtil::SetBeatDetect(std::string ChannelName) {
 	SoundSystem->createDSPByType(FMOD_DSP_TYPE_FFT, &BeatDetector);
-	LoadedChannelList.find(ChannelName)->second->addDSP(0, BeatDetector);
+	LoadedChannelList.lower_bound(ChannelName)->second->addDSP(0, BeatDetector);
 }
 
 void SoundUtil::UnSetBeatDetect(std::string ChannelName) {
-	LoadedChannelList.find(ChannelName)->second->removeDSP(BeatDetector);
+	LoadedChannelList.lower_bound(ChannelName)->second->removeDSP(BeatDetector);
 }
 
 float SoundUtil::DetectBeat(float Threshold) {
@@ -147,7 +147,7 @@ int SoundUtil::GetSoundNumif(std::string ContainSrtring) {
 	int Count{};
 
 	for (auto& [Name, Sound] : LoadedSoundList)
-		if (Name.contains("stage"))
+		if (Name.contains(ContainSrtring))
 			++Count;
 
 	return Count;

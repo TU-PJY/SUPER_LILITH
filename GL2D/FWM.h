@@ -63,11 +63,8 @@ public:
 	size_t Size(Layer TargetLayer);
 
 private:
-	void UpdateObjectList(int i);
-	void CheckDeleteFlag(int i);
 	void ChangeMode();
 	void ClearFloatingObject();
 	void ClearAll();
-	void UpdateObjectList();
 };
 extern FWM fw;
