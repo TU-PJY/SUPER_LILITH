@@ -251,18 +251,15 @@ void FWM::ChangeMode() {
 }
 
 void FWM::ClearFloatingObject() {
-	for (int i = 0; i < Num; ++i) {
-		for (auto It = begin(Container[i]); It != end(Container[i]);) {
-			if ((*It)->FloatingSpecifiedDescriptor) {
-				delete* It;
-				*It = nullptr;
-				It = Container[i].erase(It);
-				continue;
-			}
-
-			++It;
+	for(int i = 0; i < Num; ++i)
+		std::erase_if(Container[i], [](OBJ_BASE*& Object) {
+		bool IsDeleteTarget = Object->FloatingSpecifiedDescriptor;
+		if (IsDeleteTarget) {
+			delete Object;
+			Object = nullptr;
 		}
-	}
+		return IsDeleteTarget;
+			});
 }
 
 void FWM::ClearAll() {
@@ -272,10 +269,8 @@ void FWM::ClearAll() {
 				delete* It;
 				*It = nullptr;
 				It = Container[i].erase(It);
-
 				continue;
 			}
-
 			++It;
 		}
 	}
