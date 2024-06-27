@@ -49,6 +49,7 @@ public:
 	virtual void SetMoveSpeed(GLfloat Speed) {}
 	virtual void SetGameOver() {}
 	virtual bool GetGameOverState() {return {};}
+	virtual void ChangeRotationDirection() {}
 	virtual void ClickButton() {}
 	virtual int GetLobbyPage() { return {}; }
 	virtual void EnableStartAnimation() {}

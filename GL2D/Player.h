@@ -20,6 +20,7 @@ private:
 
 	GLfloat RotateSpeed{};
 	GLfloat PlaySpeed = 0.3;
+	GLfloat Direction = 1;
 
 	bool GameOver{};
 
@@ -35,4 +36,5 @@ public:
 	void SetSize(GLfloat Size);
 	void SetGameOver();
 	bool GetGameOverState();
+	void ChangeRotationDirection();
 };

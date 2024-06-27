@@ -24,6 +24,8 @@ private:
 	GLfloat PlaySpeed = 1.0;
 	GLfloat ShakeValue = 0.1;
 
+	bool DirectionChanger{};
+
 	std::random_device rd;
 
 public:

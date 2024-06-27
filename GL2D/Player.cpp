@@ -46,6 +46,10 @@ bool Player::GetGameOverState() {
 	return GameOver;
 }
 
+void Player::ChangeRotationDirection() {
+	Direction *= -1;
+}
+
 
 Player::Player(){
 	SetColor(1.0, 1.0, 1.0);
@@ -67,20 +71,20 @@ void Player::Update(float FT){
 	if (!GameOver) {
 		auto score = fw.Find("game_score");
 		if (score) {
-			if (score->GetTime() >= 20 && score->GetTime() < 40)
-				RotateSpeed = 20;
+			if (score->GetTime() >= 20 && score->GetTime() < 60)
+				RotateSpeed = 20 * Direction;
 
 			/*else if (score->GetTime() >= 40 && score->GetTime() < 60)
 				RotateSpeed = 35;*/
 
 			else if (score->GetTime() >= 60 && score->GetTime() < 80)
-				RotateSpeed = 45;
+				RotateSpeed = 45 * Direction;
 
 			else if (score->GetTime() >= 80 && score->GetTime() < 100)
-				RotateSpeed = 85;
+				RotateSpeed = 85 * Direction;
 
 			else if(score->GetTime() >= 100)
-				RotateSpeed = 120;
+				RotateSpeed = 120 * Direction;
 		}
 	}
 

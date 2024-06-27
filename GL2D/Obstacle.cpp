@@ -9,6 +9,7 @@
 Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 	std::string TypeName;
 	auto score = fw.Find("game_score");
+	int num{};
 
 	// 40초 이후부터는 다양한 패턴을 생성한다
 	switch (type) {
@@ -18,9 +19,12 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 			if (score->GetTime() < 40)
 				TypeName = "obstacle_triangle_1";
 			else {
-				std::uniform_int_distribution uid{ 1, 4 };
+				std::uniform_int_distribution uid{ 1, 5 };
+				num = uid(rd);
 				TypeName = "obstacle_triangle_";
-				TypeName += std::to_string(uid(rd));
+				TypeName += std::to_string(num);
+				if (num == 5)
+					DirectionChanger = true;
 			}
 		}
 		}
@@ -32,9 +36,12 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 			if (score->GetTime() < 40)
 				TypeName = "obstacle_square_1";
 			else {
-				std::uniform_int_distribution uid{ 1, 5 };
+				std::uniform_int_distribution uid{ 1, 6 };
+				num = uid(rd);
 				TypeName = "obstacle_square_";
-				TypeName += std::to_string(uid(rd));
+				TypeName += std::to_string(num);
+				if (num == 6)
+					DirectionChanger = true;
 			}
 		}
 		}
@@ -46,9 +53,12 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 			if (score->GetTime() < 40)
 				TypeName = "obstacle_pentagon_1";
 			else {
-				std::uniform_int_distribution uid{ 1, 5 };
+				std::uniform_int_distribution uid{ 1, 6 };
+				num = uid(rd);
 				TypeName = "obstacle_pentagon_";
-				TypeName += std::to_string(uid(rd));
+				TypeName += std::to_string(num);
+				if (num == 6)
+					DirectionChanger = true;
 			}
 		}
 		}
@@ -73,20 +83,13 @@ void Obstacle::Update(float FT) {
 
 	auto score = fw.Find("game_score");
 	if (score) {
-		if (score->GetTime() >= 20 && score->GetTime() < 40) {
+		if (score->GetTime() >= 20 && score->GetTime() < 60) {
 			if (MoveSpeed < 11) {
 				MoveSpeed += FT * 0.1;
 				if (MoveSpeed >= 11)
 					MoveSpeed = 11;
 			}
 		}
-		/*else if (score->GetTime() >= 40 && score->GetTime() < 60) {
-			if (MoveSpeed < 12) {
-				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 12)
-					MoveSpeed = 12;
-			}
-		}*/
 		else if (score->GetTime() >= 60 && score->GetTime() < 80) {
 			if (MoveSpeed < 13) {
 				MoveSpeed += FT * 0.1;
@@ -128,6 +131,11 @@ void Obstacle::Update(float FT) {
 	else if (Size <= 0.75) {
 		// 플레이어의 도형과 같을 경우 삭제
 		if (CheckShapeType()) {
+			if (DirectionChanger) {
+				fw.Find("player");
+				if (player) player->ChangeRotationDirection();
+			}
+
 			fw.AddObject(new FeedBack, "feedback", Layer::L1);
 			fw.DeleteSelf(this);
 		}
