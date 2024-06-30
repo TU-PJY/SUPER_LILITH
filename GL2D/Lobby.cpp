@@ -6,6 +6,7 @@
 #include "MusicPlayer.h"
 #include "Stage1.h"
 #include "AnimationShape.h"
+#include "LobbyPlayer.h"
 #include <string>
 
 void Lobby::SetController() {
@@ -21,6 +22,7 @@ void Lobby::SetController() {
 
 std::string Lobby::LobbyMode() {
 	fw.AddObject(new Title{mp.MusicPage}, "title", Layer::L2);
+	fw.AddObject(new LobbyPlayer, "lobby_player", Layer::L2);
 	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Cursor, "cursor", Layer::L2);
 	mp.SetToLobbyMode();

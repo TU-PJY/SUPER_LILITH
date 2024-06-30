@@ -69,6 +69,38 @@ Player::Player(){
 	pentagon.Init();
 }
 
+void Player::UpdateBlink(float FT) {
+	BlinkTimer += FT * 10;
+
+	if (BlinkTimer >= NextTime && !BlinkState && !WinkState) {
+		++BlinkCount;
+		if (BlinkCount >= 10)
+			WinkState = true;
+
+		BlinkState = true;
+		BlinkTimer = 0;
+	}
+
+	if (BlinkTimer >= 2 && BlinkState && !WinkState) {
+		std::uniform_int_distribution uid{ 10, 30 };
+		NextTime = uid(rd);
+
+		BlinkState = false;
+		BlinkTimer = 0;
+	}
+
+	if (BlinkState && WinkState && BlinkTimer >= 40) {
+		std::uniform_int_distribution uid{ 10, 30 };
+		NextTime = uid(rd);
+
+		BlinkState = false;
+		WinkState = false;
+		BlinkCount = 0;
+
+		BlinkTimer = 0;
+	}
+}
+
 void Player::Update(float FT){
 	InitTransform();
 
@@ -118,6 +150,8 @@ void Player::Update(float FT){
 		break;
 	}
 
+	UpdateBlink(FT);
+
 	Scale(Size, Size);
 	Rotate(Rotation + ShapeRotation);
 }
@@ -146,8 +180,14 @@ void Player::RenderShapes() {
 
 	SetColor(0.0, 0.0, 0.0);
 	ProcessTransform();
-	if(!GameOver)
-		imageUtil.Draw(PlayerImageNormal1);
+	if (!GameOver) {
+		if(!BlinkState)
+			imageUtil.Draw(PlayerImageNormal1);
+		else if(BlinkState && WinkState)
+			imageUtil.Draw(PlayerImageNormal3);
+		else
+			imageUtil.Draw(PlayerImageNormal2);
+	}
 	else
 		imageUtil.Draw(PlayerImageGameOver);
 }

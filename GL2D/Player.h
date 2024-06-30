@@ -2,6 +2,7 @@
 #include "ObjectBase.h"
 #include "PlayerShape.h"
 #include <array>
+#include <random>
 
 enum Shape 
 {EnumTriangle, EnumSquare, EnumPentagon, EnumHexagon};
@@ -29,6 +30,13 @@ private:
 	unsigned int PlayerImageNormal3{};
 	unsigned int PlayerImageGameOver{};
 
+	bool BlinkState{};
+	bool WinkState{};
+	GLfloat BlinkTimer{};
+	GLfloat NextTime{20};
+	GLfloat BlinkCount{};
+	std::random_device rd;
+
 public:
 	Player();
 	void Update(float FT);
@@ -42,4 +50,5 @@ public:
 	void SetGameOver();
 	bool GetGameOverState();
 	void ChangeRotationDirection();
+	void UpdateBlink(float FT);
 };

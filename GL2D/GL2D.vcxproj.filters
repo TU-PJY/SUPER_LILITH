@@ -100,6 +100,9 @@
     <Filter Include="[1]___________[ Object ]\[ GamePlay ]\[ Game Score ]">
       <UniqueIdentifier>{9d65c8a4-bd75-41b5-881d-8078a49064e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Player Body ]">
+      <UniqueIdentifier>{c5013534-4adb-45fd-87ea-2fa822f9b46f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -248,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="GameScore.h">
       <Filter>[1]___________[ Object ]\[ GamePlay ]\[ Game Score ]</Filter>
+    </ClInclude>
+    <ClInclude Include="LobbyPlayer.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Player Body ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

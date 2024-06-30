@@ -175,6 +175,7 @@
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
     <ClInclude Include="Lobby.h" />
+    <ClInclude Include="LobbyPlayer.h" />
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleGenerator.h" />

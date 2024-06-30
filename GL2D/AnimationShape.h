@@ -8,10 +8,17 @@ private:
 	GLfloat Rotation{};
 	GLfloat Size = 1.2;
 	unsigned int Image{};
+	unsigned int PlayerImage{};
 	GLfloat Position = -0.2;
 	
 public:
 	AnimationShape(GLfloat R, GLfloat G, GLfloat B) {
+		switch (Face) {
+		case lilith:
+			PlayerImage = imageUtil.SetImage("lilith_3");
+			break;
+		}
+
 		Image = imageUtil.SetImage("center_triangle");
 		Rotation = -180;
 		Translate(0.0, Position);
@@ -32,7 +39,12 @@ public:
 	}
 
 	void Render() {
+		SetColor(1.0, 1.0, 1.0);
 		ProcessTransform();
 		imageUtil.Draw(Image);
+
+		SetColor(0.0, 0.0, 0.0);
+		ProcessTransform();
+		imageUtil.Draw(PlayerImage);
 	}
 };

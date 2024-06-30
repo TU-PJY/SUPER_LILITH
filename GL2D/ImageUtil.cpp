@@ -53,6 +53,15 @@ std::unordered_map<std::string, const char*> ImageList
 	{"lilith_2", "resources//image//player//lilith_sprite_2.png"},
 	{"lilith_3", "resources//image//player//lilith_sprite_3.png"},
 	{"lilith_4", "resources//image//player//lilith_sprite_4.png"},
+
+	// player body
+	{"lilith_body_1", "resources//image//player//lilith_sprite_body_1.png"},
+	{"lilith_body_2", "resources//image//player//lilith_sprite_body_2.png"},
+	{"lilith_body_3", "resources//image//player//lilith_sprite_body_3.png"},
+	{"lilith_body_4", "resources//image//player//lilith_sprite_body_4.png"},
+	{"lilith_body_5", "resources//image//player//lilith_sprite_body_5.png"},
+	{"lilith_body_6", "resources//image//player//lilith_sprite_body_6.png"},
+	{"lilith_body_7", "resources//image//player//lilith_sprite_body_7.png"},
 };
 
 

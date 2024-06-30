@@ -23,7 +23,7 @@ extern std::string VENDOR;
 constexpr bool PrintVendorInfoOpt = false;
 
 // fullscreen option
-constexpr bool StartWithFullScreen = false;
+constexpr bool StartWithFullScreen = true;
 
 // boundbox option
 constexpr bool ShowBoundBox = true;

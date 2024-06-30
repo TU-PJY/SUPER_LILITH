@@ -110,10 +110,10 @@ void Obstacle::Update(float FT) {
 			}
 		}
 		else if (score->GetTime() >= 100) {
-			if (MoveSpeed < 18) {
+			if (MoveSpeed < 26) {
 				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 18)
-					MoveSpeed = 18;
+				if (MoveSpeed >= 26)
+					MoveSpeed = 26;
 			}
 		}
 	}

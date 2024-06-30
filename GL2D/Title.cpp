@@ -38,6 +38,7 @@ void Title::InputKey(unsigned char KEY, bool KeyDown) {
 	if (!StartAnimation) {
 		if (KeyDown) {
 			if (KEY == 32) {
+				fw.DeleteObject("lobby_player", DeleteRange::One);
 				fw.AddObject(new AnimationShape(1.0, 1.0, 1.0), "ani_shape", Layer::L2);
 				auto button = fw.Find("button");
 				if (button) button->EnableStartAnimation();
