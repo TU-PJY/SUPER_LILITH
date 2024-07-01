@@ -261,6 +261,9 @@
     <ClInclude Include="BackObject.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Back Object ]</Filter>
     </ClInclude>
+    <ClInclude Include="White.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GLSL\GLSL_vertex.glsl">

@@ -191,6 +191,7 @@
     <ClInclude Include="TextUtil.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="AnimationShape.h" />
+    <ClInclude Include="White.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModeTemplate.txt" />
