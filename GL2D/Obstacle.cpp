@@ -6,78 +6,68 @@
 #include <cmath>
 #include <string>
 
+
 Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 	std::string TypeName;
 	auto score = fw.Find("game_score");
 	int num{};
 
-	// 40초 이후부터는 다양한 패턴을 생성한다
 	switch (type) {
 	case ObstacleType::Triangle:
-		{
-		if (score) {
-			if (score->GetTime() < 40)
-				TypeName = "obstacle_triangle_1";
-			else {
-				std::uniform_int_distribution uid{ 1, 5 };
-				num = uid(rd);
-				TypeName = "obstacle_triangle_";
-				TypeName += std::to_string(num);
-				if (num == 5)
-					DirectionChanger = true;
+	{
+		std::uniform_int_distribution uid{ 1, 5 };
+		num = uid(rd);
+		if (num == 5)
+			DirectionChanger = true;
 
-			}
-			ShapeRotation = 0.0;
-		}
-		}
+		TypeName = "obstacle_triangle_";
+		ShapeRotation = 0.0;
+	}
 		break;
 
 	case ObstacleType::Square:
-		{
-		if (score) {
-			if (score->GetTime() < 40)
-				TypeName = "obstacle_square_1";
-			else {
-				std::uniform_int_distribution uid{ 1, 6 };
-				num = uid(rd);
-				TypeName = "obstacle_square_";
-				TypeName += std::to_string(num);
-				if (num == 6)
-					DirectionChanger = true;
-			}
-			ShapeRotation = -90.0;
-		}
-		}
+	{
+		std::uniform_int_distribution uid{ 1, 7 };
+		num = uid(rd);
+		if (num == 7)
+			DirectionChanger = true;
+
+		TypeName = "obstacle_square_";
+		ShapeRotation = -90.0;
+	}
 		break;
 
 	case ObstacleType::Pentagon:
-		{
-		if (score) {
-			if (score->GetTime() < 40)
-				TypeName = "obstacle_pentagon_1";
-			else {
-				std::uniform_int_distribution uid{ 1, 6 };
-				num = uid(rd);
-				TypeName = "obstacle_pentagon_";
-				TypeName += std::to_string(num);
-				if (num == 6)
-					DirectionChanger = true;
-			}
-			ShapeRotation = -192.0;
-		}
-		}
+	{
+		std::uniform_int_distribution uid{ 1, 7 };
+		num = uid(rd);
+		if (num == 7)
+			DirectionChanger = true;
+
+		TypeName = "obstacle_pentagon_";
+		ShapeRotation = -192.0;
+	}
 		break;
 	}
+
+	if (score && score->GetDiff() < 20) {
+		num = 1;
+		DirectionChanger = false;
+	}
+
+	TypeName += std::to_string(num);
 
 	Image = imageUtil.SetImage(TypeName);
 	ShapeType = static_cast<int>(type);
 
 	SetColor(R, G, B);
 	Rotate(ShapeRotation);
+	IsMove = true;
 }
 
-void Obstacle::SetMoveSpeed(GLfloat Speed) {
-	MoveSpeed = Speed;
+void Obstacle::Stop() {
+	IsMove = false;
+	MoveSpeed = 0;
 }
 
 void Obstacle::Update(float FT) {
@@ -86,35 +76,25 @@ void Obstacle::Update(float FT) {
 	auto player = fw.Find("player");
 	if (player) Rotation = player->GetRotation();
 
-	auto score = fw.Find("game_score");
-	if (score) {
-		if (score->GetTime() >= 20 && score->GetTime() < 60) {
-			if (MoveSpeed < 11) {
-				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 11)
-					MoveSpeed = 11;
-			}
-		}
-		else if (score->GetTime() >= 60 && score->GetTime() < 80) {
-			if (MoveSpeed < 13) {
-				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 12)
-					MoveSpeed = 12;
-			}
-		}
-		else if (score->GetTime() >= 80 && score->GetTime() < 100) {
-			if (MoveSpeed < 15) {
-				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 14)
-					MoveSpeed = 14;
-			}
-		}
-		else if (score->GetTime() >= 100) {
-			if (MoveSpeed < 26) {
-				MoveSpeed += FT * 0.1;
-				if (MoveSpeed >= 26)
-					MoveSpeed = 26;
-			}
+	if (IsMove) {
+		auto score = fw.Find("game_score");
+		if (score) {
+			int Diff = score->GetDiff();
+
+			if (Diff < 20)
+				MoveSpeed = 1.6;
+
+			else if (20 <= Diff && Diff < 60)
+				MoveSpeed = 1.8;
+
+			else if (60 <= Diff && Diff < 100)
+				MoveSpeed = 2.0;
+
+			else if (100 <= Diff && Diff < 140)
+				MoveSpeed = 2.2;
+
+			else if (140 <= Diff)
+				MoveSpeed = 2.4;
 		}
 	}
 	
@@ -182,7 +162,7 @@ void Obstacle::ShakeCamera(float FT) {
 void Obstacle::ProcessGameOver(float FT) {
 	for (int i = 0; i < fw.Size(Layer::L1); ++i) {
 		auto shape = fw.Find("obstacle", Layer::L1, i);
-		if (shape) shape->SetMoveSpeed(0.0);
+		if (shape) shape->Stop();
 	}
 
 	auto player = fw.Find("player");

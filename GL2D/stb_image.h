@@ -3589,9 +3589,9 @@ static stbi_uc *stbi__resample_row_hv_2_simd(stbi_uc *out, stbi_uc *in_near, stb
       // this uses 3*x + y = 4*x + (y - x)
       uint8x8_t farb  = vld1_u8(in_far + i);
       uint8x8_t nearb = vld1_u8(in_near + i);
-      int16x8_t diff  = vreinterpretq_s16_u16(vsubl_u8(farb, nearb));
+      int16x8_t Diff  = vreinterpretq_s16_u16(vsubl_u8(farb, nearb));
       int16x8_t nears = vreinterpretq_s16_u16(vshll_n_u8(nearb, 2));
-      int16x8_t curr  = vaddq_s16(nears, diff); // current row
+      int16x8_t curr  = vaddq_s16(nears, Diff); // current row
 
       // horizontal filter works the same based on shifted vers of current
       // row. "prev" is current row shifted right by 1 pixel; we need to

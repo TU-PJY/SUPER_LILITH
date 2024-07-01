@@ -2,10 +2,13 @@
 #include "ObjectBase.h"
 #include "TextUtil.h"
 
+enum DiffType
+{Easy, Normal, Hard, Harder, Insane};
+
 class GameScore : public OBJ_BASE {
 private:
-	float MiliSecond{99};
-	int Second{};
+	float TimeElapsed{0};
+	float Diff{};
 	unsigned int ScorePlate{};
 	bool StopState{};
 
@@ -13,6 +16,7 @@ private:
 
 public:
 	GameScore();
+	float GetDiff();
 	void Stop();
 	void Update(float FT);
 	void Render();

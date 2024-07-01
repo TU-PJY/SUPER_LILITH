@@ -7,7 +7,7 @@ private:
 	std::vector<int> PlayTime;
 
 public:
-	int MusicPage = 1;
+	int MusicNumber = 1;
 	float Threshold = 1.0;
 
 	void SetToLobbyMode();

@@ -31,20 +31,21 @@ void ObstacleGenerator::Update(float FT) {
 
 	auto score = fw.Find("game_score");
 	if (score) {
-		if (score->GetTime() >= 20 && score->GetTime() < 60)
-			GenTimeValue = 8;
+		int Diff = score->GetDiff();
+		if (Diff < 20)
+			GenTimeValue = 10;
 
-		/*else if (score->GetTime() >= 40 && score->GetTime() < 60)
-			GenTimeValue = 6;*/
+		else if (20 <= Diff && Diff < 60)
+			GenTimeValue = 7;
 
-		else if (score->GetTime() >= 60 && score->GetTime() < 80)
-			GenTimeValue = 6;
+		else if(60 <= Diff && Diff < 100)
+			GenTimeValue = 4.5;
 
-		else if (score->GetTime() >= 80 && score->GetTime() < 100)
-			GenTimeValue = 4;
+		else if (100 <= Diff && Diff < 140)
+			GenTimeValue = 3.5;
 
-		/*else if (score->GetTime() >= 100)
-			GenTimeValue = 4;*/
+		else if (140 <= Diff)
+			GenTimeValue = 3;
 	}
 }
 

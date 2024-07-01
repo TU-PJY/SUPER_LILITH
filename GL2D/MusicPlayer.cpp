@@ -50,7 +50,7 @@ void MusicPlayer::PlayMusic(int Page){
 
 	soundUtil.SetBeatDetect("ch_bgm");
 
-	MusicPage = Page;
+	MusicNumber = Page;
 }
 
 void MusicPlayer::Update() {
@@ -65,5 +65,5 @@ void MusicPlayer::Update() {
 		if (player) player->SetSize(BassValue * 0.01);
 	}
 
-	PlayTime[MusicPage - 1] = soundUtil.GetPlayTime("ch_bgm");
+	PlayTime[MusicNumber - 1] = soundUtil.GetPlayTime("ch_bgm");
 }

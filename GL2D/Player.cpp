@@ -8,12 +8,12 @@ void Player::InputSpecialKey(int KEY, bool KeyDown) {
 	if (!GameOver) {
 		if (KeyDown) {
 			switch (KEY) {
-			case GLUT_KEY_RIGHT:
+			case GLUT_KEY_RIGHT: case GLUT_KEY_SHIFT_R:
 				if (ShapeState < 2)
 					ShapeState += 1;
 				break;
 
-			case GLUT_KEY_LEFT:
+			case GLUT_KEY_LEFT: case GLUT_KEY_SHIFT_L:
 				if (ShapeState > 0)
 					ShapeState -= 1;
 				break;
@@ -112,20 +112,25 @@ void Player::Update(float FT){
 	if (!GameOver) {
 		auto score = fw.Find("game_score");
 		if (score) {
-			if (score->GetTime() >= 20 && score->GetTime() < 60)
+			int Diff = score->GetDiff();
+
+			if (20 <= Diff && Diff < 40)
 				RotateSpeed = 20 * Direction;
 
-			/*else if (score->GetTime() >= 40 && score->GetTime() < 60)
-				RotateSpeed = 35;*/
+			else if (40 <= Diff && Diff < 60)
+				RotateSpeed = 35 * Direction;
 
-			else if (score->GetTime() >= 60 && score->GetTime() < 80)
+			else if (60 <= Diff && Diff < 80)
 				RotateSpeed = 45 * Direction;
 
-			else if (score->GetTime() >= 80 && score->GetTime() < 100)
-				RotateSpeed = 85 * Direction;
+			else if (80 <= Diff && Diff < 100)
+				RotateSpeed = 55 * Direction;
 
-			else if(score->GetTime() >= 100)
-				RotateSpeed = 120 * Direction;
+			else if (100 <= Diff && Diff < 140)
+				RotateSpeed = 65 * Direction;
+
+			else if (140 <= Diff)
+				RotateSpeed = 80 * Direction;
 		}
 	}
 
@@ -140,13 +145,13 @@ void Player::Update(float FT){
 
 	switch (ShapeState) {
 	case EnumTriangle:
-		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, 0.0, FT * 25);
 		break;
 	case EnumSquare:
-		ShapeRotation = std::lerp(ShapeRotation, -90, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, -90, FT * 25);
 		break;
 	case EnumPentagon:
-		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 15);
+		ShapeRotation = std::lerp(ShapeRotation, -192, FT * 25);
 		break;
 	}
 

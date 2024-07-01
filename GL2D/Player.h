@@ -20,7 +20,7 @@ private:
 	Hexagon hexagon;
 
 	GLfloat RotateSpeed{};
-	GLfloat PlaySpeed = 0.3;
+	GLfloat PlaySpeed = 0.0;
 	GLfloat Direction = 1;
 
 	bool GameOver{};

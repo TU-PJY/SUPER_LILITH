@@ -16,7 +16,7 @@ private:
 	GLfloat Size = 16;
 	GLfloat Rotation{};
 	GLfloat ShapeRotation{};
-	GLfloat MoveSpeed = 1.5;
+	GLfloat MoveSpeed = 1.6;
 
 	bool IsSame{};
 	bool B_ObstacleAdded{};
@@ -26,11 +26,13 @@ private:
 
 	bool DirectionChanger{};
 
+	bool IsMove{};
+
 	std::random_device rd;
 
 public:
 	Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B);
-	void SetMoveSpeed(GLfloat Speed);
+	void Stop();
 	void Update(float FT);
 	bool CheckShapeType();
 	void Render();

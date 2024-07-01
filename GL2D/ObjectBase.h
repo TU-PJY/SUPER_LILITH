@@ -46,7 +46,7 @@ public:
 	virtual void SetRotateSpeed(GLfloat Speed) {}
 	virtual void SetSize(GLfloat SizeValue) {}
 	virtual int GetShapeState() { return {}; }
-	virtual void SetMoveSpeed(GLfloat Speed) {}
+	virtual void Stop(GLfloat Speed) {}
 	virtual void SetGameOver() {}
 	virtual bool GetGameOverState() {return {};}
 	virtual void ChangeRotationDirection() {}
@@ -57,6 +57,7 @@ public:
 	virtual bool GetAnimationtate() { return {}; }
 	virtual void PlayMusic(int dir) {}
 	virtual float GetTime() { return{}; }
+	virtual float GetDiff() { return {}; }
 	virtual void Stop() {}
 };
 
