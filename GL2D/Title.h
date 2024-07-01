@@ -18,10 +18,11 @@ private:
 
 	std::vector<std::string> MusicInfo
 	{
-		"DJ Striden - Charisma VIP",
-		"DJ Striden - Celestial Donimion",
-		"DJ Striden - Sky Voyager",
-		"DJ Striden - Cyber Bunked"
+		"DJ Striden - Dare",
+		"DJ Striden - Retropolis",
+		"DJ Striden - Starlight Shifter",
+		"DJ Striden - Singularity",
+		"DJ Striden - Sentient"
 	};
 	
 public:

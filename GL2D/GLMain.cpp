@@ -119,7 +119,7 @@ void main(int argc, char** argv) {
 
 	Face = lilith;
 	fw.Init(Lobby::LobbyMode, Lobby::SetController);
-	mp.Init("stage1");
+	mp.Init("stage_easy");
 
 	glutDisplayFunc(GLMain);
 	glutReshapeFunc(DisplayReshape);

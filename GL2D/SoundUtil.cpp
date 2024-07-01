@@ -15,10 +15,11 @@ FileNameAndOption FNO;
 // list sounds to load
 std::unordered_map<std::string, FileNameAndOption> SoundList
 {
-	{"stage1", {"resources//sound//bgm//DJ Striden - Charisma VIP.mp3", FMOD_LOOP_NORMAL}},
-	{"stage2", {"resources//sound//bgm//DJ Striden - Celestial Dominion.mp3", FMOD_LOOP_NORMAL}},
-	{"stage3", {"resources//sound//bgm//DJ Striden - Sky Voyager.mp3", FMOD_LOOP_NORMAL}},
-	{"stage4", {"resources//sound//bgm//DJ Striden - Cyber Bunked.mp3", FMOD_LOOP_NORMAL}},
+	{"stage_easy", {"resources//sound//bgm//easy.mp3", FMOD_LOOP_NORMAL}},
+	{"stage_normal", {"resources//sound//bgm//normal.mp3", FMOD_LOOP_NORMAL}},
+	{"stage_hard", {"resources//sound//bgm//hard.mp3", FMOD_LOOP_NORMAL}},
+	{"stage_harder", {"resources//sound//bgm//harder.mp3", FMOD_LOOP_NORMAL}},
+	{"stage_insane", {"resources//sound//bgm//insane.mp3", FMOD_LOOP_NORMAL}},
 
 	{"click", {"resources//sound//ui//lobby_click.wav", FMOD_DEFAULT}}
 };

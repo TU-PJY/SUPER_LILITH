@@ -27,20 +27,24 @@ void MusicPlayer::PlayMusic(int Page){
 
 	switch (Page) {
 	case 1:
-		soundUtil.PlaySound("stage1", "ch_bgm", PlayTime[Page - 1]);
+		soundUtil.PlaySound("stage_easy", "ch_bgm", PlayTime[Page - 1]);
 		Threshold = 1.0;
 		break;
 	case 2:
-		soundUtil.PlaySound("stage2", "ch_bgm", PlayTime[Page - 1]);
+		soundUtil.PlaySound("stage_normal", "ch_bgm", PlayTime[Page - 1]);
 		Threshold = 1.0;
 		break;
 	case 3:
-		soundUtil.PlaySound("stage3", "ch_bgm", PlayTime[Page - 1]);
-		Threshold = 1.2;
+		soundUtil.PlaySound("stage_hard", "ch_bgm", PlayTime[Page - 1]);
+		Threshold = 1.0;
 		break;
 	case 4:
-		soundUtil.PlaySound("stage4", "ch_bgm", PlayTime[Page - 1]);
-		Threshold = 0.3;
+		soundUtil.PlaySound("stage_harder", "ch_bgm", PlayTime[Page - 1]);
+		Threshold = 1.0;
+		break;
+	case 5:
+		soundUtil.PlaySound("stage_insane", "ch_bgm", PlayTime[Page - 1]);
+		Threshold = 1.0;
 		break;
 	}
 
