@@ -87,7 +87,7 @@ void Title::Update(float FT) {
 }
 
 void Title::Render() {
-	Text.Draw(0.0, 0.6 + TitleMovePosition, 0.45, "BEAT SHIFTER");
+	Text.Draw(0.0, 0.6 + TitleMovePosition, 0.45, "SUPER LILITH");
 	Text.Draw(TitlePosition, 0.3 + TitleMovePosition , 0.3, "%s", MusicInfo[LobbyPage - 1].c_str());
 }
 
