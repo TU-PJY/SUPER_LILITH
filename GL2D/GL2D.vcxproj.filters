@@ -103,6 +103,9 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Player Body ]">
       <UniqueIdentifier>{c5013534-4adb-45fd-87ea-2fa822f9b46f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Back Object ]">
+      <UniqueIdentifier>{60b52b51-f705-4d5a-9b55-dbbbc7f4f8d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="LobbyPlayer.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Player Body ]</Filter>
+    </ClInclude>
+    <ClInclude Include="BackObject.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Back Object ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

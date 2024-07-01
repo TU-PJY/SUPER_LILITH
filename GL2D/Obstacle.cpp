@@ -160,6 +160,8 @@ void Obstacle::ShakeCamera(float FT) {
 }
 
 void Obstacle::ProcessGameOver(float FT) {
+	SetBackgroundColor(0.0, 0.0, 0.0);
+
 	for (int i = 0; i < fw.Size(Layer::L1); ++i) {
 		auto shape = fw.Find("obstacle", Layer::L1, i);
 		if (shape) shape->Stop();

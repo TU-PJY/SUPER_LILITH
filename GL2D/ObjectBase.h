@@ -59,6 +59,7 @@ public:
 	virtual float GetTime() { return{}; }
 	virtual float GetDiff() { return {}; }
 	virtual void Stop() {}
+	virtual void SetTransparent() {}
 };
 
 // dummy object for avoiding iterator errors

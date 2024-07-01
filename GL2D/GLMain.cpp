@@ -22,6 +22,14 @@
 int WIDTH = 1200;
 int HEIGHT = 800;
 
+glm::vec3 BackgroundColor = glm::vec3(0.0, 0.0, 0.0);
+
+void SetBackgroundColor(GLfloat R, GLfloat G, GLfloat B) {
+	BackgroundColor.r = R;
+	BackgroundColor.g = G;
+	BackgroundColor.b = B;
+}
+
 GLfloat ASPECT;
 Rect rect;
 
@@ -56,7 +64,7 @@ GLvoid DisplayReshape(int w, int h) {
 GLvoid GLMain() {
 	StartTime = clock();
 
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	glClearColor(BackgroundColor.r, BackgroundColor.g, BackgroundColor.b, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	soundUtil.Update();
@@ -117,6 +125,7 @@ void main(int argc, char** argv) {
 	imageUtil.Init();
 	soundUtil.Init();
 
+	SetBackgroundColor(0.737255, 0.560784, 0.560784);
 	Face = lilith;
 	fw.Init(Lobby::LobbyMode, Lobby::SetController);
 	mp.Init("stage_easy");

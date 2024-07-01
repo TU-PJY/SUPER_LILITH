@@ -32,6 +32,10 @@ constexpr bool ShowBoundBox = true;
 extern GLuint ImageShader;
 extern GLuint TextShader;
 
+// global scope background color
+extern glm::vec3 BackgroundColor;
+void SetBackgroundColor(GLfloat R, GLfloat G, GLfloat B);
+
 extern int Face;
 
 enum Face {

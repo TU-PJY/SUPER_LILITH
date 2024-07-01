@@ -60,7 +60,7 @@ void MusicPlayer::Update() {
 	}
 
 	else {
-		float BassValue = soundUtil.DetectBeat(Threshold);
+		float BassValue = soundUtil.DetectBeat(0.0);
 		auto player = fw.Find("player");
 		if (player) player->SetSize(BassValue * 0.01);
 	}

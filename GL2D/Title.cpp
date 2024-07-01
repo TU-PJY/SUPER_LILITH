@@ -5,6 +5,7 @@
 #include "MusicPlayer.h"
 #include "stage1.h"
 #include "AnimationShape.h"
+#include "BackObject.h"
 #include <cmath>
 
 Title::Title(int Page) {
@@ -14,7 +15,7 @@ Title::Title(int Page) {
 	Text.SetAlign(Align::Middle);
 
 	BgmNum = soundUtil.GetSoundNumif("stage");
-
+	SetBackgroundColor(ColorSet[Page - 1].r, ColorSet[Page - 1].g, ColorSet[Page - 1].b);
 	LobbyPage = Page;
 }
 
@@ -42,6 +43,12 @@ void Title::InputKey(unsigned char KEY, bool KeyDown) {
 				fw.AddObject(new AnimationShape(1.0, 1.0, 1.0), "ani_shape", Layer::L2);
 				auto button = fw.Find("button");
 				if (button) button->EnableStartAnimation();
+
+				for (int i = 0; i < fw.Size(Layer::L1); ++i) {
+					auto back_object = fw.Find("back_object", Layer::L1, i);
+					if (back_object) back_object->SetTransparent();
+				}
+
 				StartAnimation = true;
 			}
 		}
@@ -58,6 +65,8 @@ void Title::EnableStartAnimation() {
 
 void Title::Update(float FT) {
 	InitTransform();
+
+	UpdateBackObject(FT);
 
 	if (StartAnimation) {
 		TitleMovePosition = std::lerp(TitleMovePosition, 0.8, FT * 3);
@@ -87,6 +96,7 @@ void Title::ChangeLobbyPage(int dir) {
 	case 0:  // left
 		if (LobbyPage > 1) {
 			LobbyPage -= 1;
+			SetBackgroundColor(ColorSet[LobbyPage - 1].r, ColorSet[LobbyPage - 1].g, ColorSet[LobbyPage - 1].b);
 			TitlePosition = 0.3;
 
 			soundUtil.PlaySound("click", "ch_ui");
@@ -97,6 +107,7 @@ void Title::ChangeLobbyPage(int dir) {
 	case 1:  // right
 		if (LobbyPage < BgmNum) {
 			LobbyPage += 1;
+			SetBackgroundColor(ColorSet[LobbyPage - 1].r, ColorSet[LobbyPage - 1].g, ColorSet[LobbyPage - 1].b);
 			TitlePosition = -0.3;
 
 			soundUtil.PlaySound("click", "ch_ui");
@@ -108,4 +119,15 @@ void Title::ChangeLobbyPage(int dir) {
 
 int Title::GetLobbyPage() {
 	return LobbyPage;
+}
+
+void Title::UpdateBackObject(float FT) {
+	if (!StartAnimation) {
+		BackObjectTimer += FT * 5;
+
+		if (BackObjectTimer >= 5) {
+			fw.AddObject(new BackObject, "back_object", Layer::L1);
+			BackObjectTimer = 0;
+		}
+	}
 }

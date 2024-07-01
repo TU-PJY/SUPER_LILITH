@@ -14,6 +14,8 @@ private:
 	GLfloat TitleMovePosition = 0.8;
 	GLfloat PlaySpeed = 0.0;
 
+	GLfloat BackObjectTimer{};
+
 	bool StartAnimation{};
 
 	std::vector<std::string> MusicInfo
@@ -23,6 +25,15 @@ private:
 		"HARD",
 		"HARDER",
 		"INSANE"
+	};
+
+	std::vector<glm::vec3> ColorSet
+	{
+		{0.737255, 0.560784, 0.560784},
+		{0.980392, 0.501961, 0.447059},
+		{0.27451, 0.509804, 0.705882},
+		{0.419608, 0.556863, 0.137255},
+		{0, 0, 0}
 	};
 	
 public:
@@ -35,5 +46,6 @@ public:
 	void Render();
 	void ChangeLobbyPage(int dir);
 	int GetLobbyPage();
+	void UpdateBackObject(float FT);
 };
 
