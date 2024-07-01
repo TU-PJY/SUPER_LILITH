@@ -18,11 +18,11 @@ private:
 
 	std::vector<std::string> MusicInfo
 	{
-		"DJ Striden - Dare",
-		"DJ Striden - Retropolis",
-		"DJ Striden - Starlight Shifter",
-		"DJ Striden - Singularity",
-		"DJ Striden - Sentient"
+		"EASY",
+		"NORMAL",
+		"HARD",
+		"HARDER",
+		"INSANE"
 	};
 	
 public:

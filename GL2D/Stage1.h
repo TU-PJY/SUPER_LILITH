@@ -3,9 +3,9 @@
 #include "FWM.h"
 #include <string>
 
-namespace Stage_1 {
+namespace Play {
 	void SetController();
-	std::string Stage1();
+	std::string PlayMode();
 
 	void ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey);
 	void MouseButton(int button, int state, int x, int y);

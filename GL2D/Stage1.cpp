@@ -6,7 +6,7 @@
 #include "GameScore.h"
 #include "CameraUtil.h"
 
-void Stage_1::SetController() {
+void Play::SetController() {
 	glutMotionFunc(MouseMotion);
 	glutPassiveMotionFunc(MousePassiveMotion);
 	glutKeyboardFunc(KeyDown);
@@ -17,7 +17,7 @@ void Stage_1::SetController() {
 	glutSpecialUpFunc(SpecialKeyUp);
 }
 
-std::string Stage_1::Stage1() {
+std::string Play::PlayMode() {
 	fw.AddObject(new Player, "player", Layer::L2);
 	fw.AddObject(new ObstacleGenerator, "obstacle_generator", Layer::L2);
 	fw.AddObject(new GameScore, "game_score", Layer::L3);
@@ -26,7 +26,7 @@ std::string Stage_1::Stage1() {
 	return __func__;
 }
 
-void Stage_1::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
+void Play::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
 	// Normal Key Down
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
@@ -36,7 +36,7 @@ void Stage_1::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool S
 		}
 }
 
-void Stage_1::MouseButton(int button, int state, int x, int y) {
+void Play::MouseButton(int button, int state, int x, int y) {
 	switch (button) {
 	case GLUT_LEFT_BUTTON:
 		switch (state) {
@@ -60,7 +60,7 @@ void Stage_1::MouseButton(int button, int state, int x, int y) {
 	}
 }
 
-void Stage_1::MouseWheel(int button, int Wheel, int x, int y) {
+void Play::MouseWheel(int button, int Wheel, int x, int y) {
 	if (Wheel > 0) {
 	}
 
@@ -69,29 +69,29 @@ void Stage_1::MouseWheel(int button, int Wheel, int x, int y) {
 }
 
 
-void Stage_1::KeyDown(unsigned char KEY, int x, int y) {
+void Play::KeyDown(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, true, false);
 }
 
-void Stage_1::KeyUp(unsigned char KEY, int x, int y) {
+void Play::KeyUp(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, false, false);
 }
 
-void Stage_1::SpecialKeyUp(int KEY, int x, int y) {
+void Play::SpecialKeyUp(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, true, true);
 }
 
-void Stage_1::SpecialKeyDown(int KEY, int x, int y) {
+void Play::SpecialKeyDown(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, false, true);
 
 	auto player = fw.Find("player");
 	if (player) player->InputSpecialKey(KEY, true);
 }
 
-void Stage_1::MouseMotion(int x, int y) {
+void Play::MouseMotion(int x, int y) {
 	mouse.ConvertPosition(x, y);
 }
 
-void Stage_1::MousePassiveMotion(int x, int y) {
+void Play::MousePassiveMotion(int x, int y) {
 	mouse.ConvertPosition(x, y);
 }

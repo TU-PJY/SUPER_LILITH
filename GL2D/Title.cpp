@@ -65,8 +65,9 @@ void Title::Update(float FT) {
 		soundUtil.SetPlaySpeed("ch_bgm", PlaySpeed);
 
 		if(TitleMovePosition >= 0.78)
-			fw.SwitchMode(Stage_1::Stage1, Stage_1::SetController);
+			fw.SwitchMode(Play::PlayMode, Play::SetController);
 	}
+
 	else {
 		TitleMovePosition = std::lerp(TitleMovePosition, 0.0, FT * 5);
 		PlaySpeed = std::lerp(PlaySpeed, 1.0, FT * 5);
@@ -78,7 +79,7 @@ void Title::Update(float FT) {
 
 void Title::Render() {
 	Text.Draw(0.0, 0.6 + TitleMovePosition, 0.45, "BEAT SHIFTER");
-	Text.Draw(TitlePosition, 0.4 + TitleMovePosition , 0.1, "%s", MusicInfo[LobbyPage - 1].c_str());
+	Text.Draw(TitlePosition, 0.3 + TitleMovePosition , 0.3, "%s", MusicInfo[LobbyPage - 1].c_str());
 }
 
 void Title::ChangeLobbyPage(int dir) {
