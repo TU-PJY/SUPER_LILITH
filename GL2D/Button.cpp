@@ -84,12 +84,12 @@ void Button::Render() {
 	imageUtil.Draw(ButtonSoundEnable);
 
 	Text.Draw(
-		DivideZoom(rect.rx - 0.4, cam.Zoom), DivideZoom(rect.ly + 0.3 - ButtonMovePosition, cam.Zoom),
+		DivideZoom(rect.rx - 0.4, cam.Zoom), DivideZoom(rect.ly + 0.27 - ButtonMovePosition, cam.Zoom),
 		DivideZoom(0.1, cam.Zoom), "1"
 	);
 
 	Text.Draw(
-		DivideZoom(rect.rx - 0.15, cam.Zoom), DivideZoom(rect.ly + 0.3 - ButtonMovePosition, cam.Zoom),
+		DivideZoom(rect.rx - 0.15, cam.Zoom), DivideZoom(rect.ly + 0.27 - ButtonMovePosition, cam.Zoom),
 		DivideZoom(0.1, cam.Zoom), "2"
 	);
 }

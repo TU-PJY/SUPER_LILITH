@@ -99,7 +99,7 @@ void Obstacle::Update(float FT) {
 		}
 	}
 
-	if (Size <= 0.73) {
+	if (Size <= 0.72) {
 		// 플레이어의 도형과 같을 경우 삭제
 		if (CheckShapeType()) {
 			if (DirectionChanger) {
@@ -120,7 +120,10 @@ void Obstacle::Update(float FT) {
 	else
 		Size -= FT * MoveSpeed * Size;
 
-	Scale(Size, Size );
+	if(ShapeType == 0)
+		Scale(Size + 0.1, Size + 0.1);
+	else
+		Scale(Size, Size);
 	Rotate(Rotation + ShapeRotation);
 }
 
