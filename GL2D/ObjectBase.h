@@ -61,9 +61,6 @@ public:
 	virtual float GetDiff() { return {}; }
 	virtual void Stop() {}
 	virtual void SetTransparent() {}
-	virtual void SetInvisibleLeftArrow() {}
-	virtual void SetInvisibleRightArrow() {}
-	virtual void SetVisibleArrow() {}
 	virtual void SaveHighScoreToFile() {}
 };
 

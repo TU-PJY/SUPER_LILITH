@@ -26,8 +26,5 @@ public:
 	void Update(float FT);
 	void ClickButton();
 	void Render();
-	void SetInvisibleLeftArrow();
-	void SetInvisibleRightArrow();
-	void SetVisibleArrow();
 };
 

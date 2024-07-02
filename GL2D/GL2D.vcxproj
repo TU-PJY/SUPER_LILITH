@@ -143,6 +143,7 @@
     <ClCompile Include="CollisionUtil.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DataUtil.cpp" />
+    <ClCompile Include="Exit.cpp" />
     <ClCompile Include="FontLoaderUtil.cpp" />
     <ClCompile Include="FWM.cpp" />
     <ClCompile Include="GameScore.cpp" />
@@ -171,6 +172,8 @@
     <ClInclude Include="CollisionUtil.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DataUtil.h" />
+    <ClInclude Include="Exit.h" />
+    <ClInclude Include="ExitScreen.h" />
     <ClInclude Include="FontLoaderUtil.h" />
     <ClInclude Include="FWM.h" />
     <ClInclude Include="FWM_CONF.h" />

@@ -24,18 +24,20 @@ void FWM::Routine() {
 	if (!ModeSwitchState && RunningState) {
 		for (int i = 0; i < Num; ++i) {
 			for (auto It = begin(Container[i]); It != end(Container[i]);) {
-				if (!FloatingModeRunningState) {
-					(*It)->Update(FrameTime);
-					(*It)->Render();
-				}
-
-				else {
-					if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor)
+				if (!(*It)->ObjectDeleteDescriptor) {
+					if (!FloatingModeRunningState) {
 						(*It)->Update(FrameTime);
-					else
-						(*It)->Update(FrameTime);
+						(*It)->Render();
+					}
 
-					(*It)->Render();
+					else {
+						if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor)
+							(*It)->Update(FrameTime);
+						else
+							(*It)->Update(FrameTime);
+
+						(*It)->Render();
+					}
 				}
 
 				if (ModeSwitchReserveDescriptor)
@@ -44,21 +46,13 @@ void FWM::Routine() {
 				++It;
 			}
 
+			ClearDeleteTargetObject(i);
+
 			if (ModeSwitchReserveDescriptor) {
 				ModeSwitchState = true;
 				break;
 			}
 
-			std::erase_if(Container[i], [](OBJ_BASE*& Object) {
-				bool IsDeleteTarget = Object->ObjectDeleteDescriptor;
-				if (IsDeleteTarget) {
-					delete Object;
-					Object = nullptr;
-				}
-				return IsDeleteTarget;
-				});
-
-			std::erase_if(ObjectList, [](const std::pair<std::string, OBJ_BASE*>& Object) {return !Object.second; });
 		}
 	}
 
@@ -105,16 +99,19 @@ void FWM::StartFloatingMode(Function ModeFunction, ControllerFunction Controller
 	if (!RunningState || FloatingModeRunningState)  
 		return;
 
-	ModeFunctionBuffer = ModeFunction;
-
+	PrevRunningMode = RunningMode;
 	FLog.PrevMode = RunningMode;
 
-	FloatingModeReserveDescriptor = true;
-	ModeSwitchReserveDescriptor = true;
+	RunningMode = ModeFunction();
+	Controller();
 
 	FloatingOnlyState = FloatingOnlyOption;
-
 	FLog.IsOnlyFloating = FloatingOnlyState;
+
+	FLog.CurrentMode = RunningMode;
+	FLog.Log(LogType::START_FLOATING_MODE);
+
+	FloatingModeRunningState = true;
 }
 
 void FWM::EndFloatingMode() {
@@ -161,14 +158,15 @@ void FWM::DeleteObject(std::string Tag, DeleteRange deleteRange) {
 	}
 
 	else if (deleteRange == DeleteRange::All) {
-		for (auto It = begin(ObjectList); It != end(ObjectList);) {
-			if (It->first == Tag) {
+		for (auto It = begin(ObjectList); It != end(ObjectList); ++It) {
+			if (It->first == Tag)
 				It->second->ObjectDeleteDescriptor = true;
-				continue;
-			}
-			++It;
 		}
 	}
+
+	std::erase_if(ObjectList, [](const std::pair<std::string, OBJ_BASE*>& Object) {
+		return Object.second->ObjectDeleteDescriptor; 
+		});
 }
 
 OBJ_BASE* FWM::Find(std::string Tag) {
@@ -198,19 +196,6 @@ size_t FWM::Size(Layer TargetLayer) {
 //////// private ///////////////
 
 void FWM::ChangeMode() {
-	if (FloatingModeReserveDescriptor) {
-		PrevRunningMode = RunningMode;
-		RunningMode = ModeFunctionBuffer();
-
-		if(ControllerBuffer)
-			ControllerBuffer();
-
-		FloatingModeRunningState = true;
-
-		FLog.CurrentMode = RunningMode;
-		FLog.Log(LogType::START_FLOATING_MODE);
-	}
-
 	if (FloatingModeEndReserveDescriptor) {
 		ClearFloatingObject();
 		RunningMode = PrevRunningMode;
@@ -225,7 +210,7 @@ void FWM::ChangeMode() {
 		FLog.Log(LogType::END_FLOATING_MODE);
 	}
 	
-	if(!FloatingModeReserveDescriptor && !FloatingModeEndReserveDescriptor) {
+	else {
 		ClearAll();
 		RunningMode = ModeFunctionBuffer();
 
@@ -244,22 +229,38 @@ void FWM::ChangeMode() {
 	FLog.CurrentMode = RunningMode;
 	FLog.Log(LogType::MODE_SWITCH);
 
-	FloatingModeReserveDescriptor = false;
 	FloatingModeEndReserveDescriptor = false;
 	ModeSwitchReserveDescriptor = false;
 	ModeSwitchState = false;
 }
 
-void FWM::ClearFloatingObject() {
-	for(int i = 0; i < Num; ++i)
-		std::erase_if(Container[i], [](OBJ_BASE*& Object) {
-		bool IsDeleteTarget = Object->FloatingSpecifiedDescriptor;
-		if (IsDeleteTarget) {
-			delete Object;
-			Object = nullptr;
+void FWM::ClearDeleteTargetObject(int i) {
+	std::erase_if(ObjectList, [](const std::pair<std::string, OBJ_BASE*>& Object) {
+		return Object.second->ObjectDeleteDescriptor;
+		});
+
+	for (auto It = begin(Container[i]); It != end(Container[i]);) {
+		if ((*It)->ObjectDeleteDescriptor) {
+			delete* It;
+			*It = nullptr;
+			It = Container[i].erase(It);
+			continue;
 		}
-		return IsDeleteTarget;
-			});
+		++It;
+	}
+}
+
+void FWM::ClearFloatingObject() {
+	for (int i = 0; i < Num; ++i) {
+		for (auto It = begin(Container[i]); It != end(Container[i]); ++It) {
+			if ((*It)->FloatingSpecifiedDescriptor)
+				(*It)->ObjectDeleteDescriptor = true;
+		}
+	}
+
+	std::erase_if(ObjectList, [](const std::pair<std::string, OBJ_BASE*>& Object) {
+		return Object.second->ObjectDeleteDescriptor;
+		});
 }
 
 void FWM::ClearAll() {

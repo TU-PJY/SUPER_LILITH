@@ -118,6 +118,9 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Splash ]">
       <UniqueIdentifier>{e2727fe1-eec6-4061-b789-c9d281ebaa88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Exit ]">
+      <UniqueIdentifier>{cf473f32-b637-4ed4-b020-f204c1f612fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -192,6 +195,9 @@
     </ClCompile>
     <ClCompile Include="Splash.cpp">
       <Filter>[2]___________[ GameMode ]\[ Splash ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>[2]___________[ GameMode ]\[ Exit ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +299,12 @@
     </ClInclude>
     <ClInclude Include="SplashScreen.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Splash ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>[2]___________[ GameMode ]\[ Exit ]</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitScreen.h">
+      <Filter>[1]___________[ Object ]\[2][ Sub Object ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

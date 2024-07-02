@@ -63,6 +63,7 @@ public:
 
 private:
 	void ChangeMode();
+	void ClearDeleteTargetObject(int i);
 	void ClearFloatingObject();
 	void ClearAll();
 };

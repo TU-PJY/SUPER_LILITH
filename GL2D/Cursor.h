@@ -7,6 +7,7 @@ private:
 
 public:
 	Cursor();
+	void Update(float FT);
 	void Render();
 };
 

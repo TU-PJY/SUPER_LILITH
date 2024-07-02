@@ -8,13 +8,20 @@ void MusicPlayer::SetToLobbyMode(){
 }
 
 void MusicPlayer::Init(std::string MusicName) {
-	PlayTime.reserve(soundUtil.GetSoundNumif("stage"));
+	MusicNum = soundUtil.GetSoundNumif("stage");
+	PlayTime.reserve(MusicNum);
 
+	std::cout << MusicNum << std::endl;
+	
 	soundUtil.PlaySound(MusicName, "ch_bgm");
 	soundUtil.SetPlaySpeed("ch_bgm", 0.0);
 	soundUtil.SetBeatDetect("ch_bgm");
 
 	MusicPlayerInitState = true;
+}
+
+int MusicPlayer::GetMusicNum() {
+	return MusicNum;
 }
 
 void MusicPlayer::SetToPlayMode() {
@@ -51,7 +58,7 @@ void MusicPlayer::PlayMusic(int Page){
 
 void MusicPlayer::Update() {
 	if (MusicPlayerInitState) {
-		if (fw.Mode() == "LobbyMode") {
+		if (fw.Mode() == "LobbyMode" || fw.Mode() == "ExitMode") {
 			float BassValue = soundUtil.DetectBeat(0.0);
 			camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
 		}

@@ -2,6 +2,7 @@
 #include "MouseUtil.h"
 #include "ImageUtil.h"
 #include "CameraUtil.h"
+#include "FWM.h"
 #include <windows.h>
 
 Cursor::Cursor() {
@@ -10,11 +11,13 @@ Cursor::Cursor() {
 	glutWarpPointer(GetSystemMetrics(SM_CXSCREEN) - GetSystemMetrics(SM_CXSCREEN) / 4, GetSystemMetrics(SM_CYSCREEN) / 2);
 }
 
-void Cursor::Render() {
+void Cursor::Update(float FT) {
 	InitTransform();
 	Translate(DivideZoom(ASP(mouse.x) + 0.075, cam.Zoom), DivideZoom(mouse.y - 0.075, cam.Zoom));
 	ScaleSpot(DivideZoom(0.15, cam.Zoom), DivideZoom(0.15, cam.Zoom));
+}
+
+void Cursor::Render() {
 	ProcessTransform();
 	imageUtil.Draw(Image);
 }
-

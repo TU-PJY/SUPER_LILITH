@@ -8,6 +8,8 @@
 #include "AnimationShape.h"
 #include "LobbyPlayer.h"
 #include "White.h"
+
+#include "Exit.h"
 #include <string>
 
 void Lobby::SetController() {
@@ -40,7 +42,7 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
 		case 27:
-			glutDestroyWindow(1);
+			fw.StartFloatingMode(Exit::ExitMode, Exit::SetController);
 			break;
 		}
 }

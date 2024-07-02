@@ -57,7 +57,6 @@ public:
 	void Update(float FT);
 	void Render();
 	void ChangeLobbyPage(int dir);
-	void UpdateButtonState();
 	int GetLobbyPage();
 	void UpdateBackObjectGen(float FT);
 	glm::vec3 GetColorSet();

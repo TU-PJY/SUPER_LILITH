@@ -67,6 +67,7 @@ std::unordered_map<std::string, const char*> ImageList
 	{"lilith_body_7", "resources//image//player//lilith_sprite_body_7.png"},
 
 	{"white_front", "resources//image//ui//white.png"},
+	{"black_front", "resources//image//ui//black.png"},
 
 	// logo
 	{"logo", "resources//image//ui//mata_logo.png"}

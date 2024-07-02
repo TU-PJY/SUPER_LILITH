@@ -20,7 +20,6 @@ Title::Title(int Page) {
 	SetBackgroundColor(ColorSet[Page - 1].r, ColorSet[Page - 1].g, ColorSet[Page - 1].b);
 
 	LobbyPage = Page;
-	UpdateButtonState();
 
 	ScoreListSec.reserve(BgmNum);
 	ScoreListMil.reserve(BgmNum);
@@ -137,27 +136,8 @@ void Title::ChangeLobbyPage(int dir) {
 		break;
 	}
 
-	UpdateButtonState();
-
 	SetBackgroundColor(ColorSet[LobbyPage - 1].r, ColorSet[LobbyPage - 1].g, ColorSet[LobbyPage - 1].b);
 	Text.SetColor(ObjectColorSet[LobbyPage - 1].r, ObjectColorSet[LobbyPage - 1].g, ObjectColorSet[LobbyPage - 1].b);
-}
-
-void Title::UpdateButtonState() {
-	if (LobbyPage == BgmNum) {
-		auto button = fw.Find("button");
-		if (button) button->SetInvisibleRightArrow();
-	}
-
-	else if (LobbyPage == 1) {
-		auto button = fw.Find("button");
-		if (button) button->SetInvisibleLeftArrow();
-	}
-
-	else {
-		auto button = fw.Find("button");
-		if (button) button->SetVisibleArrow();
-	}
 }
 
 int Title::GetLobbyPage() {

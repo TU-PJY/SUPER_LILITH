@@ -3,6 +3,7 @@
 #include "ImageUtil.h"
 #include "MouseUtil.h"
 #include "CameraUtil.h"
+#include "MusicPlayer.h"
 #include "FWM.h"
 #include <cmath>
 
@@ -13,8 +14,6 @@ Button::Button() {
 	ButtonSoundEnable = imageUtil.SetImage("button_sound_enable");
 	ButtonSoundDisable = imageUtil.SetImage("button_sound_disable");
 
-	SetColor(1.0, 1.0, 1.0);
-	
 	for(int i = 0; i < 4; ++i)
 		aabb[i].Init();
 }
@@ -26,6 +25,17 @@ void Button::EnableStartAnimation() {
 void Button::Update(float FT) {
 	auto title = fw.Find("title");
 	if (title) ObjectColor = title->GetColorSet();
+
+	if (mp.MusicNumber == 1)
+		RenderLeft = false;
+
+	else if (mp.MusicNumber == mp.GetMusicNum())
+		RenderRight = false;
+
+	else {
+		RenderLeft = true;
+		RenderRight = true;
+	}
 
 	if (StartAnimation) {
 		ArrowMovePosition = std::lerp(ArrowMovePosition, 0.5, FT * 5);
@@ -41,13 +51,13 @@ void Button::Update(float FT) {
 		RightArrowSize = std::lerp(RightArrowSize, 0.35, FT * 15);
 	else
 		RightArrowSize = std::lerp(RightArrowSize, 0.3, FT * 15);
-	
+
 	// left arrow
 	if (aabb[1].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom)))
 		LeftArrowSize = std::lerp(LeftArrowSize, 0.35, FT * 15);
 	else
 		LeftArrowSize = std::lerp(LeftArrowSize, 0.3, FT * 15);
-	
+
 	// button info
 	if (aabb[2].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom)))
 		ButtonInfoSize = std::lerp(ButtonInfoSize, 0.23, FT * 15);
@@ -118,17 +128,4 @@ void Button::ClickButton() {
 			}
 		}
 	}
-}
-
-void Button::SetInvisibleLeftArrow() {
-	RenderLeft = false;
-}
-
-void Button::SetInvisibleRightArrow() {
-	RenderRight = false;
-}
-
-void Button::SetVisibleArrow() {
-	RenderLeft = true;
-	RenderRight = true;
 }

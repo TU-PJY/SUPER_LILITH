@@ -4,8 +4,8 @@
 [Easy Mil]=7
 [Normal Sec]=66
 [Normal Mil]=2
-[Hard Sec]=18
-[Hard Mil]=7
+[Hard Sec]=25
+[Hard Mil]=6
 [Harder Sec]=15
 [Harder Mil]=9
 [Insane Sec]=6
