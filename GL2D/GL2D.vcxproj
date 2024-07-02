@@ -154,6 +154,7 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleGenerator.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Stage1.cpp" />
     <ClCompile Include="MouseUtil.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
@@ -185,6 +186,8 @@
     <ClInclude Include="ObstacleGenerator.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerShape.h" />
+    <ClInclude Include="Splash.h" />
+    <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="Stage1.h" />
     <ClInclude Include="MouseUtil.h" />
     <ClInclude Include="ObjectBase.h" />

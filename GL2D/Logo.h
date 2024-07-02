@@ -1,16 +1,15 @@
 #pragma once
 #include "ImageUtil.h"
 #include "ObjectBase.h"
-#include "TextUtil.h"
 #include "Lobby.h"
 #include "MusicPlayer.h"
+#include "SoundUtil.h"
 #include <cmath>
 
 class FMOD_Logo : public OBJ_BASE {
 private:
 	unsigned int Image{};
 	GLfloat Size{};
-	TextUtil Text;
 	GLfloat Delay{};
 
 public:
@@ -59,8 +58,8 @@ class Logo : public OBJ_BASE {
 private:
 	unsigned int Image{};
 	GLfloat Size{};
-	TextUtil Text;
 	GLfloat Delay{};
+	bool SoundPlayed{};
 
 public:
 	Logo() {
@@ -75,9 +74,15 @@ public:
 		Delay += FT;
 
 		if (Delay >= 1) {
+			if (!SoundPlayed) {
+				soundUtil.PlaySound("logo_sound", "ch_ui");
+				SoundPlayed = true;
+			}
+
 			if (Size <= 1.52) {
 				if (Delay >= 3) {
 					AlphaValue -= FT * 2;
+
 					if (AlphaValue <= 0) {
 						AlphaValue = 0;
 						fw.AddObject(new FMOD_Logo, "fmod_logo", Layer::L1);

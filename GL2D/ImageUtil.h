@@ -12,6 +12,7 @@ private:
 public:
 	void Init();
 	void LoadImageFromList();
+	void LoadImageFromFile(std::string Name, const char* FileName);
 	unsigned int SetImage(std::string ImageName);
 	GLfloat Aspect(float Width, float Height);
 	void Draw(unsigned int ImageVar);

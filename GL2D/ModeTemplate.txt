@@ -39,7 +39,7 @@ std::string Mode_1::Mode1() {
 	return __func__;
 }
 
-void  Mode_1::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
+void Mode_1::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
 	// Normal Key Down
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
@@ -49,7 +49,7 @@ void  Mode_1::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool S
 		}
 }
 
-void  Mode_1::MouseButton(int button, int state, int x, int y) {
+void Mode_1::MouseButton(int button, int state, int x, int y) {
 	switch (button) {
 	case GLUT_LEFT_BUTTON:
 		switch (state) {
@@ -73,7 +73,7 @@ void  Mode_1::MouseButton(int button, int state, int x, int y) {
 	}
 }
 
-void  Mode_1::MouseWheel(int button, int Wheel, int x, int y) {
+void Mode_1::MouseWheel(int button, int Wheel, int x, int y) {
 	if (Wheel > 0) {
 	}
 
@@ -82,26 +82,26 @@ void  Mode_1::MouseWheel(int button, int Wheel, int x, int y) {
 }
 
 
-void  Mode_1::KeyDown(unsigned char KEY, int x, int y) {
+void Mode_1::KeyDown(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, true);
 }
 
-void  Mode_1::KeyUp(unsigned char KEY, int x, int y) {
+void Mode_1::KeyUp(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, false);
 }
 
-void  Mode_1::SpecialKeyUp(int KEY, int x, int y) {
+void Mode_1::SpecialKeyUp(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, true, true);
 }
 
-void  Mode_1::SpecialKeyDown(int KEY, int x, int y) {
+void Mode_1::SpecialKeyDown(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, false, true);
 }
 
-void  Mode_1::MouseMotion(int x, int y) {
+void Mode_1::MouseMotion(int x, int y) {
 	mouse.ConvertPosition(x, y);
 }
 
-void  Mode_1::MousePassiveMotion(int x, int y) {
+void Mode_1::MousePassiveMotion(int x, int y) {
 	mouse.ConvertPosition(x, y);
 }

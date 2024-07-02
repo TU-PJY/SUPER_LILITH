@@ -99,10 +99,10 @@ void Obstacle::Update(float FT) {
 		}
 	}
 	
-	if (Size <= 0.85 && Size > 0.75)
-		Size -= FT * MoveSpeed * 2 * Size;
+	/*if (Size <= 0.85 && Size > 0.75)
+		Size -= FT * MoveSpeed * 2 * Size;*/
 
-	else if (Size <= 0.75) {
+	if (Size <= 0.7) {
 		// 플레이어의 도형과 같을 경우 삭제
 		if (CheckShapeType()) {
 			if (DirectionChanger) {

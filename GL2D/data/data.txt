@@ -1,12 +1,12 @@
 [Data Version]=1
 [Play First]=0
-[Easy Sec]=20
-[Easy Mil]=8
-[Normal Sec]=36
+[Easy Sec]=60
+[Easy Mil]=6
+[Normal Sec]=66
 [Normal Mil]=2
 [Hard Sec]=18
 [Hard Mil]=7
 [Harder Sec]=15
-[Harder Mil]=6
+[Harder Mil]=9
 [Insane Sec]=6
-[Insane Mil]=1
+[Insane Mil]=7

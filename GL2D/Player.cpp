@@ -141,7 +141,7 @@ void Player::Update(float FT){
 	if (Rotation > 360)
 		Rotation = 0;
 
-	Size = std::lerp(Size, 0.6, FT * 25);
+	Size = std::lerp(Size, 0.55, FT * 45);
 
 	switch (ShapeState) {
 	case EnumTriangle:

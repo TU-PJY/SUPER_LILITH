@@ -100,8 +100,6 @@ void ImageUtil::Init() {
 	glEnableVertexAttribArray(2);
 
 	stbi_set_flip_vertically_on_load(true);
-
-	LoadImageFromList();
 }
 
 void ImageUtil::LoadImageFromList() {
@@ -122,6 +120,24 @@ void ImageUtil::LoadImageFromList() {
 
 		LoadedImageList.insert(std::pair(Name, Image));
 	}
+}
+
+void ImageUtil::LoadImageFromFile(std::string Name, const char* FileName) {
+	unsigned int Image{};
+	int Width{}, Height{}, Channel{};
+
+	glGenTextures(1, &Image);
+	glBindTexture(GL_TEXTURE_2D, Image);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	unsigned char* texture_data = stbi_load(FileName, &Width, &Height, &Channel, 4);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data);
+	stbi_image_free(texture_data);
+
+	LoadedImageList.insert(std::pair(Name, Image));
 }
 
 unsigned int ImageUtil::SetImage(std::string ImageName) {

@@ -13,6 +13,7 @@
 #include "Stage1.h"
 #include "Lobby.h"
 #include "Intro.h"
+#include "Splash.h"
 
 #include "MusicPlayer.h"
 
@@ -90,9 +91,6 @@ void main(int argc, char** argv) {
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutCreateWindow("GL2D");
 
-	if (StartWithFullScreen)
-		glutFullScreen();
-
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 	glewExperimental = GL_TRUE;
@@ -110,8 +108,6 @@ void main(int argc, char** argv) {
 			std::cout << "GPU Vendor: " << VENDOR << "\n\n";
 	}
 
-	//SetBackgroundColor(0.737255, 0.560784, 0.560784);
-
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -126,12 +122,15 @@ void main(int argc, char** argv) {
 	shader.CreateShader(TextShader);
 
 	imageUtil.Init();
+	//fw.Init(Splash::SplashMode, Splash::SetController);
+
+	// for dev
+	glutFullScreen();
+	imageUtil.LoadImageFromList();
 	soundUtil.Init();
 	dataUtil.Init();
+	fw.Init(Lobby::LobbyMode, Lobby::SetController);
 
-	//fw.Init(Lobby::LobbyMode, Lobby::SetController);
-	fw.Init(Intro::IntroMode, Intro::SetController);
-	//mp.Init("stage_easy");
 
 	glutDisplayFunc(GLMain);
 	glutReshapeFunc(DisplayReshape);

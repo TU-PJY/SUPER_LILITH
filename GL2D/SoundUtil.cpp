@@ -21,7 +21,8 @@ std::unordered_map<std::string, FileNameAndOption> SoundList
 	{"stage_harder", {"resources//sound//bgm//harder.mp3", FMOD_LOOP_NORMAL}},
 	{"stage_insane", {"resources//sound//bgm//insane.mp3", FMOD_LOOP_NORMAL}},
 
-	{"click", {"resources//sound//ui//lobby_click.wav", FMOD_DEFAULT}}
+	{"click", {"resources//sound//ui//lobby_click.wav", FMOD_DEFAULT}},
+	{ "logo_sound", {"resources//sound//ui//logo.wav", FMOD_DEFAULT}}
 };
 
 // list channels to load

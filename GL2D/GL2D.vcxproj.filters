@@ -112,6 +112,12 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Intro ]">
       <UniqueIdentifier>{fbfd358a-9f6a-4e6f-aeef-f44e6344596f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Splash ]">
+      <UniqueIdentifier>{0fab1dac-d2dc-4e53-b179-4bc91f0818ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Splash ]">
+      <UniqueIdentifier>{e2727fe1-eec6-4061-b789-c9d281ebaa88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -183,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="Intro.cpp">
       <Filter>[2]___________[ GameMode ]\[ Intro ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Splash.cpp">
+      <Filter>[2]___________[ GameMode ]\[ Splash ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +287,12 @@
     </ClInclude>
     <ClInclude Include="Logo.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Intro ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Splash.h">
+      <Filter>[2]___________[ GameMode ]\[ Splash ]</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashScreen.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Splash ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
