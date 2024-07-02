@@ -16,6 +16,8 @@ private:
 
 	GLfloat ArrowMovePosition = 0.5;
 	GLfloat ButtonMovePosition = 0.5;
+
+	bool RenderLeft{true}, RenderRight{true};
 	
 
 public:
@@ -24,5 +26,8 @@ public:
 	void Update(float FT);
 	void ClickButton();
 	void Render();
+	void SetInvisibleLeftArrow();
+	void SetInvisibleRightArrow();
+	void SetVisibleArrow();
 };
 

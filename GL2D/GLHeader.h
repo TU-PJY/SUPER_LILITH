@@ -26,7 +26,7 @@ constexpr bool PrintVendorInfoOpt = false;
 constexpr bool StartWithFullScreen = true;
 
 // boundbox option
-constexpr bool ShowBoundBox = true;
+constexpr bool ShowBoundBox = false;
 
 // global scope shader
 extern GLuint ImageShader;

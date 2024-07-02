@@ -35,6 +35,15 @@ private:
 		{0.419608, 0.556863, 0.137255},
 		{0, 0, 0}
 	};
+
+	std::vector<glm::vec3> ObjectColorSet
+	{
+		{1.0, 0.89, 0.89},
+		{1.0, 0.949, 0.776},
+		{0.549, 1.0, 1.0},
+		{0.839, 1.0, 0.275},
+		{1.0, 1.0, 1.0}
+	};
 	
 public:
 	Title(int Page);
@@ -45,7 +54,9 @@ public:
 	void Update(float FT);
 	void Render();
 	void ChangeLobbyPage(int dir);
+	void UpdateButtonState();
 	int GetLobbyPage();
 	void UpdateBackObject(float FT);
+	glm::vec3 GetColorSet();
 };
 

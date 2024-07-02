@@ -10,8 +10,11 @@ private:
 	
 	GLfloat BlinkTimer{};
 	GLfloat NextTime{};
+	GLfloat Size{};
+	GLfloat Posotion{};
 	int BlinkCount{};
 	int NextIndex{};
+	GLfloat Num{};
 	bool BlinkState{};
 	std::random_device rd;
 	
@@ -25,14 +28,19 @@ public:
 		Image[5] = imageUtil.SetImage("lilith_body_6");
 		Image[6] = imageUtil.SetImage("lilith_body_7");
 
-		Translate(0.0, -0.3);
+		Translate(0.0, -0.35);
 		ScaleSpot(1.2, 1.2);
 	}
 
 	void Update(float FT) {
 		InitTransform();
-		Translate(0.0, -0.3);
-		ScaleSpot(1.2, 1.2);
+
+		Num += FT;
+
+		Size = (sin(Num) + 1) * 0.02;
+
+		Translate(0.0, -0.35 + Size / 2);
+		ScaleSpot(1.2, 1.2 + Size);
 
 		BlinkTimer += FT * 10;
 

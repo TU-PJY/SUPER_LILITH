@@ -39,6 +39,9 @@ public:
 	}
 
 	void Update(float FT) {
+		auto title = fw.Find("title");
+		if (title)  ObjectColor = title->GetColorSet();
+
 		InitTransform();
 
 		if (Transparent)

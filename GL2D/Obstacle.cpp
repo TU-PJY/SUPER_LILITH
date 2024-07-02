@@ -3,6 +3,7 @@
 #include "FWM.h"
 #include "SoundUtil.h"
 #include "CameraUtil.h"
+#include "MusicPlayer.h"
 #include <cmath>
 #include <string>
 
@@ -60,7 +61,7 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 	Image = imageUtil.SetImage(TypeName);
 	ShapeType = static_cast<int>(type);
 
-	SetColor(R, G, B);
+	SetColor(ObjectColorSet[mp.MusicNumber - 1].r, ObjectColorSet[mp.MusicNumber - 1].g, ObjectColorSet[mp.MusicNumber - 1].b);
 	Rotate(ShapeRotation);
 	IsMove = true;
 }

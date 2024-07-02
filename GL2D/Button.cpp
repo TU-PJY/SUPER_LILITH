@@ -24,6 +24,9 @@ void Button::EnableStartAnimation() {
 }
 
 void Button::Update(float FT) {
+	auto title = fw.Find("title");
+	if (title) ObjectColor = title->GetColorSet();
+
 	if (StartAnimation) {
 		ArrowMovePosition = std::lerp(ArrowMovePosition, 0.5, FT * 5);
 		ButtonMovePosition = std::lerp(ButtonMovePosition, 0.5, FT * 5);
@@ -33,19 +36,18 @@ void Button::Update(float FT) {
 		ArrowMovePosition = std::lerp(ArrowMovePosition, 0.0, FT * 5);
 		ButtonMovePosition = std::lerp(ButtonMovePosition, 0.0, FT * 5);
 	}
-
 	// right arrow
 	if (aabb[0].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom)))
 		RightArrowSize = std::lerp(RightArrowSize, 0.35, FT * 15);
 	else
 		RightArrowSize = std::lerp(RightArrowSize, 0.3, FT * 15);
-
+	
 	// left arrow
 	if (aabb[1].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom)))
 		LeftArrowSize = std::lerp(LeftArrowSize, 0.35, FT * 15);
 	else
 		LeftArrowSize = std::lerp(LeftArrowSize, 0.3, FT * 15);
-
+	
 	// button info
 	if (aabb[2].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom)))
 		ButtonInfoSize = std::lerp(ButtonInfoSize, 0.23, FT * 15);
@@ -60,19 +62,23 @@ void Button::Update(float FT) {
 }
 
 void Button::Render() {
-	InitTransform();
-	Translate(DivideZoom(rect.rx - 0.18, cam.Zoom), 0.0);
-	Translate(DivideZoom(ArrowMovePosition, cam.Zoom), 0.0);
-	ScaleSpot(DivideZoom(RightArrowSize, cam.Zoom), DivideZoom(RightArrowSize, cam.Zoom));
-	ProcessTransform();
-	imageUtil.Draw(ArrowRight);
+	if (RenderRight) {
+		InitTransform();
+		Translate(DivideZoom(rect.rx - 0.18, cam.Zoom), 0.0);
+		Translate(DivideZoom(ArrowMovePosition, cam.Zoom), 0.0);
+		ScaleSpot(DivideZoom(RightArrowSize, cam.Zoom), DivideZoom(RightArrowSize, cam.Zoom));
+		ProcessTransform();
+		imageUtil.Draw(ArrowRight);
+	}
 
-	InitTransform();
-	Translate(DivideZoom(rect.lx + 0.18, cam.Zoom), 0.0);
-	Translate(DivideZoom(-ArrowMovePosition, cam.Zoom), 0.0);
-	ScaleSpot(DivideZoom(LeftArrowSize, cam.Zoom), DivideZoom(LeftArrowSize, cam.Zoom));
-	ProcessTransform();
-	imageUtil.Draw(ArrowLeft);
+	if (RenderLeft) {
+		InitTransform();
+		Translate(DivideZoom(rect.lx + 0.18, cam.Zoom), 0.0);
+		Translate(DivideZoom(-ArrowMovePosition, cam.Zoom), 0.0);
+		ScaleSpot(DivideZoom(LeftArrowSize, cam.Zoom), DivideZoom(LeftArrowSize, cam.Zoom));
+		ProcessTransform();
+		imageUtil.Draw(ArrowLeft);
+	}
 
 	InitTransform();
 	Translate(DivideZoom(rect.rx - 0.15, cam.Zoom), DivideZoom(rect.ly + 0.15, cam.Zoom));
@@ -96,16 +102,33 @@ void Button::Render() {
 
 void Button::ClickButton() {
 	if (!StartAnimation) {
-		// right arrow
-		if (aabb[0].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
-			auto title = fw.Find("title");
-			if (title) title->ChangeLobbyPage(1);
+		if (RenderRight) {
+			// right arrow
+			if (aabb[0].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
+				auto title = fw.Find("title");
+				if (title) title->ChangeLobbyPage(1);
+			}
 		}
 
-		// left arrow
-		if (aabb[1].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
-			auto title = fw.Find("title");
-			if (title) title->ChangeLobbyPage(0);
+		if (RenderLeft) {
+			// left arrow
+			if (aabb[1].CheckCollisionDot(DivideZoom(ASP(mouse.x), cam.Zoom), DivideZoom(mouse.y, cam.Zoom))) {
+				auto title = fw.Find("title");
+				if (title) title->ChangeLobbyPage(0);
+			}
 		}
 	}
+}
+
+void Button::SetInvisibleLeftArrow() {
+	RenderLeft = false;
+}
+
+void Button::SetInvisibleRightArrow() {
+	RenderRight = false;
+}
+
+void Button::SetVisibleArrow() {
+	RenderLeft = true;
+	RenderRight = true;
 }

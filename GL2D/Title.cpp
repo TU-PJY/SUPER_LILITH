@@ -13,10 +13,13 @@ Title::Title(int Page) {
 
 	Text.Init(L"열정그자체", FW_NORMAL, TRUE);
 	Text.SetAlign(Align::Middle);
+	Text.SetColor(ObjectColorSet[Page - 1].r, ObjectColorSet[Page - 1].g, ObjectColorSet[Page - 1].b);
 
 	BgmNum = soundUtil.GetSoundNumif("stage");
 	SetBackgroundColor(ColorSet[Page - 1].r, ColorSet[Page - 1].g, ColorSet[Page - 1].b);
+
 	LobbyPage = Page;
+	UpdateButtonState();
 }
 
 void Title::InputSpecialKey(int KEY, bool KeyDown) {
@@ -96,7 +99,6 @@ void Title::ChangeLobbyPage(int dir) {
 	case 0:  // left
 		if (LobbyPage > 1) {
 			LobbyPage -= 1;
-			SetBackgroundColor(ColorSet[LobbyPage - 1].r, ColorSet[LobbyPage - 1].g, ColorSet[LobbyPage - 1].b);
 			TitlePosition = 0.3;
 
 			soundUtil.PlaySound("click", "ch_ui");
@@ -107,13 +109,34 @@ void Title::ChangeLobbyPage(int dir) {
 	case 1:  // right
 		if (LobbyPage < BgmNum) {
 			LobbyPage += 1;
-			SetBackgroundColor(ColorSet[LobbyPage - 1].r, ColorSet[LobbyPage - 1].g, ColorSet[LobbyPage - 1].b);
 			TitlePosition = -0.3;
 
 			soundUtil.PlaySound("click", "ch_ui");
 			mp.PlayMusic(LobbyPage);
 		}
 		break;
+	}
+
+	UpdateButtonState();
+
+	SetBackgroundColor(ColorSet[LobbyPage - 1].r, ColorSet[LobbyPage - 1].g, ColorSet[LobbyPage - 1].b);
+	Text.SetColor(ObjectColorSet[LobbyPage - 1].r, ObjectColorSet[LobbyPage - 1].g, ObjectColorSet[LobbyPage - 1].b);
+}
+
+void Title::UpdateButtonState() {
+	if (LobbyPage == BgmNum) {
+		auto button = fw.Find("button");
+		if (button) button->SetInvisibleRightArrow();
+	}
+
+	else if (LobbyPage == 1) {
+		auto button = fw.Find("button");
+		if (button) button->SetInvisibleLeftArrow();
+	}
+
+	else {
+		auto button = fw.Find("button");
+		if (button) button->SetVisibleArrow();
 	}
 }
 
@@ -130,4 +153,8 @@ void Title::UpdateBackObject(float FT) {
 			BackObjectTimer = 0;
 		}
 	}
+}
+
+glm::vec3 Title::GetColorSet() {
+	return ObjectColorSet[LobbyPage-1];
 }

@@ -23,9 +23,9 @@ void Lobby::SetController() {
 
 std::string Lobby::LobbyMode() {
 	fw.AddObject(new White, "white", Layer::L3);
+	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Title{mp.MusicNumber}, "title", Layer::L2);
 	fw.AddObject(new LobbyPlayer, "lobby_player", Layer::L2);
-	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Cursor, "cursor", Layer::L2);
 	mp.SetToLobbyMode();
 

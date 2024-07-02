@@ -38,7 +38,7 @@ public:
 	void ProcessTransform();
 
 	virtual void ResetControlState() {}
-	
+
 	///////////////
 
 	virtual void SetGenTime(GLfloat TimeValue) {}
@@ -48,18 +48,22 @@ public:
 	virtual int GetShapeState() { return {}; }
 	virtual void Stop(GLfloat Speed) {}
 	virtual void SetGameOver() {}
-	virtual bool GetGameOverState() {return {};}
+	virtual bool GetGameOverState() { return {}; }
 	virtual void ChangeRotationDirection() {}
 	virtual void ClickButton() {}
 	virtual int GetLobbyPage() { return {}; }
 	virtual void EnableStartAnimation() {}
 	virtual void ChangeLobbyPage(int dir) {}
 	virtual bool GetAnimationtate() { return {}; }
+	virtual glm::vec3 GetColorSet() { return {}; }
 	virtual void PlayMusic(int dir) {}
 	virtual float GetTime() { return{}; }
 	virtual float GetDiff() { return {}; }
 	virtual void Stop() {}
 	virtual void SetTransparent() {}
+	virtual void SetInvisibleLeftArrow() {};
+	virtual void SetInvisibleRightArrow() {};
+	virtual void SetVisibleArrow() {};
 };
 
 // dummy object for avoiding iterator errors

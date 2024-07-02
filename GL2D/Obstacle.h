@@ -25,10 +25,18 @@ private:
 	GLfloat ShakeValue = 0.1;
 
 	bool DirectionChanger{};
-
 	bool IsMove{};
 
 	std::random_device rd;
+
+	std::vector<glm::vec3> ObjectColorSet
+	{
+		{1.0, 0.89, 0.89},
+		{1.0, 0.949, 0.776},
+		{0.549, 1.0, 1.0},
+		{0.839, 1.0, 0.275},
+		{1.0, 1.0, 1.0}
+	};
 
 public:
 	Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B);
