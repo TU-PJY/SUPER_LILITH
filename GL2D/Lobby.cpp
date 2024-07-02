@@ -2,7 +2,6 @@
 #include "FWM.h"
 #include "Title.h"
 #include "Button.h"
-#include "Cursor.h"
 #include "MusicPlayer.h"
 #include "Stage1.h"
 #include "AnimationShape.h"
@@ -28,7 +27,6 @@ std::string Lobby::LobbyMode() {
 	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Title{mp.MusicNumber}, "title", Layer::L2);
 	fw.AddObject(new LobbyPlayer, "lobby_player", Layer::L2);
-	fw.AddObject(new Cursor, "cursor", Layer::L2);
 
 	if(!mp.MusicPlayerInitState)
 		mp.Init("stage_easy");	

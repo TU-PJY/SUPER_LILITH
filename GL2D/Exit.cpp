@@ -1,8 +1,8 @@
 #include "Exit.h"
 #include "FWM.h"
 #include "ExitScreen.h"
-#include "Cursor.h"
 #include "Button.h"
+#include "SoundUtil.h"
 
 void Exit::SetController() {
 	glutMotionFunc(MouseMotion);
@@ -16,7 +16,7 @@ void Exit::SetController() {
 }
 
 std::string Exit::ExitMode() {
-	fw.DeleteObject("cursor", DeleteRange::One);
+	soundUtil.SetFreqCutOff("ch_bgm", 200);
 	fw.DeleteObject("button", DeleteRange::One);
 	fw.AddObject(new ExitScreen, "exit_screen", Layer::L3, true);
 
@@ -24,15 +24,11 @@ std::string Exit::ExitMode() {
 }
 
 void Exit::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
-	// Normal Key Down
-	if (KeyDown && !SpecialKey)
-		switch (KEY) {
-		case 27:
-			fw.AddObject(new Button, "button", Layer::L2);
-			fw.AddObject(new Cursor, "cursor", Layer::L2);
-			fw.EndFloatingMode();
-			break;
-		}
+	auto exitscreen = fw.Find("exit_screen");
+	if (exitscreen) {
+		if(!SpecialKey)
+			exitscreen->InputKey(KEY, KeyDown);
+	}
 }
 
 void Exit::MouseButton(int button, int state, int x, int y) {
@@ -40,6 +36,10 @@ void Exit::MouseButton(int button, int state, int x, int y) {
 	case GLUT_LEFT_BUTTON:
 		switch (state) {
 		case GLUT_DOWN:
+		{
+			auto exitscreen = fw.Find("exit_screen");
+			if (exitscreen) exitscreen->ClickButton();
+		}
 			break;
 
 		case GLUT_UP:

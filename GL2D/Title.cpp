@@ -105,12 +105,14 @@ void Title::Update(float FT) {
 }
 
 void Title::Render() {
-	Text.SetAlign(Align::Middle);
-	Text.Draw(0.0, 0.6 + TitleMovePosition, 0.45, "SUPER LILITH");
-	Text.Draw(TitlePosition, 0.3 + TitleMovePosition , 0.3, "%s", MusicInfo[LobbyPage - 1].c_str());
+	if (fw.Mode() == "LobbyMode") {
+		Text.SetAlign(Align::Middle);
+		Text.Draw(0.0, 0.6 + TitleMovePosition, 0.45, "SUPER LILITH");
+		Text.Draw(TitlePosition, 0.3 + TitleMovePosition, 0.3, "%s", MusicInfo[LobbyPage - 1].c_str());
 
-	Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.4, 0.15, "HIGH SCORE");
-	Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.3, 0.12, "%d.%d", ScoreListSec[LobbyPage - 1], ScoreListMil[LobbyPage - 1]);
+		Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.4, 0.15, "HIGH SCORE");
+		Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.3, 0.12, "%d.%d", ScoreListSec[LobbyPage - 1], ScoreListMil[LobbyPage - 1]);
+	}
 }
 
 void Title::ChangeLobbyPage(int dir) {

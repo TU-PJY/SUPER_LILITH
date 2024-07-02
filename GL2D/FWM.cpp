@@ -90,9 +90,6 @@ void FWM::SwitchMode(Function ModeFunction, ControllerFunction Controller) {
 	FLog.PrevMode = RunningMode;
 
 	ModeSwitchReserveDescriptor = true;
-
-	if (FloatingModeRunningState)
-		FLog.Log(LogType::END_FLOATING_MODE);
 }
 
 void FWM::StartFloatingMode(Function ModeFunction, ControllerFunction Controller, bool FloatingOnlyOption) {
@@ -111,12 +108,19 @@ void FWM::StartFloatingMode(Function ModeFunction, ControllerFunction Controller
 	FLog.CurrentMode = RunningMode;
 	FLog.Log(LogType::START_FLOATING_MODE);
 
+	if (FLog.CurrentMode == FLog.PrevMode)
+		FLog.ErrorLog(LogType::ERROR_SAME_MODE);
+
+	FLog.Log(LogType::MODE_SWITCH);
+
 	FloatingModeRunningState = true;
 }
 
 void FWM::EndFloatingMode() {
 	if (!RunningState || !FloatingModeRunningState)  
 		return;
+
+	FLog.Log(LogType::END_FLOATING_MODE);
 
 	FLog.PrevMode = RunningMode;
 
@@ -145,6 +149,10 @@ void FWM::AddObject(OBJ_BASE* Object, std::string Tag, Layer AddLayer, bool SetF
 
 void FWM::DeleteSelf(OBJ_BASE* Object) {
 	Object->ObjectDeleteDescriptor = true;
+
+	std::erase_if(ObjectList, [](const std::pair<std::string, OBJ_BASE*>& Object) {
+		return Object.second->ObjectDeleteDescriptor;
+		});
 
 	FLog.ObjectTag = Object->ObjectTag;
 	FLog.Log(LogType::DELETE_OBJECT);

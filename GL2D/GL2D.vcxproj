@@ -141,7 +141,6 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="CollisionUtil.cpp" />
-    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DataUtil.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="FontLoaderUtil.cpp" />
@@ -170,7 +169,6 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionUtil.h" />
-    <ClInclude Include="Cursor.h" />
     <ClInclude Include="DataUtil.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="ExitScreen.h" />
