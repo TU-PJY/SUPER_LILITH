@@ -4,7 +4,7 @@
 
 class MusicPlayer {
 private:
-	std::vector<int> PlayTime;
+	std::vector<unsigned int> PlayTime;
 
 public:
 	int MusicNumber = 1;

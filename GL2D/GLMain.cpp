@@ -33,7 +33,7 @@ void SetBackgroundColor(GLfloat R, GLfloat G, GLfloat B) {
 GLfloat ASPECT;
 Rect rect;
 
-int Face;
+int Face = lilith;
 
 std::string VENDOR;
 
@@ -109,6 +109,8 @@ void main(int argc, char** argv) {
 			std::cout << "GPU Vendor: " << VENDOR << "\n\n";
 	}
 
+	//SetBackgroundColor(0.737255, 0.560784, 0.560784);
+
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -124,9 +126,8 @@ void main(int argc, char** argv) {
 
 	imageUtil.Init();
 	soundUtil.Init();
+	dataUtil.Init();
 
-	SetBackgroundColor(0.737255, 0.560784, 0.560784);
-	Face = lilith;
 	fw.Init(Lobby::LobbyMode, Lobby::SetController);
 	mp.Init("stage_easy");
 

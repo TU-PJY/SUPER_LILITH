@@ -18,6 +18,9 @@ private:
 
 	bool StartAnimation{};
 
+	std::vector<int> ScoreListSec{};
+	std::vector<int> ScoreListMil{};
+
 	std::vector<std::string> MusicInfo
 	{
 		"EASY",
@@ -56,7 +59,7 @@ public:
 	void ChangeLobbyPage(int dir);
 	void UpdateButtonState();
 	int GetLobbyPage();
-	void UpdateBackObject(float FT);
+	void UpdateBackObjectGen(float FT);
 	glm::vec3 GetColorSet();
 };
 

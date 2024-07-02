@@ -6,6 +6,7 @@
 #include "stage1.h"
 #include "AnimationShape.h"
 #include "BackObject.h"
+#include "DataUtil.h"
 #include <cmath>
 
 Title::Title(int Page) {
@@ -20,6 +21,21 @@ Title::Title(int Page) {
 
 	LobbyPage = Page;
 	UpdateButtonState();
+
+	ScoreListSec.reserve(BgmNum);
+	ScoreListMil.reserve(BgmNum);
+
+	ScoreListSec.push_back(dataUtil.LoadData("Easy Sec"));
+	ScoreListSec.push_back(dataUtil.LoadData("Normal Sec"));
+	ScoreListSec.push_back(dataUtil.LoadData("Hard Sec"));
+	ScoreListSec.push_back(dataUtil.LoadData("Harder Sec"));
+	ScoreListSec.push_back(dataUtil.LoadData("Insane Sec"));
+
+	ScoreListMil.push_back(dataUtil.LoadData("Easy Mil"));
+	ScoreListMil.push_back(dataUtil.LoadData("Normal Mil"));
+	ScoreListMil.push_back(dataUtil.LoadData("Hard Mil"));
+	ScoreListMil.push_back(dataUtil.LoadData("Harder Mil"));
+	ScoreListMil.push_back(dataUtil.LoadData("Insane Mil"));
 }
 
 void Title::InputSpecialKey(int KEY, bool KeyDown) {
@@ -69,7 +85,7 @@ void Title::EnableStartAnimation() {
 void Title::Update(float FT) {
 	InitTransform();
 
-	UpdateBackObject(FT);
+	UpdateBackObjectGen(FT);
 
 	if (StartAnimation) {
 		TitleMovePosition = std::lerp(TitleMovePosition, 0.8, FT * 3);
@@ -90,8 +106,12 @@ void Title::Update(float FT) {
 }
 
 void Title::Render() {
+	Text.SetAlign(Align::Middle);
 	Text.Draw(0.0, 0.6 + TitleMovePosition, 0.45, "SUPER LILITH");
 	Text.Draw(TitlePosition, 0.3 + TitleMovePosition , 0.3, "%s", MusicInfo[LobbyPage - 1].c_str());
+
+	Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.4, 0.15, "HIGH SCORE");
+	Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.3, 0.12, "%d.%d", ScoreListSec[LobbyPage - 1], ScoreListMil[LobbyPage - 1]);
 }
 
 void Title::ChangeLobbyPage(int dir) {
@@ -144,7 +164,7 @@ int Title::GetLobbyPage() {
 	return LobbyPage;
 }
 
-void Title::UpdateBackObject(float FT) {
+void Title::UpdateBackObjectGen(float FT) {
 	if (!StartAnimation) {
 		BackObjectTimer += FT * 5;
 

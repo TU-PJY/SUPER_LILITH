@@ -71,6 +71,9 @@ public:
 		Frame += FT * 10;
 
 		if (Frame >= 30) {
+			auto score = fw.Find("game_score");
+			if (score) score->SaveHighScoreToFile();
+
 			mp.SetToLobbyMode();
 			fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
 		}

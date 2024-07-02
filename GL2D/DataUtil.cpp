@@ -8,9 +8,9 @@
 #define USE_CUSTOM_PATH
 
 // game version
-#define VERSION 2
-constexpr const char* FolderName = "MyData";
-constexpr const char* FileName = "Data.txt";
+#define VERSION 1
+constexpr const char* FolderName = "data";
+constexpr const char* FileName = "data.txt";
 
 
 #ifndef USE_CUSTOM_PATH
@@ -31,7 +31,17 @@ std::filesystem::path FilePath = FolderPath / FileName;
 // ex: (x)"ExampleData", (x)"ExampleData ", (x)" ExampleData", (o)"Example Data"
 std::deque<std::string> DataList = 
 {
-
+	"Play First",
+	"Easy Sec",
+	"Easy Mil",
+	"Normal Sec",
+	"Normal Mil",
+	"Hard Sec",
+	"Hard Mil",
+	"Harder Sec",
+	"Harder Mil",
+	"Insane Sec",
+	"Insane Mil",
 };
 
 

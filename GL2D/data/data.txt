@@ -1,0 +1,12 @@
+[Data Version]=1
+[Play First]=0
+[Easy Sec]=16
+[Easy Mil]=0
+[Normal Sec]=30
+[Normal Mil]=5
+[Hard Sec]=18
+[Hard Mil]=7
+[Harder Sec]=0
+[Harder Mil]=0
+[Insane Sec]=0
+[Insane Mil]=0
