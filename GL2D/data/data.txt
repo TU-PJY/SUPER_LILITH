@@ -1,7 +1,7 @@
 [Data Version]=1
 [Play First]=0
-[Easy Sec]=60
-[Easy Mil]=6
+[Easy Sec]=65
+[Easy Mil]=7
 [Normal Sec]=66
 [Normal Mil]=2
 [Hard Sec]=18
