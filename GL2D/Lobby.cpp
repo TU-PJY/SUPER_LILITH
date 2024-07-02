@@ -27,6 +27,9 @@ std::string Lobby::LobbyMode() {
 	fw.AddObject(new Title{mp.MusicNumber}, "title", Layer::L2);
 	fw.AddObject(new LobbyPlayer, "lobby_player", Layer::L2);
 	fw.AddObject(new Cursor, "cursor", Layer::L2);
+
+	if(!mp.MusicPlayerInitState)
+		mp.Init("stage_easy");	
 	mp.SetToLobbyMode();
 
 	return __func__;

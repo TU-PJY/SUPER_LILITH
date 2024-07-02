@@ -18,7 +18,7 @@ public:
 	void Update(float FT) {
 		Delay += FT * 10;
 
-		if (Delay >= 5) {
+		if (Delay >= 2.5) {
 			AlphaValue = std::lerp(AlphaValue, 0.0, FT * 5);
 			if (AlphaValue <= 0.01)
 				fw.DeleteSelf(this);

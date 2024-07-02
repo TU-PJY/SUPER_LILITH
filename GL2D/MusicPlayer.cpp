@@ -13,7 +13,8 @@ void MusicPlayer::Init(std::string MusicName) {
 	soundUtil.PlaySound(MusicName, "ch_bgm");
 	soundUtil.SetPlaySpeed("ch_bgm", 0.0);
 	soundUtil.SetBeatDetect("ch_bgm");
-	Threshold = 1.0;
+
+	MusicPlayerInitState = true;
 }
 
 void MusicPlayer::SetToPlayMode() {
@@ -49,16 +50,18 @@ void MusicPlayer::PlayMusic(int Page){
 }
 
 void MusicPlayer::Update() {
-	if (fw.Mode() == "LobbyMode") {
-		float BassValue = soundUtil.DetectBeat(0.0);
-		camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
-	}
+	if (MusicPlayerInitState) {
+		if (fw.Mode() == "LobbyMode") {
+			float BassValue = soundUtil.DetectBeat(0.0);
+			camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
+		}
 
-	else {
-		float BassValue = soundUtil.DetectBeat(0.0);
-		auto player = fw.Find("player");
-		if (player) player->SetSize(BassValue * 0.01);
-	}
+		else {
+			float BassValue = soundUtil.DetectBeat(0.0);
+			auto player = fw.Find("player");
+			if (player) player->SetSize(BassValue * 0.01);
+		}
 
-	PlayTime[MusicNumber - 1] = soundUtil.GetPlayTime("ch_bgm");
+		PlayTime[MusicNumber - 1] = soundUtil.GetPlayTime("ch_bgm");
+	}
 }

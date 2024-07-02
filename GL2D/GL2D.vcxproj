@@ -148,6 +148,7 @@
     <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
+    <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="Obstacle.cpp" />
@@ -175,8 +176,10 @@
     <ClInclude Include="GameScore.h" />
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
+    <ClInclude Include="Intro.h" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="LobbyPlayer.h" />
+    <ClInclude Include="Logo.h" />
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleGenerator.h" />

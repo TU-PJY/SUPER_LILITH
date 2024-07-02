@@ -12,6 +12,7 @@
 
 #include "Stage1.h"
 #include "Lobby.h"
+#include "Intro.h"
 
 #include "MusicPlayer.h"
 
@@ -19,8 +20,8 @@
 #include <map>
 #include <ctime>
 
-int WIDTH = 1200;
-int HEIGHT = 800;
+int WIDTH = 800;
+int HEIGHT = 400;
 
 glm::vec3 BackgroundColor = glm::vec3(0.0, 0.0, 0.0);
 
@@ -128,8 +129,9 @@ void main(int argc, char** argv) {
 	soundUtil.Init();
 	dataUtil.Init();
 
-	fw.Init(Lobby::LobbyMode, Lobby::SetController);
-	mp.Init("stage_easy");
+	//fw.Init(Lobby::LobbyMode, Lobby::SetController);
+	fw.Init(Intro::IntroMode, Intro::SetController);
+	//mp.Init("stage_easy");
 
 	glutDisplayFunc(GLMain);
 	glutReshapeFunc(DisplayReshape);

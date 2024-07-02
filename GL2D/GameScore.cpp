@@ -59,12 +59,16 @@ void GameScore::Render() {
 	ProcessTransform();
 	imageUtil.Draw(ScorePlate);
 
-	Text.Draw(rect.rx - 0.7 - cam.ShakeValueX, rect.ly + 0.07 - cam.ShakeValueY, 0.2, "%.1f",TimeElapsed);
+	Text.Draw(rect.rx - 0.7 - cam.ShakeValueX, rect.ly + 0.07 - cam.ShakeValueY, 0.2, "%.1f", 
+		std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1));
 }
 
+#include <iostream>
+
 void GameScore::SaveHighScoreToFile() {
+	float RealTimeElpased = std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1);
 	int IntegerPart = static_cast<int>(TimeElapsed);
-	int FloatPart = static_cast<int>((TimeElapsed - IntegerPart) * 10);
+	int FloatPart = static_cast<int>(RealTimeElpased * 10) % 10;
 
 	int PrevIntegerPart{};
 	int PrevFloatPart{};

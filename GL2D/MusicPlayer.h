@@ -9,6 +9,7 @@ private:
 public:
 	int MusicNumber = 1;
 	float Threshold = 1.0;
+	bool MusicPlayerInitState{};
 
 	void SetToLobbyMode();
 	void Init(std::string MusicName);

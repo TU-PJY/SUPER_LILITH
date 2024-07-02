@@ -7,6 +7,7 @@
 std::unordered_map<std::string, const char*> ImageList
 {
 	{"gl2d_boundbox", "GL2D res//boundbox.png"}, // do not delete this
+	{"FMOD_logo", "GL2D Res//FMOD Logo.png"},
 
 	// play mode
 	{"center_triangle", "resources//image//shape//center_triangle.png"},
@@ -65,7 +66,10 @@ std::unordered_map<std::string, const char*> ImageList
 	{"lilith_body_6", "resources//image//player//lilith_sprite_body_6.png"},
 	{"lilith_body_7", "resources//image//player//lilith_sprite_body_7.png"},
 
-	{"white_front", "resources//image//ui//white.png"}
+	{"white_front", "resources//image//ui//white.png"},
+
+	// logo
+	{"logo", "resources//image//ui//mata_logo.png"}
 };
 
 
@@ -124,7 +128,7 @@ unsigned int ImageUtil::SetImage(std::string ImageName) {
 	return LoadedImageList.lower_bound(ImageName)->second;
 }
 
-GLfloat ImageUtil::Aspect(int Width, int Height) {
+GLfloat ImageUtil::Aspect(float Width, float Height) {
 	return Width / Height;
 }
 
