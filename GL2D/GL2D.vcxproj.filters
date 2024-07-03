@@ -118,6 +118,9 @@
     <Filter Include="[2]___________[ GameMode ]\[ Exit ]">
       <UniqueIdentifier>{cf473f32-b637-4ed4-b020-f204c1f612fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Bar ]">
+      <UniqueIdentifier>{82b069db-155e-43bc-a80c-363293337e2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -296,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="ExitScreen.h">
       <Filter>[1]___________[ Object ]\[2][ Sub Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Bar.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Bar ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -50,6 +50,12 @@ std::unordered_map<std::string, const char*> ImageList
 	{"button_music_reset_at_start", "resources//image//ui//button_music_reset_at_start.png"},
 	{"button_music_resume_at_start", "resources//image//ui//button_music_resume_at_start.png"},
 
+	{"bar", "resources//image//ui//bar.png"},
+	{"icon_music_reset", "resources//image//ui//icon_music_restart.png"},
+	{"icon_music_resume", "resources//image//ui//icon_music_resume.png"},
+	{"icon_effect_on", "resources//image//ui//icon_effect_on.png"},
+	{"icon_effect_off", "resources//image//ui//icon_effect_off.png"},
+
 	// player face
 	{"lilith_1", "resources//image//player//lilith_sprite_1.png"},
 	{"lilith_2", "resources//image//player//lilith_sprite_2.png"},

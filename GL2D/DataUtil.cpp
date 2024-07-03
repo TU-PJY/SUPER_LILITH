@@ -31,7 +31,7 @@ std::filesystem::path FilePath = FolderPath / FileName;
 // ex: (x)"ExampleData", (x)"ExampleData ", (x)" ExampleData", (o)"Example Data"
 std::deque<std::string> DataList = 
 {
-	"Play First",
+	"Play Once",
 	"Disable Effect",
 	"Music Reset",
 	"Easy Sec",

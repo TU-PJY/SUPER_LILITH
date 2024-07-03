@@ -26,4 +26,3 @@ public:
 	void Render();
 	void InputKey(unsigned char KEY, bool KeyDown);
 };
-

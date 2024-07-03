@@ -3,6 +3,7 @@
 #include "CameraUtil.h"
 #include "DataUtil.h"
 #include "FWM.h"
+#include "Bar.h"
 
 void MusicPlayer::SetToLobbyMode(){
 	soundUtil.SetPlaySpeed("ch_bgm", 1.0);
@@ -25,22 +26,30 @@ void MusicPlayer::Init(std::string MusicName) {
 }
 
 void MusicPlayer::ChangeEffectSetting() {
-	if (!EffectDisable)
+	if (!EffectDisable) {
+		fw.AddObject(new Bar(3), "alert_effect_off", Layer::L3);
 		EffectDisable = true;
-	else
+	}
+	else {
+		fw.AddObject(new Bar(4), "alert_effect_on", Layer::L3);
 		EffectDisable = false;
+	}
 
 	dataUtil.WriteData("Disable Effect", EffectDisable);
 }
 
 void MusicPlayer::ChangeMusicSetting() {
 	if (!MusicReset) {
+		fw.AddObject(new Bar(1), "alert_music_reset", Layer::L3);
 		for (auto& T : PlayTime)
 			T = 0;
+
 		MusicReset = true;
 	}
-	else
+	else {
+		fw.AddObject(new Bar(2), "alert_music_resume", Layer::L3);
 		MusicReset = false;
+	}
 
 	dataUtil.WriteData("Music Reset", MusicReset);
 }

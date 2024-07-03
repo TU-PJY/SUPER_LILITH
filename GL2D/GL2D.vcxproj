@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackObject.h" />
+    <ClInclude Include="Bar.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionUtil.h" />
