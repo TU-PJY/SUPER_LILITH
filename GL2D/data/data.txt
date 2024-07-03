@@ -2,8 +2,8 @@
 [Play First]=0
 [Easy Sec]=72
 [Easy Mil]=6
-[Normal Sec]=66
-[Normal Mil]=2
+[Normal Sec]=72
+[Normal Mil]=5
 [Hard Sec]=44
 [Hard Mil]=2
 [Harder Sec]=15

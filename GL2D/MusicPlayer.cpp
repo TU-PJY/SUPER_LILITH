@@ -66,12 +66,25 @@ void MusicPlayer::Update() {
 		else {
 			float BassValue = soundUtil.DetectBeat(0.0);
 			auto player = fw.Find("player");
-
-			if(MusicNumber == 1)
-				if (player) player->SetSize(BassValue * 0.01);
-
-			else if(MusicNumber == 2)
-				if (player) player->SetSize(BassValue * 0.02);
+			if (player) {
+				switch (MusicNumber) {
+					case 1:
+						player->SetSize(BassValue * 0.02);
+						break;
+					case 2:
+						player->SetSize(BassValue * 0.02);
+						break;
+					case 3:
+						player->SetSize(BassValue * 0.02);
+						break;
+					case 4:
+						player->SetSize(BassValue * 0.02);
+						break;
+					case 5:
+						player->SetSize(BassValue * 0.02);
+						break;
+				}
+			}
 		}
 
 		PlayTime[MusicNumber - 1] = soundUtil.GetPlayTime("ch_bgm");
