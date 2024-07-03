@@ -66,11 +66,15 @@ void SoundUtil::Update() {
 
 void SoundUtil::PlaySound(std::string SoundName, std::string ChannelName, unsigned int Ms) {
 	auto ChannelIter = LoadedChannelList.find(ChannelName);
-
 	SoundSystem->playSound(LoadedSoundList.find(SoundName)->second, 0, false, &ChannelIter->second);
 
 	if (Ms > 0)
 		ChannelIter->second->setPosition(Ms, FMOD_TIMEUNIT_MS);
+}
+
+void SoundUtil::ReplaySound(std::string ChannelName) {
+	auto ChannelIter = LoadedChannelList.find(ChannelName);
+	ChannelIter->second->setPosition(0, FMOD_TIMEUNIT_MS);
 }
 
 void SoundUtil::PauseSound(std::string ChannelName, bool Flag) {

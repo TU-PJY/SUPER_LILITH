@@ -1,6 +1,7 @@
 #include "MusicPlayer.h"
 #include "SoundUtil.h"
 #include "CameraUtil.h"
+#include "DataUtil.h"
 #include "FWM.h"
 
 void MusicPlayer::SetToLobbyMode(){
@@ -8,6 +9,9 @@ void MusicPlayer::SetToLobbyMode(){
 }
 
 void MusicPlayer::Init(std::string MusicName) {
+	EffectDisable = dataUtil.LoadData("Disable Effect");
+	MusicReset = dataUtil.LoadData("Music Reset");
+
 	MusicNum = soundUtil.GetSoundNumif("stage");
 	PlayTime.reserve(MusicNum);
 
@@ -20,12 +24,36 @@ void MusicPlayer::Init(std::string MusicName) {
 	MusicPlayerInitState = true;
 }
 
+void MusicPlayer::ChangeEffectSetting() {
+	if (!EffectDisable)
+		EffectDisable = true;
+	else
+		EffectDisable = false;
+
+	dataUtil.WriteData("Disable Effect", EffectDisable);
+}
+
+void MusicPlayer::ChangeMusicSetting() {
+	if (!MusicReset) {
+		for (auto& T : PlayTime)
+			T = 0;
+		MusicReset = true;
+	}
+	else
+		MusicReset = false;
+
+	dataUtil.WriteData("Music Reset", MusicReset);
+}
+
 int MusicPlayer::GetMusicNum() {
 	return MusicNum;
 }
 
 void MusicPlayer::SetToPlayMode() {
 	soundUtil.UnSetFreqCutOff("ch_bgm");
+
+	if (MusicReset)
+		soundUtil.ReplaySound("ch_bgm");
 }
 
 void MusicPlayer::PlayMusic(int Page){
@@ -33,22 +61,44 @@ void MusicPlayer::PlayMusic(int Page){
 	soundUtil.UnSetBeatDetect("ch_bgm");
 	soundUtil.UnSetFreqCutOff("ch_bgm");
 
-	switch (Page) {
-	case 1:
-		soundUtil.PlaySound("stage_easy", "ch_bgm", PlayTime[Page - 1]);
-		break;
-	case 2:
-		soundUtil.PlaySound("stage_normal", "ch_bgm", PlayTime[Page - 1]);
-		break;
-	case 3:
-		soundUtil.PlaySound("stage_hard", "ch_bgm", PlayTime[Page - 1]);
-		break;
-	case 4:
-		soundUtil.PlaySound("stage_harder", "ch_bgm", PlayTime[Page - 1]);
-		break;
-	case 5:
-		soundUtil.PlaySound("stage_insane", "ch_bgm", PlayTime[Page - 1]);
-		break;
+	if (!MusicReset) {
+		switch (Page) {
+		case 1:
+			soundUtil.PlaySound("stage_easy", "ch_bgm", PlayTime[Page - 1]);
+			break;
+		case 2:
+			soundUtil.PlaySound("stage_normal", "ch_bgm", PlayTime[Page - 1]);
+			break;
+		case 3:
+			soundUtil.PlaySound("stage_hard", "ch_bgm", PlayTime[Page - 1]);
+			break;
+		case 4:
+			soundUtil.PlaySound("stage_harder", "ch_bgm", PlayTime[Page - 1]);
+			break;
+		case 5:
+			soundUtil.PlaySound("stage_insane", "ch_bgm", PlayTime[Page - 1]);
+			break;
+		}
+	}
+
+	else {
+		switch (Page) {
+		case 1:
+			soundUtil.PlaySound("stage_easy", "ch_bgm");
+			break;
+		case 2:
+			soundUtil.PlaySound("stage_normal", "ch_bgm");
+			break;
+		case 3:
+			soundUtil.PlaySound("stage_hard", "ch_bgm");
+			break;
+		case 4:
+			soundUtil.PlaySound("stage_harder", "ch_bgm");
+			break;
+		case 5:
+			soundUtil.PlaySound("stage_insane", "ch_bgm");
+			break;
+		}
 	}
 
 	soundUtil.SetBeatDetect("ch_bgm");
@@ -58,16 +108,17 @@ void MusicPlayer::PlayMusic(int Page){
 
 void MusicPlayer::Update() {
 	if (MusicPlayerInitState) {
-		if (fw.Mode() == "LobbyMode" || fw.Mode() == "ExitMode") {
-			float BassValue = soundUtil.DetectBeat(0.0);
-			camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
-		}
+		if (!EffectDisable) {
+			if (fw.Mode() == "LobbyMode" || fw.Mode() == "ExitMode") {
+				float BassValue = soundUtil.DetectBeat(0.0);
+				camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
+			}
 
-		else {
-			float BassValue = soundUtil.DetectBeat(0.0);
-			auto player = fw.Find("player");
-			if (player) {
-				switch (MusicNumber) {
+			else {
+				float BassValue = soundUtil.DetectBeat(0.0);
+				auto player = fw.Find("player");
+				if (player) {
+					switch (MusicNumber) {
 					case 1:
 						player->SetSize(BassValue * 0.02);
 						break;
@@ -83,10 +134,12 @@ void MusicPlayer::Update() {
 					case 5:
 						player->SetSize(BassValue * 0.02);
 						break;
+					}
 				}
 			}
 		}
 
-		PlayTime[MusicNumber - 1] = soundUtil.GetPlayTime("ch_bgm");
+		if(!MusicReset)
+			PlayTime[MusicNumber - 1] = soundUtil.GetPlayTime("ch_bgm");
 	}
 }

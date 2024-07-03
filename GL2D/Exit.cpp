@@ -17,7 +17,6 @@ void Exit::SetController() {
 
 std::string Exit::ExitMode() {
 	soundUtil.SetFreqCutOff("ch_bgm", 200);
-	fw.DeleteObject("button", DeleteRange::One);
 	fw.AddObject(new ExitScreen, "exit_screen", Layer::L3, true);
 
 	return __func__;

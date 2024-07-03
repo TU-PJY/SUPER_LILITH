@@ -12,8 +12,14 @@ public:
 	float Threshold = 1.0;
 	bool MusicPlayerInitState{};
 
+	bool MusicReset{};
+	bool EffectDisable{};
+
 	void SetToLobbyMode();
 	void Init(std::string MusicName);
+	void UpdateSetting();
+	void ChangeEffectSetting();
+	void ChangeMusicSetting();
 	int GetMusicNum();
 	void SetToPlayMode();
 	void PlayMusic(int dir);

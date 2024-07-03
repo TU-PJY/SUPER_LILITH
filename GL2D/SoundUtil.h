@@ -25,6 +25,7 @@ public:
 	void Update();
 	unsigned int GetLength(std::string SoundName);
 	void PlaySound(std::string SoundName, std::string ChannelName, unsigned int Ms=0);
+	void ReplaySound(std::string ChannelName);
 	void PauseSound(std::string ChannelName, bool Flag);
 	void StopSound(std::string ChannelName);
 	unsigned int GetPlayTime(std::string ChannelName);

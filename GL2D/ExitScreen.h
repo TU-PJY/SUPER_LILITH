@@ -38,7 +38,6 @@ public:
 
 			case 27:
 				soundUtil.UnSetFreqCutOff("ch_bgm");
-				fw.AddObject(new Button, "button", Layer::L2);
 				fw.EndFloatingMode();
 				break;
 

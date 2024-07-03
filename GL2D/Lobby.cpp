@@ -43,6 +43,9 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 			fw.StartFloatingMode(Exit::ExitMode, Exit::SetController);
 			break;
 		}
+
+	auto button = fw.Find("button");
+	if (button) button->InputKey(KEY, KeyDown);
 }
 
 void Lobby::MouseButton(int button, int state, int x, int y) {
