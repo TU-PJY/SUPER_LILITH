@@ -161,14 +161,20 @@ void FWM::DeleteSelf(OBJ_BASE* Object) {
 void FWM::DeleteObject(std::string Tag, DeleteRange deleteRange) {
 	if (deleteRange == DeleteRange::One) {
 		auto It = ObjectList.lower_bound(Tag);
-		if (It != end(ObjectList))
+		if (It != end(ObjectList)) {
 			It->second->ObjectDeleteDescriptor = true;
+			FLog.ObjectTag = It->second->ObjectTag;
+			FLog.Log(LogType::DELETE_OBJECT);
+		}
 	}
 
 	else if (deleteRange == DeleteRange::All) {
 		for (auto It = begin(ObjectList); It != end(ObjectList); ++It) {
-			if (It->first == Tag)
+			if (It->first == Tag) {
 				It->second->ObjectDeleteDescriptor = true;
+				FLog.ObjectTag = It->second->ObjectTag;
+				FLog.Log(LogType::DELETE_OBJECT);
+			}
 		}
 	}
 
