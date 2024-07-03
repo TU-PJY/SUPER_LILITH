@@ -13,6 +13,7 @@ private:
 	int Type{};
 	std::random_device rd;
 	bool Transparent{};
+	GLfloat Size = 0.5;
 
 public:
 	BackObject() {
@@ -38,6 +39,10 @@ public:
 		SetColor(1.0, 1.0, 1.0);
 	}
 
+	void SetSize(GLfloat SizeValue) {
+		Size += SizeValue;
+	}
+
 	void Update(float FT) {
 		auto title = fw.Find("title");
 		if (title)  ObjectColor = title->GetColorSet();
@@ -53,9 +58,11 @@ public:
 
 		Rotation += FT * 20;
 
+		Size = std::lerp(Size, 0.5, FT * 15);
+
 		Translate(Position, Height);
 		RotateSpot(Rotation);
-		ScaleSpot(0.5, 0.5);
+		ScaleSpot(Size, Size);
 	}
 
 	void Render() {

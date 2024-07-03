@@ -4,6 +4,7 @@
 #include "MouseUtil.h"
 #include "CameraUtil.h"
 #include "MusicPlayer.h"
+#include "SoundUtil.h"
 #include "FWM.h"
 #include <cmath>
 
@@ -128,9 +129,11 @@ void Button::InputKey(unsigned char KEY, bool KeyDown){
 	if (KeyDown) {
 		switch (KEY) {
 		case '1':
+			soundUtil.PlaySound("button_click", "ch_ui");
 			mp.ChangeMusicSetting();
 			break;
 		case '2':
+			soundUtil.PlaySound("button_click", "ch_ui");
 			mp.ChangeEffectSetting();
 			break;
 		}

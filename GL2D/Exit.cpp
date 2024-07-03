@@ -16,6 +16,7 @@ void Exit::SetController() {
 }
 
 std::string Exit::ExitMode() {
+	soundUtil.PlaySound("exit_sound", "ch_ui");
 	soundUtil.SetFreqCutOff("ch_bgm", 200);
 	fw.AddObject(new ExitScreen, "exit_screen", Layer::L3, true);
 

@@ -17,7 +17,6 @@ public:
 
 	void SetToLobbyMode();
 	void Init(std::string MusicName);
-	void UpdateSetting();
 	void ChangeEffectSetting();
 	void ChangeMusicSetting();
 	int GetMusicNum();

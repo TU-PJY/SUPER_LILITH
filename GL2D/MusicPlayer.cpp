@@ -121,6 +121,11 @@ void MusicPlayer::Update() {
 			if (fw.Mode() == "LobbyMode" || fw.Mode() == "ExitMode") {
 				float BassValue = soundUtil.DetectBeat(0.0);
 				camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
+
+				for (int i = 0; i < fw.Size(Layer::L1); ++i) {
+					auto object = fw.Find("back_object", Layer::L1, i);
+					if (object) object->SetSize(BassValue * 0.01);
+				}
 			}
 
 			else {
