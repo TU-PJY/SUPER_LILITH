@@ -49,6 +49,7 @@ std::unordered_map<std::string, const char*> ImageList
 	{"button_effect_on", "resources//image//ui//button_effect_on.png"},
 	{"button_music_reset_at_start", "resources//image//ui//button_music_reset_at_start.png"},
 	{"button_music_resume_at_start", "resources//image//ui//button_music_resume_at_start.png"},
+	{"button_data_reset", "resources//image//ui//button_data_reset.png"},
 
 	{"bar", "resources//image//ui//bar.png"},
 	{"icon_music_reset", "resources//image//ui//icon_music_restart.png"},

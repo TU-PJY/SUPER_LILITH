@@ -6,7 +6,7 @@
 class Button : public OBJ_BASE {
 private:
 	unsigned int ArrowRight{}, ArrowLeft{}, ButtonInfo{}, ButtonEffectOn{}, ButtonEffectOff{}, ButtonMusicReset{}, ButtonMusicResume{};
-
+	unsigned int ButtonDataReset{};
 	GLfloat RightArrowSize{0.3}, LeftArrowSize{0.3};
 	GLfloat ButtonInfoSize{ 0.2 }, ButtonSoundSize{ 0.2 };
 

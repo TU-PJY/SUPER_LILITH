@@ -141,6 +141,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="CollisionUtil.cpp" />
+    <ClCompile Include="DataReset.cpp" />
     <ClCompile Include="DataUtil.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="FontLoaderUtil.cpp" />
@@ -174,6 +175,8 @@
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionUtil.h" />
     <ClInclude Include="ControlTut.h" />
+    <ClInclude Include="DataReset.h" />
+    <ClInclude Include="DataResetScreen.h" />
     <ClInclude Include="DataUtil.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="ExitScreen.h" />

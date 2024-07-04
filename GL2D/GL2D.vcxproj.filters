@@ -130,6 +130,9 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[  tutorial ]">
       <UniqueIdentifier>{84a6d10a-d85f-4d78-bb89-4122d4235743}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Data reset ]">
+      <UniqueIdentifier>{a454b599-6e03-43cf-a675-8964405daf32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -210,6 +213,9 @@
     </ClCompile>
     <ClCompile Include="Info.cpp">
       <Filter>[2]___________[ GameMode ]\[ Info ]</Filter>
+    </ClCompile>
+    <ClCompile Include="DataReset.cpp">
+      <Filter>[2]___________[ GameMode ]\[ Data reset ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +344,12 @@
     </ClInclude>
     <ClInclude Include="ControlTut.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[  tutorial ]</Filter>
+    </ClInclude>
+    <ClInclude Include="DataResetScreen.h">
+      <Filter>[1]___________[ Object ]\[2][ Sub Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="DataReset.h">
+      <Filter>[2]___________[ GameMode ]\[ Data reset ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -160,7 +160,7 @@ void DataUtil::ResetData() {
 
 	OutFile.close();
 
-	WriteData("VersionData", VERSION);
+	WriteData(DataVersionStr, VERSION);
 }
 
 void DataUtil::WriteData(const std::string& DataName, int DataValue) {
@@ -204,7 +204,7 @@ void DataUtil::WriteData(const std::string& DataName, int DataValue) {
 		FileContent = Match.suffix();
 	}
 
-	std::ofstream OutFile(FilePath);
+	std::ofstream OutFile(FilePath, std::ios::binary);
 	OutFile << NewContent;
 
 	OutFile.close();

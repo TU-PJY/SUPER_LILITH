@@ -5,8 +5,10 @@
 #include "CameraUtil.h"
 #include "MusicPlayer.h"
 #include "SoundUtil.h"
+#include "DataUtil.h"
 #include "FWM.h"
 #include "Info.h"
+#include "DataReset.h"
 #include <cmath>
 
 Button::Button() {
@@ -17,6 +19,7 @@ Button::Button() {
 	ButtonEffectOff = imageUtil.SetImage("button_effect_off");
 	ButtonMusicReset = imageUtil.SetImage("button_music_reset_at_start");
 	ButtonMusicResume = imageUtil.SetImage("button_music_resume_at_start");
+	ButtonDataReset = imageUtil.SetImage("button_data_reset");
 
 	Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 	Text.SetAlign(Align::Middle);
@@ -108,6 +111,15 @@ void Button::Render() {
 		else if (mp.MusicReset)
 			imageUtil.Draw(ButtonMusicReset);
 
+		// data reset button
+		InitTransform();
+		Translate(DivideZoom(rect.lx + 0.15, cam.Zoom), DivideZoom(rect.ly + 0.15, cam.Zoom));
+		Translate(0.0, DivideZoom(-ButtonMovePosition, cam.Zoom));
+		ScaleSpot(DivideZoom(ButtonSoundSize, cam.Zoom), DivideZoom(ButtonSoundSize, cam.Zoom));
+		ProcessTransform();
+
+		imageUtil.Draw(ButtonDataReset);
+
 
 		Text.Draw(
 			DivideZoom(rect.rx - 0.65, cam.Zoom), DivideZoom(rect.ly + 0.27 - ButtonMovePosition, cam.Zoom),
@@ -122,6 +134,11 @@ void Button::Render() {
 		Text.Draw(
 			DivideZoom(rect.rx - 0.15, cam.Zoom), DivideZoom(rect.ly + 0.27 - ButtonMovePosition, cam.Zoom),
 			DivideZoom(0.1, cam.Zoom), "3"
+		);
+
+		Text.Draw(
+			DivideZoom(rect.lx + 0.15, cam.Zoom), DivideZoom(rect.ly + 0.27 - ButtonMovePosition, cam.Zoom),
+			DivideZoom(0.1, cam.Zoom), "R"
 		);
 	}
 }
@@ -140,6 +157,10 @@ void Button::InputKey(unsigned char KEY, bool KeyDown){
 		case '3':
 			soundUtil.PlaySound("button_click", "ch_ui");
 			fw.StartFloatingMode(Info::InfoMode, Info::SetController);
+			break;
+		case 'r':
+			soundUtil.PlaySound("button_click", "ch_ui");
+			fw.StartFloatingMode(DataReset::DataResetMode, DataReset::SetController);
 			break;
 		}
 	}

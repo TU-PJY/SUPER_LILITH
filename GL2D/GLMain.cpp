@@ -20,6 +20,7 @@
 #include <iostream>
 #include <map>
 #include <ctime>
+#include <windows.h>
 
 int WIDTH = 800;
 int HEIGHT = 400;
@@ -87,6 +88,11 @@ GLvoid GLMain() {
 }
 
 void main(int argc, char** argv) {
+	if (!ShowConsole) {
+		HWND hWnd = GetConsoleWindow();
+		ShowWindow(hWnd, SW_HIDE);
+	}
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GL_MULTISAMPLE);
 
