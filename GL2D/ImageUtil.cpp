@@ -74,6 +74,12 @@ std::unordered_map<std::string, const char*> ImageList
 	{"white_front", "resources//image//ui//white.png"},
 	{"black_front", "resources//image//ui//black.png"},
 
+	{"popup", "resources//image//ui//lobby_tutorial.png"},
+	{"control_tut_left", "resources//image//ui//controltut_left.png"},
+	{"control_tut_right", "resources//image//ui//controltut_right.png"},
+	{"control_tut_lshift", "resources//image//ui//controltut_l_shift.png"},
+	{"control_tut_rshift", "resources//image//ui//controltut_r_shift.png"},
+
 	// logo
 	{"logo", "resources//image//ui//mata_logo.png"}
 };

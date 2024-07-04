@@ -26,7 +26,7 @@ std::unordered_map<std::string, FileNameAndOption> SoundList
 	{"exit_sound", {"resources//sound//ui//exit_sound.wav", FMOD_DEFAULT}},
 	{"start_sound", {"resources//sound//ui//game_start.wav", FMOD_DEFAULT}},
 
-	{"lilith_welcome", {"resources//sound//lilith//lilith_voice_welcome.wav", FMOD_DEFAULT}},
+	{"popup", {"resources//sound//ui//popup.wav", FMOD_DEFAULT}},
 
 	{"logo_sound", {"resources//sound//ui//logo.wav", FMOD_DEFAULT}}
 };

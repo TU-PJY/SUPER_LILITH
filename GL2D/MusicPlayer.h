@@ -19,6 +19,7 @@ public:
 	void Init(std::string MusicName);
 	void ChangeEffectSetting();
 	void ChangeMusicSetting();
+	void ClearMessageBar();
 	int GetMusicNum();
 	void SetToPlayMode();
 	void PlayMusic(int dir);

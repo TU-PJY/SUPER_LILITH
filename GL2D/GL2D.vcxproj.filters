@@ -127,6 +127,9 @@
     <Filter Include="[2]___________[ GameMode ]\[ Info ]">
       <UniqueIdentifier>{619656e3-f3ff-4331-939f-4e0f1466dc7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[  tutorial ]">
+      <UniqueIdentifier>{84a6d10a-d85f-4d78-bb89-4122d4235743}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -329,6 +332,12 @@
     </ClInclude>
     <ClInclude Include="Info.h">
       <Filter>[2]___________[ GameMode ]\[ Info ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Popup.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[  tutorial ]</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlTut.h">
+      <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[  tutorial ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

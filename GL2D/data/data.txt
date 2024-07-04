@@ -1,13 +1,13 @@
 [Data Version]=1
-[Play Once]=0
+[Play Once]=1
 [Disable Effect]=0
 [Music Reset]=0
 [Easy Sec]=79
 [Easy Mil]=4
 [Normal Sec]=34
 [Normal Mil]=8
-[Hard Sec]=19
-[Hard Mil]=2
+[Hard Sec]=28
+[Hard Mil]=8
 [Harder Sec]=22
 [Harder Mil]=6
 [Insane Sec]=9

@@ -11,7 +11,7 @@ public:
 	void Init();
 	void CheckDataVersion();
 	void ResetData();
-	void WriteData(const std::string& target, int value);
-	int LoadData(std::string target);
+	void WriteData(const std::string& DataName, int value);
+	int LoadData(std::string DataName);
 };
 extern DataUtil dataUtil;

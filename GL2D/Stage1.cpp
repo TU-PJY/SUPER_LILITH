@@ -5,6 +5,8 @@
 #include "MusicPlayer.h"
 #include "GameScore.h"
 #include "CameraUtil.h"
+#include "ControlTut.h"
+#include "DataUtil.h"
 #include "Pause.h"
 
 void Play::SetController() {
@@ -22,6 +24,9 @@ std::string Play::PlayMode() {
 	fw.AddObject(new Player, "player", Layer::L2);
 	fw.AddObject(new ObstacleGenerator, "obstacle_generator", Layer::L2);
 	fw.AddObject(new GameScore, "game_score", Layer::L3);
+
+	if(dataUtil.LoadData("Play Once") == 0)
+		fw.AddObject(new ControlTut, "control_tut", Layer::L3);
 	mp.SetToPlayMode();
 
 	return __func__;

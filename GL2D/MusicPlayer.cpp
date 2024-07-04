@@ -15,8 +15,6 @@ void MusicPlayer::Init(std::string MusicName) {
 
 	MusicNum = soundUtil.GetSoundNumif("stage");
 	PlayTime.reserve(MusicNum);
-
-	std::cout << MusicNum << std::endl;
 	
 	soundUtil.PlaySound(MusicName, "ch_bgm");
 	soundUtil.SetPlaySpeed("ch_bgm", 0.0);
@@ -26,6 +24,7 @@ void MusicPlayer::Init(std::string MusicName) {
 }
 
 void MusicPlayer::ChangeEffectSetting() {
+	ClearMessageBar();
 	if (!EffectDisable) {
 		fw.AddObject(new Bar(3), "alert_effect_off", Layer::L3);
 		EffectDisable = true;
@@ -39,6 +38,7 @@ void MusicPlayer::ChangeEffectSetting() {
 }
 
 void MusicPlayer::ChangeMusicSetting() {
+	ClearMessageBar();
 	if (!MusicReset) {
 		fw.AddObject(new Bar(1), "alert_music_reset", Layer::L3);
 		for (auto& T : PlayTime)
@@ -52,6 +52,13 @@ void MusicPlayer::ChangeMusicSetting() {
 	}
 
 	dataUtil.WriteData("Music Reset", MusicReset);
+}
+
+void MusicPlayer::ClearMessageBar() {
+	fw.DeleteObject("alert_music_reset", DeleteRange::All);
+	fw.DeleteObject("alert_music_resume", DeleteRange::All);
+	fw.DeleteObject("alert_effect_off", DeleteRange::All);
+	fw.DeleteObject("alert_effect_on", DeleteRange::All);
 }
 
 int MusicPlayer::GetMusicNum() {

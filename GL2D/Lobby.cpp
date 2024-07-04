@@ -7,6 +7,8 @@
 #include "AnimationShape.h"
 #include "LobbyPlayer.h"
 #include "White.h"
+#include "Popup.h"
+#include "DataUtil.h"
 
 #include "Exit.h"
 #include <string>
@@ -27,6 +29,10 @@ std::string Lobby::LobbyMode() {
 	fw.AddObject(new Button, "button", Layer::L2);
 	fw.AddObject(new Title{mp.MusicNumber}, "title", Layer::L2);
 	fw.AddObject(new LobbyPlayer, "lobby_player", Layer::L2);
+
+	if (dataUtil.LoadData("Play Once") == 0) {
+		fw.AddObject(new PopUp, "popup", Layer::L2);
+	}
 
 	if(!mp.MusicPlayerInitState)
 		mp.Init("stage_easy");	

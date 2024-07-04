@@ -68,6 +68,9 @@ void Title::InputKey(unsigned char KEY, bool KeyDown) {
 					if (back_object) back_object->SetTransparent();
 				}
 
+				auto popup = fw.Find("popup");
+				if (popup) popup->Stop();
+
 				StartAnimation = true;
 			}
 		}

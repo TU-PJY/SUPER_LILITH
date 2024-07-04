@@ -173,6 +173,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionUtil.h" />
+    <ClInclude Include="ControlTut.h" />
     <ClInclude Include="DataUtil.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="ExitScreen.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="PauseScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerShape.h" />
+    <ClInclude Include="Popup.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="Stage1.h" />
