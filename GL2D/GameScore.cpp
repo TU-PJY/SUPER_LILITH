@@ -78,7 +78,6 @@ void GameScore::Render() {
 		if ((static_cast<int>(TimeElapsed) > HighSec) ||
 			((static_cast<int>(RealTimeElpased * 10) % 10 > HighMil) && (static_cast<int>(TimeElapsed) == HighSec))) {
 			HighScore = true;
-
 		}
 
 		if (HighScore) {

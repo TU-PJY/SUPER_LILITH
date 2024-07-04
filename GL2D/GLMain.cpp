@@ -36,6 +36,9 @@ GLfloat ASPECT;
 Rect rect;
 
 int Face = lilith;
+int PrevSec;
+int PrevMil;
+bool TitleInit;
 
 std::string VENDOR;
 

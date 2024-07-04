@@ -10,7 +10,6 @@
 #include <cmath>
 
 Title::Title(int Page) {
-	SetColor(1.0, 1.0, 1.0);
 	Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 	Text.SetAlign(Align::Middle);
 	Text.SetColor(ObjectColorSet[Page - 1].r, ObjectColorSet[Page - 1].g, ObjectColorSet[Page - 1].b);
@@ -34,6 +33,17 @@ Title::Title(int Page) {
 	ScoreListMil.push_back(dataUtil.LoadData("Hard Mil"));
 	ScoreListMil.push_back(dataUtil.LoadData("Harder Mil"));
 	ScoreListMil.push_back(dataUtil.LoadData("Insane Mil"));
+
+	// 첫 실행시에는 하이스코어 강조를 설정하지 않는다
+	if (TitleInit) {
+		if (PrevSec < ScoreListSec[Page - 1] || (PrevSec == ScoreListSec[Page - 1] && PrevMil < ScoreListMil[Page - 1]))
+			HighScoreAchived[Page - 1] = true;
+	}
+	else
+		TitleInit = true;
+
+	Fanfare = imageUtil.SetImage("fanfare");
+	SetColor(ObjectColorSet[Page - 1].r, ObjectColorSet[Page - 1].g, ObjectColorSet[Page - 1].b);
 }
 
 void Title::InputSpecialKey(int KEY, bool KeyDown) {
@@ -71,6 +81,9 @@ void Title::InputKey(unsigned char KEY, bool KeyDown) {
 				auto popup = fw.Find("popup");
 				if (popup) popup->Stop();
 
+				PrevSec = ScoreListSec[LobbyPage - 1];
+				PrevMil = ScoreListMil[LobbyPage - 1];
+
 				StartAnimation = true;
 			}
 		}
@@ -106,6 +119,8 @@ void Title::Update(float FT) {
 	}
 
 	TitlePosition = std::lerp(TitlePosition, 0.0, FT * 10);
+
+	FanfareRotation += FT * 20;
 }
 
 void Title::Render() {
@@ -113,6 +128,15 @@ void Title::Render() {
 		Text.SetAlign(Align::Middle);
 		Text.Draw(0.0, 0.6 + TitleMovePosition, 0.45, "SUPER LILITH");
 		Text.Draw(TitlePosition, 0.3 + TitleMovePosition, 0.3, "%s", MusicInfo[LobbyPage - 1].c_str());
+
+		if (HighScoreAchived[LobbyPage - 1]) {
+			InitTransform();
+			AlphaValue = 0.5;
+			Translate(0.83 + TitlePosition, TitleMovePosition + 0.4);
+			RotateSpot(FanfareRotation);
+			ProcessTransform();
+			imageUtil.Draw(Fanfare);
+		}
 
 		Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.4, 0.15, "HIGH SCORE");
 		Text.Draw(0.83 + TitlePosition, TitleMovePosition + 0.3, 0.12, "%d.%d", ScoreListSec[LobbyPage - 1], ScoreListMil[LobbyPage - 1]);
@@ -144,6 +168,7 @@ void Title::ChangeLobbyPage(int dir) {
 
 	SetBackgroundColor(ColorSet[LobbyPage - 1].r, ColorSet[LobbyPage - 1].g, ColorSet[LobbyPage - 1].b);
 	Text.SetColor(ObjectColorSet[LobbyPage - 1].r, ObjectColorSet[LobbyPage - 1].g, ObjectColorSet[LobbyPage - 1].b);
+	SetColor(ObjectColorSet[LobbyPage - 1].r, ObjectColorSet[LobbyPage - 1].g, ObjectColorSet[LobbyPage - 1].b);
 }
 
 int Title::GetLobbyPage() {

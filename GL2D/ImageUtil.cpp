@@ -80,6 +80,8 @@ std::unordered_map<std::string, const char*> ImageList
 	{"control_tut_lshift", "resources//image//ui//controltut_l_shift.png"},
 	{"control_tut_rshift", "resources//image//ui//controltut_r_shift.png"},
 
+	{"fanfare", "resources//image//ui//fanfare.png"},
+
 	// logo
 	{"logo", "resources//image//ui//mata_logo.png"}
 };

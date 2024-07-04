@@ -3,6 +3,7 @@
 #include "TextUtil.h"
 #include <string>
 #include <vector>
+#include <array>
 
 class Title : public OBJ_BASE {
 private:
@@ -20,6 +21,9 @@ private:
 
 	std::vector<int> ScoreListSec{};
 	std::vector<int> ScoreListMil{};
+
+	unsigned int Fanfare{};
+	GLfloat FanfareRotation{};
 
 	std::vector<std::string> MusicInfo
 	{
@@ -47,6 +51,8 @@ private:
 		{0.839, 1.0, 0.275},
 		{1.0, 1.0, 1.0}
 	};
+
+	std::array<bool, 5> HighScoreAchived{};
 	
 public:
 	Title(int Page);
