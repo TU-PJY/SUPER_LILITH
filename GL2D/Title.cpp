@@ -44,6 +44,7 @@ Title::Title(int Page) {
 
 	Fanfare = imageUtil.SetImage("fanfare");
 	SetColor(ObjectColorSet[Page - 1].r, ObjectColorSet[Page - 1].g, ObjectColorSet[Page - 1].b);
+	AlphaValue = 0.5;
 }
 
 void Title::InputSpecialKey(int KEY, bool KeyDown) {
@@ -108,6 +109,8 @@ void Title::Update(float FT) {
 		PlaySpeed = std::lerp(PlaySpeed, 0.3, FT * 3);
 		soundUtil.SetPlaySpeed("ch_bgm", PlaySpeed);
 
+		AlphaValue = std::lerp(AlphaValue, 0.0, FT * 3);
+
 		if(TitleMovePosition >= 0.78)
 			fw.SwitchMode(Play::PlayMode, Play::SetController);
 	}
@@ -131,7 +134,6 @@ void Title::Render() {
 
 		if (HighScoreAchived[LobbyPage - 1]) {
 			InitTransform();
-			AlphaValue = 0.5;
 			Translate(0.83 + TitlePosition, TitleMovePosition + 0.4);
 			RotateSpot(FanfareRotation);
 			ProcessTransform();
