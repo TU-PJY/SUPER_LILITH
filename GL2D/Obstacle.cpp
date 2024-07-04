@@ -64,6 +64,12 @@ Obstacle::Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B){
 	SetColor(ObjectColorSet[mp.MusicNumber - 1].r, ObjectColorSet[mp.MusicNumber - 1].g, ObjectColorSet[mp.MusicNumber - 1].b);
 	Rotate(ShapeRotation);
 	IsMove = true;
+
+
+	if (ShapeType == 0)
+		Scale(Size + 0.1, Size + 0.1);
+	else
+		Scale(Size, Size);
 }
 
 void Obstacle::Stop() {
