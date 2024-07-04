@@ -107,8 +107,11 @@ void Obstacle::Update(float FT) {
 			else if (100 <= Diff && Diff < 140)
 				MoveSpeed = 2.2;
 
-			else if (140 <= Diff)
+			else if (140 <= Diff && Diff < 180)
 				MoveSpeed = 2.4;
+
+			else if (180 <= Diff)
+				MoveSpeed = 2.6;
 		}
 	}
 
@@ -120,7 +123,7 @@ void Obstacle::Update(float FT) {
 				if (player) player->ChangeRotationDirection();
 			}
 
-			fw.AddObject(new FeedBack, "feedback", Layer::L1);
+			fw.AddObject(new FeedBack(ObjectColorSet[mp.MusicNumber - 1].r, ObjectColorSet[mp.MusicNumber - 1].g, ObjectColorSet[mp.MusicNumber - 1].b), "feedback", Layer::L1);
 			fw.DeleteSelf(this);
 		}
 

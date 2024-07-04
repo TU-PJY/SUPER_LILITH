@@ -5,12 +5,12 @@
 #include <iostream>
 #include <deque>
 
-#define USE_CUSTOM_PATH
+//#define USE_CUSTOM_PATH
 
 // game version
 #define VERSION 1
-constexpr const char* FolderName = "data";
-constexpr const char* FileName = "data.txt";
+constexpr const char* FolderName = "Super Lilith";
+constexpr const char* FileName = "data";
 
 
 #ifndef USE_CUSTOM_PATH
@@ -70,7 +70,7 @@ void DataUtil::Init() {
 			RegexDataList.push_back(Data);
 		}
 
-		std::ofstream OutFile(FilePath);
+		std::ofstream OutFile(FilePath, std::ios::binary);
 		if (OutFile.is_open())
 			for (auto& D : RegexDataList)
 				OutFile << D << 0 << std::endl;
@@ -105,7 +105,7 @@ void DataUtil::CheckDataVersion() {
 	if (!std::filesystem::exists(FolderPath))
 		exit(EXIT_FAILURE);
 
-	std::ifstream InFile(FilePath);
+	std::ifstream InFile(FilePath, std::ios::binary);
 	if (!InFile)
 		exit(EXIT_FAILURE);
 
@@ -119,7 +119,7 @@ void DataUtil::CheckDataVersion() {
 
 	InFile.close();
 
-	std::ofstream OutFile(FilePath);
+	std::ofstream OutFile(FilePath, std::ios::binary);
 	if (!OutFile)
 		exit(EXIT_FAILURE);
 
@@ -138,7 +138,7 @@ void DataUtil::ResetData() {
 	if (!std::filesystem::exists(FolderPath))
 		exit(EXIT_FAILURE);
 
-	std::ifstream InFile(FilePath);
+	std::ifstream InFile(FilePath, std::ios::binary);
 	if (!InFile)
 		exit(EXIT_FAILURE);
 
@@ -151,7 +151,7 @@ void DataUtil::ResetData() {
 
 	InFile.close();
 
-	std::ofstream OutFile(FilePath);
+	std::ofstream OutFile(FilePath, std::ios::binary);
 	if (!OutFile)
 		exit(EXIT_FAILURE);
 
@@ -171,7 +171,7 @@ void DataUtil::WriteData(const std::string& DataName, int DataValue) {
 	if (!std::filesystem::exists(FolderPath))
 		exit(EXIT_FAILURE);
 
-	std::ifstream InFIle(FilePath);
+	std::ifstream InFIle(FilePath, std::ios::binary);
 	if (!InFIle)  
 		exit(EXIT_FAILURE);
 
@@ -218,7 +218,7 @@ int DataUtil::LoadData(std::string DataName) {
 	if (!std::filesystem::exists(FolderPath))
 		exit(EXIT_FAILURE);
 		
-	std::ifstream InFIle(FilePath);
+	std::ifstream InFIle(FilePath, std::ios::binary);
 	if (!InFIle) 
 		exit(EXIT_FAILURE);
 

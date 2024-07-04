@@ -155,8 +155,11 @@ void Player::Update(float FT){
 			else if (100 <= Diff && Diff < 140)
 				RotateSpeed = 65 * Direction;
 
-			else if (140 <= Diff)
+			else if (140 <= Diff && Diff< 180)
 				RotateSpeed = 80 * Direction;
+
+			else if(180 <= Diff)
+				RotateSpeed = 100 * Direction;
 		}
 	}
 

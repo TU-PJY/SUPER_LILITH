@@ -121,15 +121,17 @@ void main(int argc, char** argv) {
 	shader.LoadFragmentShader("GLSL//GLSL_fragment_text.glsl");
 	shader.CreateShader(TextShader);
 
+	DWORD dword{};
+	fontloaderUtil.ImportFont("resources//font//GALSB.ttf", dword);
 	imageUtil.Init();
-	//fw.Init(Splash::SplashMode, Splash::SetController);
+	fw.Init(Splash::SplashMode, Splash::SetController);
 
 	// for dev
-	glutFullScreen();
+	/*glutFullScreen();
 	imageUtil.LoadImageFromList();
 	soundUtil.Init();
 	dataUtil.Init();
-	fw.Init(Lobby::LobbyMode, Lobby::SetController);
+	fw.Init(Lobby::LobbyMode, Lobby::SetController);*/
 
 
 	glutDisplayFunc(GLMain);

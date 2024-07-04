@@ -102,18 +102,18 @@ private:
 	GLfloat Size{};
 
 public:
-	FeedBack() {
+	FeedBack(GLfloat R, GLfloat G, GLfloat B) {
 		Image = imageUtil.SetImage("feedback");
 		Size = 0.8;
 		Scale(Size, Size);
-		SetColor(0.0, 1.0, 0.0);
+		SetColor(R, G, B);
 	}
 
 	void Update(float FT) {
 		InitTransform();
 
 		Size = std::lerp(Size, 0.0, FT * 2);
-		AlphaValue = std::lerp(AlphaValue, 0.0, FT * 2);
+		AlphaValue = std::lerp(AlphaValue, 0.0, FT * 3);
 
 		Scale(Size, Size);
 

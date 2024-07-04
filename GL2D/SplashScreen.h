@@ -52,6 +52,7 @@ public:
 			}
 
 			glutFullScreen();
+			SetBackgroundColor(0.0, 0.0, 0.0);
 			fw.SwitchMode(Intro::IntroMode, Intro::SetController);
 		}
 	}

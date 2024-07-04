@@ -45,14 +45,17 @@ void ObstacleGenerator::Update(float FT) {
 		else if (20 <= Diff && Diff < 60)
 			GenTimeValue = 7;
 
-		else if(60 <= Diff && Diff < 100)
+		else if (60 <= Diff && Diff < 100)
 			GenTimeValue = 4.5;
 
 		else if (100 <= Diff && Diff < 140)
 			GenTimeValue = 3.5;
 
-		else if (140 <= Diff)
+		else if (140 <= Diff && Diff < 180)
 			GenTimeValue = 3;
+
+		else if (180 <= Diff)
+			GenTimeValue = 2.5;
 	}
 }
 

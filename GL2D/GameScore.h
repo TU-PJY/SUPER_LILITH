@@ -7,7 +7,7 @@ enum DiffType
 
 class GameScore : public OBJ_BASE {
 private:
-	float TimeElapsed{0};
+	float TimeElapsed{};
 	float Diff{};
 	unsigned int ScorePlate{};
 	bool StopState{};
