@@ -6,6 +6,7 @@
 #include "CameraUtil.h"
 #include "TextUtil.h"
 #include "SoundUtil.h"
+#include "BlackFront.h"
 #include <cmath>
 
 class ExitScreen : public OBJ_BASE {
@@ -17,7 +18,7 @@ private:
 
 public:
 	ExitScreen() {
-		Text.Init(L"열정그자체", FW_NORMAL, TRUE);
+		Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 		Text.SetAlign(Align::Middle);
 
 		BackImage = imageUtil.SetImage("black_front");
@@ -37,7 +38,9 @@ public:
 				break;
 
 			case 27:
+				soundUtil.PlaySound("click", "ch_ui");
 				soundUtil.UnSetFreqCutOff("ch_bgm");
+				fw.AddObject(new BlackFront, "black_front", Layer::L3);
 				fw.EndFloatingMode();
 				break;
 

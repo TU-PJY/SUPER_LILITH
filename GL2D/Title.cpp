@@ -11,8 +11,7 @@
 
 Title::Title(int Page) {
 	SetColor(1.0, 1.0, 1.0);
-
-	Text.Init(L"열정그자체", FW_NORMAL, TRUE);
+	Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 	Text.SetAlign(Align::Middle);
 	Text.SetColor(ObjectColorSet[Page - 1].r, ObjectColorSet[Page - 1].g, ObjectColorSet[Page - 1].b);
 

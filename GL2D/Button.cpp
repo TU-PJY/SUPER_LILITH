@@ -6,6 +6,7 @@
 #include "MusicPlayer.h"
 #include "SoundUtil.h"
 #include "FWM.h"
+#include "Info.h"
 #include <cmath>
 
 Button::Button() {
@@ -17,7 +18,7 @@ Button::Button() {
 	ButtonMusicReset = imageUtil.SetImage("button_music_reset_at_start");
 	ButtonMusicResume = imageUtil.SetImage("button_music_resume_at_start");
 
-	Text.Init(L"열정그자체", FW_NORMAL, TRUE);
+	Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 	Text.SetAlign(Align::Middle);
 }
 
@@ -135,6 +136,10 @@ void Button::InputKey(unsigned char KEY, bool KeyDown){
 		case '2':
 			soundUtil.PlaySound("button_click", "ch_ui");
 			mp.ChangeEffectSetting();
+			break;
+		case '3':
+			soundUtil.PlaySound("button_click", "ch_ui");
+			fw.StartFloatingMode(Info::InfoMode, Info::SetController);
 			break;
 		}
 	}

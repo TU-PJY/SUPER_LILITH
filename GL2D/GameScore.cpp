@@ -8,7 +8,7 @@
 #include <iomanip>
 
 GameScore::GameScore() {
-	Text.Init(L"열정그자체", FW_NORMAL, TRUE);
+	Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 	ScorePlate = imageUtil.SetImage("score_plate");
 
 	Translate(rect.rx - 0.35, rect.ly + 0.14);

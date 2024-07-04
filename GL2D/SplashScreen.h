@@ -18,7 +18,7 @@ private:
 public:
 	SplashScreen() {
 		SetBackgroundColor(0.424, 0.376, 0.412);
-		Text.Init(L"열정그자체", FW_BOLD, TRUE);
+		Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 		Text.Draw(ASP(-0.9), 0.65, 0.3, "SUPER LILITH");
 		Text.Draw(ASP(-0.9), -0.85, 0.4, "Loading...");
 

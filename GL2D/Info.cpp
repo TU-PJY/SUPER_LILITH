@@ -1,12 +1,10 @@
-#include "Pause.h"
+#include "Info.h"
 #include "FWM.h"
-#include "Lobby.h"
-#include "MusicPlayer.h"
+#include "InfoScreen.h"
 #include "SoundUtil.h"
-#include "PauseScreen.h"
 #include "BlackFront.h"
 
-void Pause::SetController() {
+void Info::SetController() {
 	glutMotionFunc(MouseMotion);
 	glutPassiveMotionFunc(MousePassiveMotion);
 	glutKeyboardFunc(KeyDown);
@@ -17,30 +15,26 @@ void Pause::SetController() {
 	glutSpecialUpFunc(SpecialKeyUp);
 }
 
-std::string Pause::PauseMode() {
-	soundUtil.PlaySound("exit_sound", "ch_ui");
-	fw.AddObject(new PauseScreen, "pause_screen", Layer::L3, true);
+std::string Info::InfoMode() {
+	soundUtil.SetFreqCutOff("ch_bgm", 200);
+	fw.AddObject(new InfoScreen, "info_screen", Layer::L3, true);
 	return __func__;
 }
 
-void Pause::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
+void Info::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool SpecialKey) {
 	// Normal Key Down
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
 		case 27:
+			soundUtil.PlaySound("click", "ch_ui");
+			soundUtil.UnSetFreqCutOff("ch_bgm");
 			fw.AddObject(new BlackFront, "black_front", Layer::L3);
-			soundUtil.PlaySound("click", "ch_ui");
 			fw.EndFloatingMode();
-			break;
-
-		case 13:
-			soundUtil.PlaySound("click", "ch_ui");
-			fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
 			break;
 		}
 }
 
-void Pause::MouseButton(int button, int state, int x, int y) {
+void Info::MouseButton(int button, int state, int x, int y) {
 	switch (button) {
 	case GLUT_LEFT_BUTTON:
 		switch (state) {
@@ -64,7 +58,7 @@ void Pause::MouseButton(int button, int state, int x, int y) {
 	}
 }
 
-void Pause::MouseWheel(int button, int Wheel, int x, int y) {
+void Info::MouseWheel(int button, int Wheel, int x, int y) {
 	if (Wheel > 0) {
 	}
 
@@ -73,26 +67,26 @@ void Pause::MouseWheel(int button, int Wheel, int x, int y) {
 }
 
 
-void Pause::KeyDown(unsigned char KEY, int x, int y) {
+void Info::KeyDown(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, true);
 }
 
-void Pause::KeyUp(unsigned char KEY, int x, int y) {
+void Info::KeyUp(unsigned char KEY, int x, int y) {
 	ProcessKeyboard(KEY, NULL, false);
 }
 
-void Pause::SpecialKeyUp(int KEY, int x, int y) {
+void Info::SpecialKeyUp(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, true, true);
 }
 
-void Pause::SpecialKeyDown(int KEY, int x, int y) {
+void Info::SpecialKeyDown(int KEY, int x, int y) {
 	ProcessKeyboard(NULL, KEY, false, true);
 }
 
-void Pause::MouseMotion(int x, int y) {
+void Info::MouseMotion(int x, int y) {
 	mouse.ConvertPosition(x, y);
 }
 
-void Pause::MousePassiveMotion(int x, int y) {
+void Info::MousePassiveMotion(int x, int y) {
 	mouse.ConvertPosition(x, y);
 }

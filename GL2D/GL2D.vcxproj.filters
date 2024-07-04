@@ -124,6 +124,9 @@
     <Filter Include="[2]___________[ GameMode ]\[ Play ]">
       <UniqueIdentifier>{7b8ece9e-369e-41aa-9eb1-0f0dc2f9398d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Info ]">
+      <UniqueIdentifier>{619656e3-f3ff-4331-939f-4e0f1466dc7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
@@ -201,6 +204,9 @@
     </ClCompile>
     <ClCompile Include="Pause.cpp">
       <Filter>[2]___________[ GameMode ]\[ Pause ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Info.cpp">
+      <Filter>[2]___________[ GameMode ]\[ Info ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +320,15 @@
     </ClInclude>
     <ClInclude Include="PauseScreen.h">
       <Filter>[1]___________[ Object ]\[2][ Sub Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackFront.h">
+      <Filter>[1]___________[ Object ]\[2][ Sub Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoScreen.h">
+      <Filter>[1]___________[ Object ]\[2][ Sub Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Info.h">
+      <Filter>[2]___________[ GameMode ]\[ Info ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

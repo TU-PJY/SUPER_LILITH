@@ -1,7 +1,6 @@
 #include "Exit.h"
 #include "FWM.h"
 #include "ExitScreen.h"
-#include "Button.h"
 #include "SoundUtil.h"
 
 void Exit::SetController() {
@@ -36,10 +35,6 @@ void Exit::MouseButton(int button, int state, int x, int y) {
 	case GLUT_LEFT_BUTTON:
 		switch (state) {
 		case GLUT_DOWN:
-		{
-			auto exitscreen = fw.Find("exit_screen");
-			if (exitscreen) exitscreen->ClickButton();
-		}
 			break;
 
 		case GLUT_UP:

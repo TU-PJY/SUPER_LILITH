@@ -118,7 +118,7 @@ void MusicPlayer::PlayMusic(int Page){
 void MusicPlayer::Update() {
 	if (MusicPlayerInitState) {
 		if (!EffectDisable) {
-			if (fw.Mode() == "LobbyMode" || fw.Mode() == "ExitMode") {
+			if (fw.Mode() != "PlayMode" && fw.Mode() != "PauseMode") {
 				float BassValue = soundUtil.DetectBeat(0.0);
 				camUtil.SetZoom(ZOOM::In, BassValue * 0.003);
 

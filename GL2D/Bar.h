@@ -42,7 +42,7 @@ public:
 		Height = -1.2;
 		Translate(0.0, Height);
 
-		Text.Init(L"열정그자체", FW_THIN, TRUE);
+		Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 	}
 
 	void Update(float FT) {

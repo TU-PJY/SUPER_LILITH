@@ -16,7 +16,7 @@ private:
 
 public:
 	PauseScreen() {
-		Text.Init(L"열정그자체", FW_NORMAL, TRUE);
+		Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 		Text.SetAlign(Align::Middle);
 
 		BackImage = imageUtil.SetImage("black_front");

@@ -148,6 +148,7 @@
     <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="GLMain.cpp" />
     <ClCompile Include="ImageUtil.cpp" />
+    <ClCompile Include="Info.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClInclude Include="BackObject.h" />
     <ClInclude Include="Bar.h" />
+    <ClInclude Include="BlackFront.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionUtil.h" />
@@ -180,6 +182,8 @@
     <ClInclude Include="GameScore.h" />
     <ClInclude Include="GLHeader.h" />
     <ClInclude Include="ImageUtil.h" />
+    <ClInclude Include="Info.h" />
+    <ClInclude Include="InfoScreen.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="LobbyPlayer.h" />
