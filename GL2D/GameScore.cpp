@@ -20,18 +20,28 @@ GameScore::GameScore() {
 	switch (DiffValue) {
 	case 0:  // easy
 		Diff = 0;
+		HighSec = dataUtil.LoadData("Easy Sec");
+		HighMil = dataUtil.LoadData("Easy Mil");
 		break;
 	case 1:  // normal
 		Diff = 20;
+		HighSec = dataUtil.LoadData("Normal Sec");
+		HighMil = dataUtil.LoadData("Normal Mil");
 		break;
 	case 2:  // hard
 		Diff = 60;
+		HighSec = dataUtil.LoadData("Hard Sec");
+		HighMil = dataUtil.LoadData("Hard Mil");
 		break;
 	case 3:  // harder
 		Diff = 100;
+		HighSec = dataUtil.LoadData("Harder Sec");
+		HighMil = dataUtil.LoadData("Harder Mil");
 		break;
 	case 4:  // insane
 		Diff = 140;
+		HighSec = dataUtil.LoadData("Insane Sec");
+		HighMil = dataUtil.LoadData("Insane Mil");
 		break;
 	}
 }
@@ -45,8 +55,6 @@ void GameScore::Stop() {
 }
 
 void GameScore::Update(float FT) {
-	InitTransform();
-
 	auto player = fw.Find("player");
 	if (player) MulValue = player->GetMulValue();
 
@@ -54,20 +62,46 @@ void GameScore::Update(float FT) {
 		TimeElapsed += FT * MulValue;
 		Diff += FT * MulValue;
 	}
-	
-	Translate(rect.rx - 0.35 - cam.ShakeValueX, rect.ly + 0.14 - cam.ShakeValueY);
-	ScaleSpot(0.3 * imageUtil.Aspect(400, 128), 0.3);
+
 }
 
 void GameScore::Render() {
-	ProcessTransform();
-	imageUtil.Draw(ScorePlate);
+	if (fw.Mode() == "PlayMode") {
+		InitTransform();
+		Translate(rect.rx - 0.35 - cam.ShakeValueX, rect.ly + 0.18 - cam.ShakeValueY);
+		ScaleSpot(0.3 * imageUtil.Aspect(400, 128), 0.4);
+		ProcessTransform();
+		imageUtil.Draw(ScorePlate);
 
-	Text.Draw(rect.rx - 0.7 - cam.ShakeValueX, rect.ly + 0.07 - cam.ShakeValueY, 0.2, "%.1f", 
-		std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1));
+		float RealTimeElpased = std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1);
+
+		if ((static_cast<int>(TimeElapsed) > HighSec) ||
+			((static_cast<int>(RealTimeElpased * 10) % 10 > HighMil) && (static_cast<int>(TimeElapsed) == HighSec))) {
+			HighScore = true;
+
+		}
+
+		if (HighScore) {
+			Text.SetColor(0.0, 1.0, 0.0);
+
+			Text.Draw(rect.rx - 0.75 - cam.ShakeValueX, rect.ly + 0.05 - cam.ShakeValueY, 0.2, "%.1f",
+				std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1));
+
+			Text.Draw(rect.rx - 0.7 - cam.ShakeValueX,
+				rect.ly + 0.25 - cam.ShakeValueY, 0.1, "HighScore: %.1f",
+				std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1));
+		}
+
+		else {
+			Text.Draw(rect.rx - 0.75 - cam.ShakeValueX, rect.ly + 0.05 - cam.ShakeValueY, 0.2, "%.1f",
+				std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1));
+
+			Text.SetColor(1.0, 1.0, 1.0);
+			Text.Draw(rect.rx - 0.7 - cam.ShakeValueX,
+				rect.ly + 0.25 - cam.ShakeValueY, 0.1, "HighScore: %d.%d", HighSec, HighMil);
+		}
+	}
 }
-
-#include <iostream>
 
 void GameScore::SaveHighScoreToFile() {
 	float RealTimeElpased = std::floor(TimeElapsed * std::pow(10, 1)) / std::pow(10, 1);
@@ -82,9 +116,7 @@ void GameScore::SaveHighScoreToFile() {
 		PrevIntegerPart = dataUtil.LoadData("Easy Sec");
 		PrevFloatPart = dataUtil.LoadData("Easy Mil");
 
-		if ((IntegerPart > PrevIntegerPart) || 
-			(FloatPart > PrevFloatPart && IntegerPart > PrevIntegerPart) || 
-			(FloatPart > PrevFloatPart && IntegerPart == PrevIntegerPart)) {
+		if (HighScore) {
 			dataUtil.WriteData("Easy Sec", IntegerPart);
 			dataUtil.WriteData("Easy Mil", FloatPart);
 		}
@@ -94,9 +126,7 @@ void GameScore::SaveHighScoreToFile() {
 		PrevIntegerPart = dataUtil.LoadData("Normal Sec");
 		PrevFloatPart = dataUtil.LoadData("Normal Sec");
 
-		if ((IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart == PrevIntegerPart)) {
+		if (HighScore) {
 			dataUtil.WriteData("Normal Sec", IntegerPart);
 			dataUtil.WriteData("Normal Mil", FloatPart);
 		}
@@ -106,9 +136,7 @@ void GameScore::SaveHighScoreToFile() {
 		PrevIntegerPart = dataUtil.LoadData("Hard Sec");
 		PrevFloatPart = dataUtil.LoadData("Hard Mil");
 
-		if ((IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart == PrevIntegerPart)) {
+		if (HighScore) {
 			dataUtil.WriteData("Hard Sec", IntegerPart);
 			dataUtil.WriteData("Hard Mil", FloatPart);
 		}
@@ -118,9 +146,7 @@ void GameScore::SaveHighScoreToFile() {
 		PrevIntegerPart = dataUtil.LoadData("Harder Sec");
 		PrevFloatPart = dataUtil.LoadData("Harder Mil");
 
-		if ((IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart == PrevIntegerPart)) {
+		if (HighScore) {
 			dataUtil.WriteData("Harder Sec", IntegerPart);
 			dataUtil.WriteData("Harder Mil", FloatPart);
 		}
@@ -130,9 +156,7 @@ void GameScore::SaveHighScoreToFile() {
 		PrevIntegerPart = dataUtil.LoadData("Insane Sec");
 		PrevFloatPart = dataUtil.LoadData("Insane Mil");
 
-		if ((IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart > PrevIntegerPart) ||
-			(FloatPart > PrevFloatPart && IntegerPart == PrevIntegerPart)) {
+		if (HighScore) {
 			dataUtil.WriteData("Insane Sec", IntegerPart);
 			dataUtil.WriteData("Insane Mil", FloatPart);
 		}

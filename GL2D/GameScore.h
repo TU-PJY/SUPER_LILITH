@@ -16,6 +16,9 @@ private:
 
 	GLfloat MulValue{};
 
+	int HighSec{}, HighMil{};
+	bool HighScore{};
+
 public:
 	GameScore();
 	float GetDiff();
