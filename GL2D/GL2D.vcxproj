@@ -153,6 +153,7 @@
     <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleGenerator.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Stage1.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleGenerator.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerShape.h" />
     <ClInclude Include="Splash.h" />

@@ -128,7 +128,7 @@ void MusicPlayer::Update() {
 				}
 			}
 
-			else {
+			else if(fw.Mode() == "PlayMode") {
 				float BassValue = soundUtil.DetectBeat(0.0);
 				auto player = fw.Find("player");
 				if (player) {

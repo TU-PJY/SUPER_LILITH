@@ -25,19 +25,13 @@ void FWM::Routine() {
 		for (int i = 0; i < Num; ++i) {
 			for (auto It = begin(Container[i]); It != end(Container[i]);) {
 				if (!(*It)->ObjectDeleteDescriptor) {
-					if (!FloatingModeRunningState) {
+					if (FloatingModeRunningState && FloatingOnlyState) {
+						if ((*It)->FloatingSpecifiedDescriptor)
+							(*It)->Update(FrameTime);
+					}
+					else
 						(*It)->Update(FrameTime);
-						(*It)->Render();
-					}
-
-					else {
-						if (FloatingOnlyState && (*It)->FloatingSpecifiedDescriptor)
-							(*It)->Update(FrameTime);
-						else
-							(*It)->Update(FrameTime);
-
-						(*It)->Render();
-					}
+					(*It)->Render();
 				}
 
 				if (ModeSwitchReserveDescriptor)
@@ -121,11 +115,22 @@ void FWM::EndFloatingMode() {
 		return;
 
 	FLog.Log(LogType::END_FLOATING_MODE);
-
 	FLog.PrevMode = RunningMode;
 
-	FloatingModeEndReserveDescriptor = true;
-	ModeSwitchReserveDescriptor = true;
+	ClearFloatingObject();
+	RunningMode = PrevRunningMode;
+
+	if (ControllerBackUpBuffer)
+		ControllerBackUpBuffer();
+
+	FloatingModeRunningState = false;
+	FloatingOnlyState = false;
+
+	FLog.IsOnlyFloating = FloatingOnlyState;
+	FLog.CurrentMode = RunningMode;
+	if (FLog.CurrentMode == FLog.PrevMode)
+		FLog.ErrorLog(LogType::ERROR_SAME_MODE);
+	FLog.Log(LogType::MODE_SWITCH);
 }
 
 void FWM::ResetControlState(OBJ_BASE* Object) {
@@ -138,8 +143,10 @@ void FWM::AddObject(OBJ_BASE* Object, std::string Tag, Layer AddLayer, bool SetF
 
 	ObjectList.insert(std::make_pair(Tag, Object));
 
-	FLog.ObjectTag = Tag;
-	FLog.Log(LogType::ADD_OBJECT);
+	if (Tag != "FWM_DUMMY") {
+		FLog.ObjectTag = Tag;
+		FLog.Log(LogType::ADD_OBJECT);
+	}
 
 	if (SetFloatingObject) {
 		Object->FloatingSpecifiedDescriptor = true;
@@ -210,40 +217,26 @@ size_t FWM::Size(Layer TargetLayer) {
 //////// private ///////////////
 
 void FWM::ChangeMode() {
-	if (FloatingModeEndReserveDescriptor) {
-		ClearFloatingObject();
-		RunningMode = PrevRunningMode;
+	FLog.PrevMode = RunningMode;
 
-		if(ControllerBackUpBuffer)  
-			ControllerBackUpBuffer();
+	ClearAll();
+	RunningMode = ModeFunctionBuffer();
 
-		FloatingModeRunningState = false;
-		FloatingOnlyState = false;
+	if(ControllerBuffer)  
+		ControllerBuffer();
 
-		FLog.CurrentMode = RunningMode;
+	FloatingOnlyState = false;
+	if (FloatingModeRunningState) {
 		FLog.Log(LogType::END_FLOATING_MODE);
-	}
-	
-	else {
-		ClearAll();
-		RunningMode = ModeFunctionBuffer();
-
-		if(ControllerBuffer)  
-			ControllerBuffer();
-
-		FLog.CurrentMode = RunningMode;
-		FloatingOnlyState = false;
+		FloatingModeRunningState = false;
 	}
 
 	FLog.IsOnlyFloating = FloatingOnlyState;
-
+	FLog.CurrentMode = RunningMode;
 	if (FLog.CurrentMode == FLog.PrevMode)
 		FLog.ErrorLog(LogType::ERROR_SAME_MODE);
-
-	FLog.CurrentMode = RunningMode;
 	FLog.Log(LogType::MODE_SWITCH);
 
-	FloatingModeEndReserveDescriptor = false;
 	ModeSwitchReserveDescriptor = false;
 	ModeSwitchState = false;
 }

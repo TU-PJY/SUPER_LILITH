@@ -35,8 +35,6 @@ private:
 	bool                              FloatingOnlyState{};
 
 	bool							  ModeSwitchReserveDescriptor{};
-	bool                              FloatingModeReserveDescriptor{};
-	bool                              FloatingModeEndReserveDescriptor{};
 
 	float							  FrameTime{};
 

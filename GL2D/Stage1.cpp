@@ -5,6 +5,7 @@
 #include "MusicPlayer.h"
 #include "GameScore.h"
 #include "CameraUtil.h"
+#include "Pause.h"
 
 void Play::SetController() {
 	glutMotionFunc(MouseMotion);
@@ -31,7 +32,7 @@ void Play::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spec
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
 		case 27:
-			glutDestroyWindow(1);
+			fw.StartFloatingMode(Pause::PauseMode, Pause::SetController, true);
 			break;
 		}
 }

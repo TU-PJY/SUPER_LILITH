@@ -64,9 +64,6 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]">
       <UniqueIdentifier>{3e8bc110-f787-4c06-aa98-b55d6a570be5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[2]___________[ GameMode ]\[ Stage1 ]">
-      <UniqueIdentifier>{7b8ece9e-369e-41aa-9eb1-0f0dc2f9398d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="[2]___________[ GameMode ]\[ Lobby ]">
       <UniqueIdentifier>{1c3a1f0a-dd2d-40fc-a517-97dbb2e1a8e6}</UniqueIdentifier>
     </Filter>
@@ -121,10 +118,16 @@
     <Filter Include="[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Bar ]">
       <UniqueIdentifier>{82b069db-155e-43bc-a80c-363293337e2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Pause ]">
+      <UniqueIdentifier>{1bca5f1a-4641-4d9d-8dc0-99136d2a52d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ GameMode ]\[ Play ]">
+      <UniqueIdentifier>{7b8ece9e-369e-41aa-9eb1-0f0dc2f9398d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stage1.cpp">
-      <Filter>[2]___________[ GameMode ]\[ Stage1 ]</Filter>
+      <Filter>[2]___________[ GameMode ]\[ Play ]</Filter>
     </ClCompile>
     <ClCompile Include="ObjectBase.cpp">
       <Filter>[1]___________[ Object ]\[3][ Object Base ]</Filter>
@@ -196,10 +199,13 @@
     <ClCompile Include="Exit.cpp">
       <Filter>[2]___________[ GameMode ]\[ Exit ]</Filter>
     </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>[2]___________[ GameMode ]\[ Pause ]</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stage1.h">
-      <Filter>[2]___________[ GameMode ]\[ Stage1 ]</Filter>
+      <Filter>[2]___________[ GameMode ]\[ Play ]</Filter>
     </ClInclude>
     <ClInclude Include="GLHeader.h">
       <Filter>[4]___________[ OpenGL ]</Filter>
@@ -302,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="Bar.h">
       <Filter>[1]___________[ Object ]\[1][ Main Object ]\[ Lobby ]\[ Bar ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
+      <Filter>[2]___________[ GameMode ]\[ Pause ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
