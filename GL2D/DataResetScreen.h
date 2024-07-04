@@ -61,6 +61,7 @@ public:
 
 		if (AnimationStart) {
 			FrontImageAlpha += FT * 0.5;
+			soundUtil.SetPlaySpeed("ch_bgm", 1.0 - FrontImageAlpha);
 			if (FrontImageAlpha >= 1.0) {
 				dataUtil.ResetData();
 				glutDestroyWindow(1);
