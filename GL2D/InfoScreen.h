@@ -9,6 +9,7 @@ class InfoScreen : public OBJ_BASE {
 private:
 	unsigned int Back{};
 	unsigned int FMOD_Logo{};
+	unsigned int MATA_Logo{};
 	TextUtil Text;
 	GLfloat BackAlpha{};
 	GLfloat Scroll{};
@@ -17,6 +18,7 @@ public:
 	InfoScreen() {
 		Back = imageUtil.SetImage("black_front");
 		FMOD_Logo = imageUtil.SetImage("FMOD_logo");
+		MATA_Logo = imageUtil.SetImage("logo");
 
 		Text.Init(L"Galiver Sans", FW_BOLD, TRUE);
 
@@ -29,7 +31,7 @@ public:
 		BackAlpha = std::lerp(BackAlpha, 0.7, FT * 10);
 		Scroll += FT * 0.2;
 
-		if (Scroll >= 3.4)
+		if (Scroll >= 4.0)
 			Scroll = -2.0;
 	}
 
@@ -80,6 +82,12 @@ public:
 
 		Text.Draw(0.0, DivideZoom(-2.3 + Scroll, cam.Zoom),
 			DivideZoom(0.1, cam.Zoom), "Copyleft 2024 MATA_");
+
+		InitTransform();
+		Translate(0.0, DivideZoom(-2.7 + Scroll, cam.Zoom));
+		ScaleSpot(DivideZoom(1.0, cam.Zoom), DivideZoom(1.0, cam.Zoom));
+		ProcessTransform();
+		imageUtil.Draw(MATA_Logo);
 	}
 };
 

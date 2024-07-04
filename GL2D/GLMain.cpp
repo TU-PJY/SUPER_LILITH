@@ -98,7 +98,7 @@ void main(int argc, char** argv) {
 
 	glutInitWindowPosition(GetSystemMetrics(SM_CXSCREEN) / 2 - WIDTH / 2, GetSystemMetrics(SM_CYSCREEN) / 2 - HEIGHT / 2);
 	glutInitWindowSize(WIDTH, HEIGHT);
-	glutCreateWindow("GL2D");
+	glutCreateWindow("SUPER LILITH");
 
 	glutSetCursor(GLUT_CURSOR_NONE);
 
