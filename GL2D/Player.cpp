@@ -50,6 +50,16 @@ void Player::ChangeRotationDirection() {
 	Direction *= -1;
 }
 
+void Player::Stop() {
+	PlaySpeed = 0.0;
+	MulValue = 0.0;
+	ResumeGame = true;
+}
+
+GLfloat Player::GetMulValue(){
+	return MulValue;
+}
+
 
 Player::Player(){
 	switch (Face) {
@@ -104,8 +114,24 @@ void Player::UpdateBlink(float FT) {
 void Player::Update(float FT){
 	InitTransform();
 
-	if (PlaySpeed < 1.0 && !GameOver) {
-		PlaySpeed = std::lerp(PlaySpeed, 1.0, FT * 3);
+	if (!ResumeGame && PlaySpeed < 1.0 && !GameOver) {
+		PlaySpeed += FT;
+		MulValue += FT;
+		if (PlaySpeed >= 1.0) {
+			PlaySpeed = 1.0;
+			MulValue = 1.0;
+		}
+		soundUtil.SetPlaySpeed("ch_bgm", PlaySpeed);
+	}
+
+	if (ResumeGame && PlaySpeed < 1.0 && !GameOver) {
+		PlaySpeed += FT / 2;
+		MulValue += FT / 2;
+		if (PlaySpeed >= 1.0) {
+			PlaySpeed = 1.0;
+			MulValue = 1.0;
+			ResumeGame = false;
+		}
 		soundUtil.SetPlaySpeed("ch_bgm", PlaySpeed);
 	}
 
@@ -137,7 +163,7 @@ void Player::Update(float FT){
 	else
 		RotateSpeed = std::lerp(RotateSpeed, 0.0, FT * 2.5);
 
-	Rotation += FT * RotateSpeed;
+	Rotation += FT * RotateSpeed * MulValue;
 	if (Rotation > 360)
 		Rotation = 0;
 

@@ -3,6 +3,7 @@
 #include "Lobby.h"
 #include "MusicPlayer.h"
 #include "SoundUtil.h"
+#include "PauseScreen.h"
 
 void Pause::SetController() {
 	glutMotionFunc(MouseMotion);
@@ -16,7 +17,8 @@ void Pause::SetController() {
 }
 
 std::string Pause::PauseMode() {
-	soundUtil.PauseSound("ch_bgm", true);
+	soundUtil.PlaySound("exit_sound", "ch_ui");
+	fw.AddObject(new PauseScreen, "pause_screen", Layer::L3, true);
 	return __func__;
 }
 
@@ -25,12 +27,10 @@ void Pause::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
 		case 27:
-			soundUtil.PauseSound("ch_bgm", false);
 			fw.EndFloatingMode();
 			break;
 
 		case 13:
-			soundUtil.PauseSound("ch_bgm", false);
 			fw.SwitchMode(Lobby::LobbyMode, Lobby::SetController);
 			break;
 		}

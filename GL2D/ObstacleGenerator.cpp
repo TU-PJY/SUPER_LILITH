@@ -8,8 +8,15 @@ void ObstacleGenerator::SetGenTime(GLfloat TimeValue) {
 	GenTimeValue = TimeValue;
 }
 
+void ObstacleGenerator::Stop() {
+	MulValue = 0.0;
+}
+
 void ObstacleGenerator::Update(float FT) {
-	GenTimer += FT * 10;
+	auto player = fw.Find("player");
+	if(player) MulValue = player->GetMulValue();
+
+	GenTimer += FT * 10 * MulValue;
 
 	if (GenTimer >= GenTimeValue) {
 		// 맨 처음 도형은 무조건 삼각형

@@ -3,6 +3,7 @@
 #include "DataUtil.h"
 #include "CameraUtil.h"
 #include "MusicPlayer.h"
+#include "FWM.h"
 #include <sstream>
 #include <iomanip>
 
@@ -46,9 +47,12 @@ void GameScore::Stop() {
 void GameScore::Update(float FT) {
 	InitTransform();
 
+	auto player = fw.Find("player");
+	if (player) MulValue = player->GetMulValue();
+
 	if (!StopState) {
-		TimeElapsed += FT;
-		Diff += FT;
+		TimeElapsed += FT * MulValue;
+		Diff += FT * MulValue;
 	}
 	
 	Translate(rect.rx - 0.35 - cam.ShakeValueX, rect.ly + 0.14 - cam.ShakeValueY);

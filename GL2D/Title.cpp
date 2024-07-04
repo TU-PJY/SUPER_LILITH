@@ -56,7 +56,7 @@ void Title::InputSpecialKey(int KEY, bool KeyDown) {
 void Title::InputKey(unsigned char KEY, bool KeyDown) {
 	if (!StartAnimation) {
 		if (KeyDown) {
-			if (KEY == 32) {
+			if (KEY == 13) {
 				soundUtil.PlaySound("start_sound", "ch_ui");
 
 				fw.DeleteObject("lobby_player", DeleteRange::One);

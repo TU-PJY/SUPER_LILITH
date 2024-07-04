@@ -10,8 +10,11 @@ private:
 	int SameCount{};
 	std::random_device rd;
 
+	GLfloat MulValue{};
+
 public:
 	void SetGenTime(GLfloat TimeValue);
+	void Stop();
 	void Update(float FT);
 	void GenerateShape();
 };

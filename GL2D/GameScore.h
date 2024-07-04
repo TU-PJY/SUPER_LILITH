@@ -14,6 +14,8 @@ private:
 
 	TextUtil Text;
 
+	GLfloat MulValue{};
+
 public:
 	GameScore();
 	float GetDiff();

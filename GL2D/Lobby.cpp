@@ -40,7 +40,11 @@ void Lobby::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spe
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
 		case 27:
-			fw.StartFloatingMode(Exit::ExitMode, Exit::SetController);
+			{
+			auto title = fw.Find("title");
+			if(title && !title->GetAnimationtate())
+				fw.StartFloatingMode(Exit::ExitMode, Exit::SetController);
+			}
 			break;
 		}
 

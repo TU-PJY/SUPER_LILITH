@@ -38,9 +38,12 @@ private:
 		{1.0, 1.0, 1.0}
 	};
 
+	GLfloat MulValue{};
+
 public:
 	Obstacle(ObstacleType type, GLfloat R, GLfloat G, GLfloat B);
 	void Stop();
+	void ZeroMulValue();
 	void Update(float FT);
 	bool CheckShapeType();
 	void Render();

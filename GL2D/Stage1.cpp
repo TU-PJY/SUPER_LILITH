@@ -32,7 +32,11 @@ void Play::ProcessKeyboard(unsigned char KEY, int S_KEY, bool KeyDown, bool Spec
 	if (KeyDown && !SpecialKey)
 		switch (KEY) {
 		case 27:
-			fw.StartFloatingMode(Pause::PauseMode, Pause::SetController, true);
+		{
+			auto player = fw.Find("player");
+			if(player && !player->GetGameOverState())
+				fw.StartFloatingMode(Pause::PauseMode, Pause::SetController, true);
+		}
 			break;
 		}
 }

@@ -312,6 +312,9 @@
     <ClInclude Include="Pause.h">
       <Filter>[2]___________[ GameMode ]\[ Pause ]</Filter>
     </ClInclude>
+    <ClInclude Include="PauseScreen.h">
+      <Filter>[1]___________[ Object ]\[2][ Sub Object ]</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GLSL\GLSL_vertex.glsl">

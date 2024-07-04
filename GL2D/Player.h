@@ -17,13 +17,15 @@ private:
 	Triangle triangle;
 	Square square;
 	Pentagon pentagon;
-	Hexagon hexagon;
 
 	GLfloat RotateSpeed{};
-	GLfloat PlaySpeed = 0.0;
+	GLfloat PlaySpeed = 0.3;
 	GLfloat Direction = 1;
 
+	GLfloat MulValue{};
+
 	bool GameOver{};
+	bool ResumeGame{};
 
 	unsigned int PlayerImageNormal1{};
 	unsigned int PlayerImageNormal2{};
@@ -50,5 +52,7 @@ public:
 	void SetGameOver();
 	bool GetGameOverState();
 	void ChangeRotationDirection();
+	void Stop();
+	GLfloat GetMulValue();
 	void UpdateBlink(float FT);
 };

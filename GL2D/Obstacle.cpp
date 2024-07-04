@@ -71,11 +71,18 @@ void Obstacle::Stop() {
 	MoveSpeed = 0;
 }
 
+void Obstacle::ZeroMulValue() {
+	MulValue = 0;
+}
+
 void Obstacle::Update(float FT) {
 	InitTransform();
 
 	auto player = fw.Find("player");
-	if (player) Rotation = player->GetRotation();
+	if (player) {
+		Rotation = player->GetRotation();
+		MulValue = player->GetMulValue();
+	}
 
 	if (IsMove) {
 		auto score = fw.Find("game_score");
@@ -118,7 +125,7 @@ void Obstacle::Update(float FT) {
 	}
 
 	else
-		Size -= FT * MoveSpeed * Size;
+		Size -= FT * MoveSpeed * Size * MulValue;
 
 	if(ShapeType == 0)
 		Scale(Size + 0.1, Size + 0.1);

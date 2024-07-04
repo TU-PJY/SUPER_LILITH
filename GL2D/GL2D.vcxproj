@@ -188,6 +188,7 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleGenerator.h" />
     <ClInclude Include="Pause.h" />
+    <ClInclude Include="PauseScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerShape.h" />
     <ClInclude Include="Splash.h" />

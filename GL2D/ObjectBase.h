@@ -48,6 +48,7 @@ public:
 	virtual int GetShapeState() { return {}; }
 	virtual void Stop(GLfloat Speed) {}
 	virtual void SetGameOver() {}
+	virtual GLfloat GetMulValue() { return {}; }
 	virtual bool GetGameOverState() { return {}; }
 	virtual void ChangeRotationDirection() {}
 	virtual void ClickButton() {}
